@@ -52,7 +52,7 @@ These notes deviate from the course material by
 - a section on symmetry and conservation laws, adapted from Griffiths. 
 - an interaction-picture explanation of time-dependent perturbation theory, 
         adapted from MIT's online lecture notes. 
-- the adiabatic theorem from Weinberg's \textit{Lectures on Quantum Mechanics}. 
+- the adiabatic theorem from Weinberg's _Lectures on Quantum Mechanics_.
 
 A note on notations: $d/dx, \partial /\partial x$ are abbreviated $d_x, \pd x$. 
 Summation over a free index which does not appear on the left hand side are occasionally 
