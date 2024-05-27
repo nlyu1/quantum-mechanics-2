@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Symmetry, Conservation Laws, and Selection Rules | Quantum Mechanics II</title>
+  <meta name="description" content="2 Symmetry, Conservation Laws, and Selection Rules | Quantum Mechanics II" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Symmetry, Conservation Laws, and Selection Rules | Quantum Mechanics II" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Symmetry, Conservation Laws, and Selection Rules | Quantum Mechanics II" />
+  
+  
+  
+
+<meta name="author" content="Nicholas Lyu" />
+
+
+<meta name="date" content="2024-05-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="path-integrals.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="path-integrals.html"><a href="path-integrals.html"><i class="fa fa-check"></i><b>1</b> Path Integrals</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="path-integrals.html"><a href="path-integrals.html#gaussian-integrals"><i class="fa fa-check"></i><b>1.1</b> Gaussian Integrals</a></li>
+<li class="chapter" data-level="1.2" data-path="path-integrals.html"><a href="path-integrals.html#propagator"><i class="fa fa-check"></i><b>1.2</b> Propagator</a></li>
+<li class="chapter" data-level="1.3" data-path="path-integrals.html"><a href="path-integrals.html#integration-over-paths"><i class="fa fa-check"></i><b>1.3</b> Integration over paths</a></li>
+<li class="chapter" data-level="1.4" data-path="path-integrals.html"><a href="path-integrals.html#separable-lagrangian"><i class="fa fa-check"></i><b>1.4</b> Separable Lagrangian</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html"><i class="fa fa-check"></i><b>2</b> Symmetry, Conservation Laws, and Selection Rules</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#operators-in-quantum-theory"><i class="fa fa-check"></i><b>2.1</b> Operators in quantum theory</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#fundamental-operators"><i class="fa fa-check"></i><b>2.1.1</b> Fundamental operators</a></li>
+<li class="chapter" data-level="2.1.2" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#ladder-operators"><i class="fa fa-check"></i><b>2.1.2</b> Ladder operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#vector-operators"><i class="fa fa-check"></i><b>2.2</b> Vector operators</a></li>
+<li class="chapter" data-level="2.3" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#transformation"><i class="fa fa-check"></i><b>2.3</b> Transformation</a></li>
+<li class="chapter" data-level="2.4" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#observables-and-transformations"><i class="fa fa-check"></i><b>2.4</b> Observables and transformations</a></li>
+<li class="chapter" data-level="2.5" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#summary"><i class="fa fa-check"></i><b>2.5</b> Summary</a></li>
+<li class="chapter" data-level="2.6" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#selection-rules"><i class="fa fa-check"></i><b>2.6</b> Selection rules</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quantum Mechanics II</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="symmetry-conservation-laws-and-selection-rules" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Symmetry, Conservation Laws, and Selection Rules<a href="symmetry-conservation-laws-and-selection-rules.html#symmetry-conservation-laws-and-selection-rules" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="operators-in-quantum-theory" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Operators in quantum theory<a href="symmetry-conservation-laws-and-selection-rules.html#operators-in-quantum-theory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="fundamental-operators" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Fundamental operators<a href="symmetry-conservation-laws-and-selection-rules.html#fundamental-operators" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The fundamental operators in quantum theory are <span class="math inline">\(x, p\)</span> with</p>
+<p><span class="math display">\[
+(x\, \psi)(x) = x\psi(x), \quad (p\, \psi)(x) = -i\hbar \partial_{x}
+\]</span></p>
+<p>They give rise to the canonical commutation relation</p>
+<p><span class="math display">\[
+[x, p] = i\hbar
+\]</span></p>
+<p>This commutation relation gives rise to vector operator’s commutation relations. The momentum operator may be conveniently memorized as using <span class="math inline">\(-\partial_{x}\)</span> to effect translation in <span class="math inline">\(x\)</span>, using <span class="math inline">\(i\)</span> to keep it skew-Hermitian, using <span class="math inline">\(\hbar\)</span> for units.</p>
+</div>
+<div id="ladder-operators" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Ladder operators<a href="symmetry-conservation-laws-and-selection-rules.html#ladder-operators" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For a harmonic oscillator Hamiltonian</p>
+<p><span class="math display">\[
+H = \frac{1}{2m} \left[p^2 + (m\omega x)^2\right]
+\]</span></p>
+<p>The raising and lowering operators of interest are</p>
+<p><span class="math display">\[
+a_\pm = \frac{1}{\sqrt{2\hbar m \omega}}\left(\mp i p + m\omega x\right)
+\]</span></p>
+<p>They are conjugates of each other and obey the commutation relations</p>
+<p><span class="math display">\[
+[a_-, a_+] = 1, \quad H = \hbar \omega \left(a_+a_- + \frac{1}{2}\right)
+\]</span></p>
+<p>We can in turn express <span class="math inline">\(x, p\)</span> in terms of the ladder operators</p>
+<p><span class="math display">\[
+x = \sqrt{\frac{\hbar}{2m\omega}}(a_+ + a_-), \quad p = i \sqrt{\frac{\hbar m \omega}{2}}(a_+ - a_-)
+\]</span></p>
+<p>Number operator <span class="math inline">\(n\)</span> is defined by <span class="math inline">\(n = a_+a_-\)</span>. We conveniently have (operator on left side)</p>
+<p><span class="math display">\[
+n\psi_n = n\psi_n, \quad a_+\psi_n = \sqrt{n+1}\psi_{n+1}, \quad a_-\psi_n = \sqrt{n} \psi_{n-1}
+\]</span></p>
+</div>
+</div>
+<div id="vector-operators" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Vector operators<a href="symmetry-conservation-laws-and-selection-rules.html#vector-operators" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The fundamental commutation relations for vector operators are
+<span class="math display">\[
+    [V_x, V_y] = i\hbar V_z; \quad [V_y, V_z] = i\hbar V_x; \quad [V_z, V_x] = i\hbar V_y
+\]</span>
+We can define <span class="math inline">\(V^2 = V_x^2 + V_y^2 + V_z^2\)</span>, then <span class="math inline">\([V, V^2]=0\)</span>.
+We can also define ladder operators
+<span class="math display">\[
+    V_\pm = V_x \pm i V_y
+\]</span>
+They obey the commutation relations
+<span class="math display">\[
+    [V^2, V_\pm] = 0, \quad [V_z, V_\pm] = \pm \hbar V_\pm
+\]</span>
+Fix an eigenspace of <span class="math inline">\(L^2\)</span> with eigenvalue <span class="math inline">\(\hbar^2l(l+1)\)</span> with
+dimension <span class="math inline">\(2l+1\)</span>, where <span class="math inline">\(l\)</span> can be an integer or half-integer.
+In this eigenspace,
+<span class="math display">\[
+    V_z = \hbar\begin{pmatrix}
+        l \\ &amp; l-1 \\ &amp;&amp;\ddots \\ &amp;&amp;&amp;-l
+    \end{pmatrix}, \quad
+    L_x = \dfrac 1 2 (V_+ + V_-), \quad
+    L_y = \dfrac i {2}(V_- - V_+)
+\]</span>
+Here the representations of <span class="math inline">\(V_\pm\)</span> are shifted diagonals of <span class="math inline">\(\hbar\)</span>.</p>
+</div>
+<div id="transformation" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Transformation<a href="symmetry-conservation-laws-and-selection-rules.html#transformation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We first formally consider transformations acting on states.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-9" class="definition"><strong>Definition 2.1  (translation operator) </strong></span>We define its action on <span class="math inline">\(\psi(x)\)</span> as
+<span class="math display">\[
+T(a)\psi(x) = \psi(x-a)
+\]</span>
+This definition characterizes the action of <span class="math inline">\(T(a)\)</span> on the positional representation of <span class="math inline">\(|\psi\rangle\)</span>. In terms of states themselves, the translation operator satisfy, for <span class="math inline">\(|\psi&#39;\rangle = T(a)|\psi\rangle\)</span>
+<span class="math display">\[
+\langle \psi&#39;|x\rangle = \langle \psi|x-a\rangle
+\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-10" class="definition"><strong>Definition 2.2  (parity operator) </strong></span>The parity-inverted state <span class="math inline">\(|\psi&#39;\rangle = \Pi |\psi\rangle\)</span> satisfies
+<span class="math display">\[
+\langle \psi&#39;|r\rangle = \langle \psi&#39;|-r\rangle
+\]</span>
+Here <span class="math inline">\(|r\rangle\)</span> may be generally understood as a 3d positional basis. Represented spherically:
+<span class="math display">\[
+\Pi \psi(r, \theta, \phi) = \psi(r, \pi - \theta, \phi + \pi)
+\]</span></p>
+</div>
+<div class="proposition">
+<p><span id="prp:unlabeled-div-11" class="proposition"><strong>Proposition 2.1  </strong></span>For hydrogenic orbitals,
+<span class="math display">\[
+\Pi \psi_{nlm}(r, \theta, \phi) = (-1)^l\psi_{nlm}(r, \theta, \phi)
+\]</span>
+We only need consider the angular part. Recall
+<span class="math display">\[
+Y_l^m(\theta, \phi) \propto P_l^m(\cos\theta)\exp(im\phi)
+\]</span>
+and <span class="math inline">\(\cos(\pi - \theta) = -\cos\theta\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-12" class="definition"><strong>Definition 2.3  (z-rotation operator) </strong></span>The rotation operator which effects counterclockwise rotation about the <span class="math inline">\(z\)</span>-axis by <span class="math inline">\(\varphi\)</span> is
+<span class="math display">\[
+R_z(\varphi)\psi(r, \theta, \phi) = \psi(r, \theta, \phi - \varphi)
+\]</span></p>
+</div>
+<p>Transformations, since they map states to states, must be unitary.
+They are effectively a basis permutation. For example, translation effects the
+basis change <span class="math inline">\(|x\rangle\mapsto |x-a\rangle\)</span>. One may view this via the equivalence between
+sliding our state to the right, and sliding the spatial axis to the left while
+following the center of the axis. By unitarity <span class="math inline">\(T^\dagger= T^{-1}\)</span>.</p>
+<p>Apart from considering the effect of <span class="math inline">\(T\)</span> on <span class="math inline">\(|\psi\rangle\)</span>,
+define its application on an operator <span class="math inline">\(O\)</span> such that expectation values of
+<span class="math inline">\(O\)</span> w.r.t. <span class="math inline">\(T|\psi\rangle\)</span> agrees with that of <span class="math inline">\(T(O)\)</span> w.r.t. <span class="math inline">\(|\psi\rangle\)</span>. This motivates
+the following definition.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-13" class="definition"><strong>Definition 2.4  (operator transformation, invariance) </strong></span>The effect of transforming operator <span class="math inline">\(O\)</span> by <span class="math inline">\(T\)</span> is
+<span class="math display">\[
+T(O) = T^\dagger O T = T^{-1}OT
+\]</span>
+It follows that <span class="math inline">\(O\)</span> is invariant under <span class="math inline">\(T\)</span> if <span class="math inline">\([O, T] = 0\)</span>.
+<span class="math display">\[\begin{equation}
+    \langle \psi|T^\dagger OT|\psi\rangle = \langle \psi|T(O)|\psi\rangle \implies T(O) = T^\dagger OT
+\end{equation}\]</span></p>
+</div>
+</div>
+<div id="observables-and-transformations" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Observables and transformations<a href="symmetry-conservation-laws-and-selection-rules.html#observables-and-transformations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>Appendum from 2024.5: study Lie groups and Lie algebra!</em></p>
+<p>Recall that <span class="math inline">\(p = -i\hbar \partial_{x}\)</span>. Assuming that <span class="math inline">\(\psi(x)\)</span> may be expanded as a power-series.</p>
+<p><span class="math display" id="eq:momentumAsExponential">\[\begin{equation}
+\begin{aligned}
+    T(a)\psi(x) &amp;= \psi(x-a) = \sum_{n=0}^\infty \frac{(-a)^n}{n!}\partial_{x}^n\psi(x)  \\
+                &amp;= \sum \frac{1}{n!} \left(\frac{-ia}{\hbar}(-i\hbar\partial_{x})\right)^n \psi(x)
+\end{aligned}
+\tag{2.1}
+\end{equation}\]</span></p>
+<div class="definition">
+<p><span id="def:unlabeled-div-14" class="definition"><strong>Definition 2.5  (exponential of an operator) </strong></span>We define the exponential of a Hermitian operator as a power-series, with multiplication denoting composition
+<span class="math display">\[\begin{equation}
+    \exp\left(\alpha O\right) = \sum_{n=0}^\infty \frac{1}{n!} (\alpha O)^n
+\end{equation}\]</span>
+This definition is made precise by the formulation of Lie group and Lie algebra, its main property of interest is
+<span class="math display">\[\begin{equation}
+    \partial_{\alpha }\exp(\alpha O) = \alpha \exp(\alpha O)
+\end{equation}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-15" class="definition"><strong>Definition 2.6  (observables generate transformation) </strong></span>We say that a Hermitian observable <span class="math inline">\(O\)</span> generates a one-parameter family of transformations <span class="math inline">\(T(a), a \in \mathbb{R}\)</span> if
+<span class="math display">\[\begin{equation}
+    T(a) = \exp\left(-\frac{i a}{\hbar} O\right)
+\end{equation}\]</span></p>
+</div>
+<p>Equation <a href="symmetry-conservation-laws-and-selection-rules.html#eq:momentumAsExponential">(2.1)</a> shows that momentum generates axial translation.</p>
+<div class="remark">
+<p><span id="unlabeled-div-16" class="remark"><em>Remark</em>. </span>Equation <a href="symmetry-conservation-laws-and-selection-rules.html#eq:hermitianExponential">(2.2)</a> provides another perspective: each Hermitian <span class="math inline">\(Q\)</span> defines an infinitesimal transformation <span class="math inline">\((1 + ia Q/N)\)</span> when <span class="math inline">\(N \to \infty\)</span>. This operator is unitary up to a quadratic order:
+<span class="math display" id="eq:hermitianExponential">\[\begin{equation}
+    \left(1 + ia Q/N\right)^\dagger\left(1 + ia Q/N\right) = 1 + O(1/N^2)
+    \tag{2.2}
+\end{equation}\]</span>
+The cumulative action of applying <span class="math inline">\((1 + ia O/N)\)</span> for <span class="math inline">\(N\)</span> times is <span class="math inline">\(\exp(ia Q)\)</span>.</p>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-17" class="theorem"><strong>Theorem 2.1  (Hamiltonian generates time translation) </strong></span><span class="math inline">\(\exp\left(-i H t/\hbar\right)|t_0\rangle = |t_0-t\rangle\)</span></p>
+</div>
+<p><em>Proof:</em> this statement is equivalent to Schrödinger’s equation.
+<span class="math display">\[
+\partial_{t}|\psi\rangle = -\frac{i}{\hbar} H|\psi\rangle
+\]</span></p>
+<div class="definition">
+<p><span id="def:unlabeled-div-18" class="definition"><strong>Definition 2.7  (complete set of compatible observables (CSCO)) </strong></span>A set of Hermitian observables <span class="math inline">\(\{O_j\}\)</span> over a Hilbert space is compatible if they pairwise commute, and complete if for every set of eigenspaces <span class="math inline">\(\{\mathcal S_{O_j, \lambda_k}\}\)</span>, their intersection has dimension at most <span class="math inline">\(1\)</span>.
+Definition 2.8 </p>
+</div>
+<div class="example">
+<p><span id="exm:unlabeled-div-19" class="example"><strong>Example 2.1  (CSCO for central potential) </strong></span>For any Hamiltonian <span class="math inline">\(H\)</span> which commutes with <span class="math inline">\(L\)</span>, the set <span class="math inline">\(H, L_z, L^2\)</span> is a complete set of compatible observables. They pairwise commute and <span class="math inline">\(E_n, l, m\)</span> uniquely determine an eigenstate.</p>
+</div>
+</div>
+<div id="summary" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Summary<a href="symmetry-conservation-laws-and-selection-rules.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+The key idea of this section is the following diagram
+<p align="center">
+<img src="symmetry_conservation.png" width="70%">
+</p>
+<p>A system is defined by its time-evolution, which is defined by its Hamiltonian. We first establish the connection between transformation and symmetry.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-20" class="definition"><strong>Definition 2.9  (continuous symmetry) </strong></span>A system with Hamiltonian <span class="math inline">\(H\)</span> has continuous symmetry with respect to a family of transformations <span class="math inline">\(T(a)\)</span>, parameterized by <span class="math inline">\(a \in \mathbb{R}\)</span>, if
+<span class="math display">\[
+\forall a \in \mathbb{R}, [H, T(a)] = 0
+\]</span></p>
+</div>
+<p>Transformations biject with observables, up to a constant factor. We show that continuous symmetry is equivalent to the conservation of an observable.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-21" class="theorem"><strong>Theorem 2.2  (conservation is equivalent to commutativity) </strong></span>The probability distribution for observing different values of a Hermitian <span class="math inline">\(O\)</span> is conserved if and only if <span class="math inline">\([H, O] = 0\)</span>.</p>
+</div>
+<p><em>Proof:</em> Suppose <span class="math inline">\([H, O] = 0\)</span>, then the energy eigenstates <span class="math inline">\(|n\rangle\)</span> are also eigenstates of <span class="math inline">\(O\)</span>.
+<span class="math display">\[
+|\psi_0\rangle = \sum c_n |n\rangle \implies \Pr[O=o_n, t=0] = |c_n|^2
+\]</span>
+Under time evolution, the probability distribution is unchanged
+<span class="math display">\[
+|\psi_t\rangle = \sum \exp\left(iE_n t/\hbar\right) c_n |n\rangle \implies \Pr[O=o_n, t] = |\exp\left(iE_n t/\hbar\right) c_n|^2 = |c_n|^2
+\]</span>
+Conversely, distribution conservation in particular implies <span class="math inline">\(\langle O \rangle = 0\)</span> (Ehrenfest’s theorem):
+<span class="math display">\[
+\begin{aligned}
+d_t\langle O \rangle &amp;= d_t\langle \psi|O|\psi \rangle \\
+&amp;= \left(d_t|\psi \rangle\right)^\dagger O|\psi \rangle + \left(O|\psi \rangle\right)^\dagger d_t|\psi \rangle + \partial t O \\
+&amp;= \frac{i}{\hbar} \langle [H, O] \rangle
+\end{aligned}
+\]</span>
+The expectation value vanishes for all <span class="math inline">\(|\psi \rangle\)</span>, so <span class="math inline">\([H, O] = 0\)</span>.</p>
+<div class="theorem">
+<p><span id="thm:conservationSymmetryEquivalence" class="theorem"><strong>Theorem 2.3  (continuous symmetry-conservation equivalence) </strong></span>For a Hermitian <span class="math inline">\(O\)</span>, the probability distribution for observing different values of <span class="math inline">\(O\)</span>
+is conserved if and only if <span class="math inline">\(H\)</span> has continuous symmetry with respect to the family of transformations
+generated by <span class="math inline">\(O\)</span>
+<span class="math display">\[
+T(a) = \exp(-ia O / \hbar)
+\]</span></p>
+</div>
+<p><em>Proof:</em> <span class="math inline">\([H, \exp(-i aO/\hbar)] \iff [H, O] = 0\)</span>. Think in the eigenbasis throughout.</p>
+<div class="remark">
+<p><span id="unlabeled-div-22" class="remark"><em>Remark</em>. </span>The previous theorem emphasizes the fundamental stochasticity
+of quantum mechanics. The true quantum-mechanical counterpart of classical values are not the
+measured values (which are not conserved), but its distribution.</p>
+</div>
+</div>
+<div id="selection-rules" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Selection rules<a href="symmetry-conservation-laws-and-selection-rules.html#selection-rules" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall that commutativity ensures a simultaneous set of eigenvectors. This constitutes the most
+basic idea of a selection rule. We recall a result from linear algebra:</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-23" class="theorem"><strong>Theorem 2.4  (commutativity is equivalent to shared eigenbasis) </strong></span>Two normal operators <span class="math inline">\(A, B\)</span> commute if and only if they share an eigenbasis.</p>
+<p><em>Proof:</em> Let <span class="math inline">\(v\)</span> be an eigenvector of <span class="math inline">\(A\)</span> with eigenvalue <span class="math inline">\(\lambda\)</span>, then
+<span class="math display">\[
+ABv = BAv = \lambda B v
+\]</span>
+This means <span class="math inline">\(Bv\)</span> is in the eigenspace of <span class="math inline">\(A\)</span> with eigenvalue <span class="math inline">\(\lambda\)</span>.
+Then <span class="math inline">\(B\)</span> maps eigenspaces of <span class="math inline">\(A\)</span> onto themselves.
+Apply the spectral theorem in each eigenspace.</p>
+</div>
+<p>Selection rules constrain the matrix elements of an operator based on commutativity.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-24" class="theorem"><strong>Theorem 2.5  (Laporte's rule) </strong></span>Matrix elements of an operator that is odd under parity are nonzero only
+for states with the same parity. Those for operators invariant under parity
+are nonzero only for states with different parity.</p>
+</div>
+<p><em>Proof:</em> Consider an operator <span class="math inline">\(O\)</span> such that <span class="math inline">\(\{O, \Pi\} = 0\)</span> and states <span class="math inline">\(|n\rangle, |m\rangle\)</span> with
+parity
+<span class="math display">\[
+\Pi |n\rangle = p_n|n\rangle, \quad \Pi |m\rangle = p_m|m\rangle, \quad p_n, p_m \in \{-1, 1\}
+\]</span>
+Consider the matrix element
+<span class="math display">\[
+\begin{aligned}
+    \langle n|O|m \rangle &amp;= -\langle n|\Pi^\dagger O \Pi|m \rangle \\
+        &amp;= -p_mp_n \langle n|O|m \rangle
+\end{aligned}
+\]</span>
+Rearranging the equation <span class="math inline">\(\langle n|O|m \rangle (1+p_mp_n) = 0\)</span> implies that states with the same parity
+(<span class="math inline">\(p_mp_n=1\)</span>) have vanishing matrix elements. The argument proceeds similarly for <span class="math inline">\([O, \Pi] = 0\)</span>.</p>
+<div class="remark">
+<p><span id="unlabeled-div-25" class="remark"><em>Remark</em>. </span>One informal way to remember Laporte’s rule is that the matrix elements of <span class="math inline">\(O\)</span> give the transition matrix when <span class="math inline">\(O\)</span> happens to be the Hamiltonian. For a system which cares about parity, only states which have the same parity can evolve into each other.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-26" class="definition"><strong>Definition 2.10  (vector operator) </strong></span>Let <span class="math inline">\(R_n(\theta)\)</span> correspond to the transformation of rotating about <span class="math inline">\(n\)</span> by <span class="math inline">\(\theta\)</span>, it has a <span class="math inline">\(3\times 3\)</span> matrix representation <span class="math inline">\(D_n(\theta)\)</span>. A 3-component vector operator <span class="math inline">\(V\)</span> is a vector operator if for all <span class="math inline">\(n, \theta\)</span>
+<span class="math display">\[
+R_n^\dagger(\theta) V R_n(\theta) = D_n(\theta)V
+\]</span>
+In other words, the operator transforms spatially. This is equivalent to if <span class="math inline">\(V\)</span> satisfies
+<span class="math display">\[
+[L_i, V_j] = i\hbar \epsilon_{ijk} V_k
+\]</span></p>
+</div>
+<p>Examples of three such vectors are <span class="math inline">\(r, p, L\)</span>.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-27" class="theorem"><strong>Theorem 2.6  (rotational selection rules for scalars) </strong></span>A rank-<span class="math inline">\(1\)</span> operator <span class="math inline">\(f\)</span> satisfying
+<span class="math display">\[
+[L_z, f] = [L_\pm, f] = [L^2, f] = 0
+\]</span>
+has matrix elements of the form
+<span class="math display">\[
+\langle n&#39;, l&#39;, m&#39;|f|n, l, m \rangle = \delta_{nn&#39;}\delta_{ll&#39;}\langle n&#39;,l\, \|\, f\, \|\, n, l \rangle
+\]</span></p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="path-integrals.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
