@@ -1,0 +1,4 @@
+book_filename: "Quantum Mechanics II"
+language:
+output_dir: "docs"
+delete_merged_file: true

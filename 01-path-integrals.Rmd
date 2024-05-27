@@ -1,0 +1,237 @@
+# Path Integrals 
+## Gaussian Integrals
+A single-variable Gaussian integral may be evaluated by a change into spherical coordinates: 
+\begin{equation}
+    G(a)=\intf dx\, \exp(-ax^2)=\sqrt{\df \pi a}
+\end{equation}
+
+More generally, we may consider a general Gaussian integral for a positive definite $n\times n$ matrix $A$
+and offset $\omega$. 
+\begin{equation}
+    \intf (dx_1\cdots dx_n)\, \exp\left(-x^TAx + \omega^Tx\right)=
+    \exp\left(\df 1 4 \omega^TA^{-1}\omega\right)\sqrt{\df {\pi^N}{\det A}}
+    (\#eq:realMultivariableGaussian)
+\end{equation}
+The integral is evaluated by diagonalizing $A$ and completing the square, as below:
+\[
+    x^TAx - \omega^Tx = \left(x - \df{A^{-1}\omega}2\right)^TA\left(x-\df{A^{-1}\omega}2\right) 
+    - \df 1 4 \omega^TA^{-1}\omega
+\]
+
+We may also consider integrating imaginary, oscillating exponentials: 
+
+- Put in by hand a convergence factor \(\exp(-\delta x^2)\), then take $\delta\to 0$
+- Perform the change of variables $x'=\sqrt{-i\alpha} x$
+
+The following integrals from [Wikipedia](https://en.wikipedia.org/wiki/Common_integrals_in_quantum_field_theory)
+are helpful:
+
+\begin{equation} 
+\begin{split}
+    \intf d^nx\, \exp\left(-\df 1 2x^T A x + \omega^Tx \right) &= \sqrt{\df{(2\pi)^n}{\det A}}\exp
+        \left(\df 1 2 \omega^T A^{-1} \omega\right)
+    \\ 
+    \intf d^nx\, \exp\left(-\df 1 2x^T A x + i\omega^Tx \right) &= \sqrt{\df{(2\pi)^n}{\det A}}\exp
+    \left(-\df 1 2 \omega^T A^{-1} \omega\right)
+    \\ 
+    \intf d^nx\, \exp\left(-\df i 2x^T A x + i\omega^Tx \right) &= \sqrt{\df{(2\pi i)^n}{\det A}}\exp
+    \left(-\df i 2 \omega^T A^{-1} \omega\right) 
+\end{split}
+(\#eq:complexMultivariableGaussian)
+\end{equation} 
+
+## Propagator 
+Recall that in Lagrangian mechanics, the Lagrangian \(\mathcal L(q, \dot q, t)\) is usually 
+associated with \(T-V\). Based on the Lagrangian, one may define the action functional as below, where \(t_1, t_2\) 
+may be omitted if clear from context. 
+\[S_{t_1, t_2}[q]=\int_{t_a}^{t_b} \mathcal L(q(t), \dot q(t), t)\]
+
+::: {.example name="Classical free particle"}
+Recall a free point particle with 
+\[\mathcal L = m\dot x^2/2\]
+The Lagrangian e.o.m and the resulting classical path are
+\[m\ddot x = 0\implies x_{\mathrm{cl}}(t)=\df{x_b-x_a}{t_b-t_a}(x-t_a)+x_a\]
+The corresponding classical action is 
+\[S[x_{\mathrm{cl}}] = 
+    \int_{t_a}^{t_b} dt\, \df 1 2 m \left(\df{x_b-x_a}{t_b-t_a}\right)^2
+    = \df{m(x_b-x_a)^2}{2(t_b-t_a)}\]
+:::
+
+The definition below demonstrates how the path integral formulation quantum mechanics is inspired 
+classical Lagrangian mechanics. The following theorem demonstrates its relation to 
+the Hamiltonian formulation of quantum mechanics.
+
+::: {.definition name="propagator"}
+Given the Lagrangian for a system, its **propagator**, or **kernel**, is 
+the following integral over all paths \(q\) such that \(q(t_a)=x_a, q(t_b)=x_b\)
+\begin{equation}
+    K(x_b, t_b, x_a, t_a)=\int D[q]\, \exp\left(\df i \hbar S[q]\right)
+    =\int D[q]\, \exp\left(\df i \hbar \int_{t_a}^{t_b}dt\, \mathcal L(q(t), \dot q(t), t)\right)
+    (\#eq:defPropagator)
+\end{equation}
+:::
+
+::: {.theorem name="path integral formulation"}
+The kernel satisfies \[K(x_b, t_b, x_a, t_a)=\ang{x_b, t_b|x_a, t_a}\]
+In other words, the Hamiltonian and Lagrangian formulation of quantum mechanics are 
+compatible in the following way (assuming a time-indepent Hamiltonian)
+\begin{equation}
+    \int D[q]\, \exp\left(\df i \hbar \int_{t_a}^{t_b}dt\, \mathcal L(q(t), \dot q(t), t)\right)
+    = \ang{x_b\left|\exp\left(-\df i \hb (t_b-t_a)H\right)\right|x_a} 
+    (\#eq:propagatorHamiltonian)
+\end{equation}
+:::
+
+Several remarks are in order: 
+
+- Every path $q$ contributes a factor with absolute value $1$: contributions only differ in phase. 
+        Conceptually, the first-order endpoint-preserving variations vanish at the classical path (which satifies the 
+        Lagrangian equations of motion), resulting in in-phase contributions, while those paths far from 
+        the classical one are easily out of phase.
+- The destructive interference far away from the classical path relies on the large value of $\Delta S / \hb$. 
+        This qualifies how quantum mechanics degenerates to classical mechanics in the limit $\hb\to 0$, or when action 
+        scales are large when compared to $\hb$, as in the case for most macroscopic systems. 
+- Should we choose to describe our system as an evolving field $\Psi(x, t)$ instead of a path $q(t)$,
+        the path-integral formulation generalizes in a straightforward way:
+        \[\int D[\Psi]\exp\left(\df i \hb \int d^4x\, \mathcal L(\Psi, \dot \Psi, t)\right)\]
+- We're assuming spinless particles. 
+        There are subtle ties to commutativity here. 
+- The position basis in $K(b, a)=\la x_b|U(t_b-t_a)|x_a\ra$ is special. It is nontrivial to use the same 
+        Lagrangian formalism should we choose a different basis for the propagator.  
+
+The propagator $K$ determines the dynamics. We take the basis $|x, t\ra$ 
+and view the system state as defined on the whole space-time, with time evolution via varying $t$: 
+\begin{equation} 
+\begin{split}
+    \psi(x, t) 
+        &= \ang{\psi|x, t} = \la \psi|{\sum}_{x'}\la x, t|x', t_0\ra |x', t_0\ra  \\ 
+        &= {\sum}_{x'}K(x, t, x', t_0)\la \psi|x', t_0\ra \\ 
+        &= {\sum}_{x'}K(x, t, x', t_0)\psi(x', t_0)
+\end{split}
+(\#eq:propagatorEvolution)
+\end{equation} 
+
+Alternatively, assuming a time-invariant Hamiltonian and an energy basis $\{|n, t\ra\}$
+\begin{equation} 
+\begin{split}
+        K(x, t, x', t') 
+        &= \la x, t|x', t'\ra 
+        = \sum \la x, t'|n\ra \la n|x, t\ra \\ 
+        &= \sum_n \exp\left(-\df i \hb E_n(t-t')\right)\psi_n^*(x)\psi_n(x')
+\end{split}
+(\#eq:propagatorEnergyEigenstates)
+\end{equation} 
+The propagator satisfies the Schrodinger equation: fixing $x', t'$ 
+and recalling equation \@ref(eq:propagatorHamiltonian)
+\begin{equation}
+    i\hb \pd t K(x, t, x', t') = H_t K(x, t, x', t')
+\end{equation}
+
+::: {.remark}
+The dynamics of the system is captured by a one-parameter family of unitaries $U_t$, 
+obtained by integrating the exponential of the Hamiltonian (or computing the Schrodinger 
+equation), which send initial states $|\psi_0\ra$ to $|\psi_t\ra$. 
+The propagator is simply the representation of this unitary in the position basis. 
+To see why, recall the action of a linear operator $A$ with matrix representation $(A_{ij})$ 
+in a finite-dimensional Hilbert space 
+\[ 
+    (Av)_i = \sum_j A_{ij} v_j 
+\] 
+The matrix element representation $A_{ij}$ may be viewed instead as a map $A(i, j)=A_{ij}$ 
+and the states similar maps $v(j) = v_j$. 
+\[ 
+    (Av)(i) = \sum_j A(i, j)v(j)
+\] 
+The direct analogue of this in infinite-dimensional Hilbert space is to replace summing 
+over the discrete index $j$ with integration over a continuous variable $x$ 
+\[ 
+    \psi_t(x) = (U_t\, \psi_0)(x) = \int K_{0\to t}(x, x')\psi_0(x')\, dx' 
+\] 
+:::
+
+
+## Integration over paths 
+Consider the following method of parameterizing all possible paths $(x_a, t_a)\to (x_b, t_b)$. 
+Discretize time by units of $\epsilon$: let $t_0=t_a, t_N=t_b, N\epsilon = t_b-t_a$, and $t_{j+1}=t_j+\epsilon$. 
+\begin{equation}
+    K(b, a)\sim \lim_{\epsilon \to 0, N\epsilon = \Delta t}\int\cdots \int (dx_1\cdots dx_{N-1}) \exp\left(\df i \hb S[q(x_1\cdots x_{N-1})]\right)
+\end{equation}
+Note that $x_0, x_N$ are fixed, so they are not variables to be integrated. 
+Under this parameterization, the values $\{x_1\cdots x_{N-1}\}$ parameterizes a path $q$ under the following substitution:
+\begin{equation}\begin{aligned}
+    S[q]&=\int_{t_a}^{t_b}\mathcal L(q, \dot q, t)\, dt = \sum_{j=0}^{N-1}\mathcal L\left(x_i, \df{x_{i+1}-x_i}{\epsilon}, t\right)
+\end{aligned}\end{equation}
+
+## Separable Lagrangian
+Let $q_{\mathrm{cl}}$ denote the classical path satisfying Euler-Lagrange equations. 
+Consider the following quantity for an endpoint-preserving perturbation $\eta$ and time-invariant Lagrangian: 
+\begin{equation}
+\begin{aligned}
+    \mathcal L(q_{\mathrm{cl}}+\epsilon \eta, \dot q_{\mathrm{cl}}+\epsilon \dot \eta)  
+    &= \sum_{n=1}^\infty \df 1 {n!} \left[\epsilon \left(\eta \pd q + \dot \eta \pd{\dot q}\right)\right]^n \mathcal L(q_{\mathrm{cl}}, \dot q_{\mathrm{cl}}, t) \\ 
+    &= \left[1 + 
+        \epsilon (\eta \pd q + \dot \eta \pd{\dot q}) + 
+        \epsilon^2\left(\eta^2 \pd{q}^2 + 2(\eta \pd q)(\dot \eta d_{\dot q}) + \dot \eta^2 \pd{\dot q}^2\right)
+        +O(\epsilon^3)\right]\mathcal L_{\mathrm{cl}}
+\end{aligned} 
+\end{equation}
+The zeroth-order term denotes the classical action, the first-order term vanishes by the 
+Euler-Lagrange equations, and the second-order terms preserve the quadratic coefficients. 
+
+::: {.theorem name="quadratic Lagrangians are separable"}
+For quadratic Lagrangians of the form 
+\[\mathcal L(q, \dot q, t)=Aq^2+B\dot q^2\]
+Both the Lagrangian and the action separate linearly by classical paths 
+\begin{equation}\begin{aligned}
+    \mathcal L(q_{\mathrm{cl}} + \eta, \dot q_{\mathrm{cl}} + \dot \eta) &= 
+        \mathcal L(q_{\mathrm{cl}}, \dot q_{\mathrm{cl}}) + \mathcal L(\eta, \dot \eta) \\ 
+    S[q_{\mathrm{cl}}+\eta] &= S[q_{\mathrm{cl}}] + S[\eta]
+\end{aligned}\end{equation}
+:::
+
+::: {.theorem name="propagator for separable Lagrangian"}
+When the Lagrangian separates, the propagator in equation \@ref(eq:defPropagator) takes the following form. 
+The path integral over $\eta$ is agnostic towards $x_a, x_b$ and only depends on $t_b-t_a$ since the Lagrangian 
+is time-invariant. 
+\begin{equation} 
+\begin{split}
+    K(x_b, t_b, x_a, t_a)&=\int D[q]\, \exp\left(\df i \hbar S[q]\right) 
+    =\int D[\eta]\, \exp\left(\df i \hbar S[q_{\mathrm{cl}}+\eta]\right) \\ 
+    &= \exp\left(\df i \hb S_{\mathrm{cl}}\right) \int D[\eta]\, \exp\left(\df i \hbar S[\eta]\right)
+    =A(t_b-t_a)\exp\left(\df i \hb S_{\mathrm{cl}}\right)
+\end{split}
+(\#eq:separablePropagator)
+\end{equation} 
+:::
+
+::: {.example name="free particle"}
+Recall a free particle has Lagrangian $\mathcal L(x, \dot x)=\df 1 2 m \dot x$. 
+\begin{equation}
+    K(x, t, x', t') = \sqrt{\df m {2\pi i \hbar \Delta t}}\exp\left(\df{im(x-x')^2}{2\hb \Delta t}\right)
+\end{equation}
+Note the appearance of classical action in the spatially dependent exponential term. 
+:::
+
+::: {.example name="simple harmonic oscillator"}
+Consider the following Lagrangian 
+\[L=\dfrac {m \dot x^2}{2} - \dfrac{m \omega^2}{2}x^2\]
+The corresponding classical action is 
+\[
+    S_{\mathrm{cl}}=\frac{m \omega}{2 \sin(\omega \Delta t)}   \left(\left(x_a^2+x_b^2\right) \cos (\omega  \Delta t)-2 x_a x_b\right)
+\]
+Recalling the simple Harmonic oscillator solution are all real and of the following form 
+\[\psi_n(x)=\dfrac 1 {\sqrt{2^nn!}}\left(\dfrac{m\omega}{\pi \hbar}\right)^{1/4}\exp\left(-\dfrac{m\omega x^2}{2\hbar}\right) 
+    H_n \left(\sqrt{\dfrac{m\omega}{\hbar}x}\right)\]
+Perform this substitution and invoke equation \@ref(eq:propagatorEnergyEigenstates)
+\[
+    \sqrt{\dfrac{m\omega}{\hbar}}x_a\mapsto \xi, \sqrt{\dfrac{m\omega}{\hbar}}x_b\mapsto \eta
+\]
+\[ 
+    K=\sqrt{\dfrac{m\omega}{2\pi \hbar i \sin \omega \Delta t}}
+        \exp \left(\dfrac 1 2 (\xi^2+\eta^2)-\dfrac{\xi^2+\eta^2 - 2\xi\eta \exp(-i\Delta t \omega)}{1-\exp(-2i\Delta t\omega)}\right)
+\]
+The exponential term is the exponential of the classical action. 
+\begin{equation}
+    K(b, a)=\sqrt{\dfrac{m\omega}{2\pi \hbar i \sin \omega \Delta t}}\exp\left(\dfrac i \hbar S_\mathrm{cl}\right)
+\end{equation}
+:::

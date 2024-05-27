@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Path Integrals | Quantum Mechanics II</title>
+  <meta name="description" content="1 Path Integrals | Quantum Mechanics II" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Path Integrals | Quantum Mechanics II" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Path Integrals | Quantum Mechanics II" />
+  
+  
+  
+
+<meta name="author" content="Nicholas Lyu" />
+
+
+<meta name="date" content="2024-05-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="path-integrals.html"><a href="path-integrals.html"><i class="fa fa-check"></i><b>1</b> Path Integrals</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="path-integrals.html"><a href="path-integrals.html#gaussian-integrals"><i class="fa fa-check"></i><b>1.1</b> Gaussian Integrals</a></li>
+<li class="chapter" data-level="1.2" data-path="path-integrals.html"><a href="path-integrals.html#propagator"><i class="fa fa-check"></i><b>1.2</b> Propagator</a></li>
+<li class="chapter" data-level="1.3" data-path="path-integrals.html"><a href="path-integrals.html#integration-over-paths"><i class="fa fa-check"></i><b>1.3</b> Integration over paths</a></li>
+<li class="chapter" data-level="1.4" data-path="path-integrals.html"><a href="path-integrals.html#separable-lagrangian"><i class="fa fa-check"></i><b>1.4</b> Separable Lagrangian</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quantum Mechanics II</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="path-integrals" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Path Integrals<a href="path-integrals.html#path-integrals" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="gaussian-integrals" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Gaussian Integrals<a href="path-integrals.html#gaussian-integrals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A single-variable Gaussian integral may be evaluated by a change into spherical coordinates:
+<span class="math display">\[\begin{equation}
+    G(a)=\int_{-\infty}^\infty dx\, \exp(-ax^2)=\sqrt{\dfrac\pi a}
+\end{equation}\]</span></p>
+<p>More generally, we may consider a general Gaussian integral for a positive definite <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(A\)</span>
+and offset <span class="math inline">\(\omega\)</span>.
+<span class="math display" id="eq:realMultivariableGaussian">\[\begin{equation}
+    \int_{-\infty}^\infty(dx_1\cdots dx_n)\, \exp\left(-x^TAx + \omega^Tx\right)=
+    \exp\left(\dfrac 1 4 \omega^TA^{-1}\omega\right)\sqrt{\dfrac{\pi^N}{\det A}}
+    \tag{1.1}
+\end{equation}\]</span>
+The integral is evaluated by diagonalizing <span class="math inline">\(A\)</span> and completing the square, as below:
+<span class="math display">\[
+    x^TAx - \omega^Tx = \left(x - \dfrac{A^{-1}\omega}2\right)^TA\left(x-\dfrac{A^{-1}\omega}2\right)
+    - \dfrac 1 4 \omega^TA^{-1}\omega
+\]</span></p>
+<p>We may also consider integrating imaginary, oscillating exponentials:</p>
+<ul>
+<li>Put in by hand a convergence factor <span class="math inline">\(\exp(-\delta x^2)\)</span>, then take <span class="math inline">\(\delta\to 0\)</span></li>
+<li>Perform the change of variables <span class="math inline">\(x&#39;=\sqrt{-i\alpha} x\)</span></li>
+</ul>
+<p>The following integrals from <a href="https://en.wikipedia.org/wiki/Common_integrals_in_quantum_field_theory">Wikipedia</a>
+are helpful:</p>
+<p><span class="math display" id="eq:complexMultivariableGaussian">\[\begin{equation}
+\begin{split}
+    \int_{-\infty}^\infty d^nx\, \exp\left(-\dfrac 1 2x^T A x + \omega^Tx \right) &amp;= \sqrt{\dfrac{(2\pi)^n}{\det A}}\exp
+        \left(\dfrac 1 2 \omega^T A^{-1} \omega\right)
+    \\
+    \int_{-\infty}^\infty d^nx\, \exp\left(-\dfrac 1 2x^T A x + i\omega^Tx \right) &amp;= \sqrt{\dfrac{(2\pi)^n}{\det A}}\exp
+    \left(-\dfrac 1 2 \omega^T A^{-1} \omega\right)
+    \\
+    \int_{-\infty}^\infty d^nx\, \exp\left(-\dfrac i 2x^T A x + i\omega^Tx \right) &amp;= \sqrt{\dfrac{(2\pi i)^n}{\det A}}\exp
+    \left(-\dfrac i 2 \omega^T A^{-1} \omega\right)
+\end{split}
+\tag{1.2}
+\end{equation}\]</span></p>
+</div>
+<div id="propagator" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Propagator<a href="path-integrals.html#propagator" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall that in Lagrangian mechanics, the Lagrangian <span class="math inline">\(\mathcal L(q, \dot q, t)\)</span> is usually
+associated with <span class="math inline">\(T-V\)</span>. Based on the Lagrangian, one may define the action functional as below, where <span class="math inline">\(t_1, t_2\)</span>
+may be omitted if clear from context.
+<span class="math display">\[S_{t_1, t_2}[q]=\int_{t_a}^{t_b} \mathcal L(q(t), \dot q(t), t)\]</span></p>
+<div class="example">
+<p><span id="exm:unlabeled-div-1" class="example"><strong>Example 1.1  (Classical free particle) </strong></span>Recall a free point particle with
+<span class="math display">\[\mathcal L = m\dot x^2/2\]</span>
+The Lagrangian e.o.m and the resulting classical path are
+<span class="math display">\[m\ddot x = 0\implies x_{\mathrm{cl}}(t)=\dfrac{x_b-x_a}{t_b-t_a}(x-t_a)+x_a\]</span>
+The corresponding classical action is
+<span class="math display">\[S[x_{\mathrm{cl}}] =
+    \int_{t_a}^{t_b} dt\, \dfrac 1 2 m \left(\dfrac{x_b-x_a}{t_b-t_a}\right)^2
+    = \dfrac{m(x_b-x_a)^2}{2(t_b-t_a)}\]</span></p>
+</div>
+<p>The definition below demonstrates how the path integral formulation quantum mechanics is inspired
+classical Lagrangian mechanics. The following theorem demonstrates its relation to
+the Hamiltonian formulation of quantum mechanics.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-2" class="definition"><strong>Definition 1.1  (propagator) </strong></span>Given the Lagrangian for a system, its <strong>propagator</strong>, or <strong>kernel</strong>, is
+the following integral over all paths <span class="math inline">\(q\)</span> such that <span class="math inline">\(q(t_a)=x_a, q(t_b)=x_b\)</span>
+<span class="math display" id="eq:defPropagator">\[\begin{equation}
+    K(x_b, t_b, x_a, t_a)=\int D[q]\, \exp\left(\dfrac i \hbar S[q]\right)
+    =\int D[q]\, \exp\left(\dfrac i \hbar \int_{t_a}^{t_b}dt\, \mathcal L(q(t), \dot q(t), t)\right)
+    \tag{1.3}
+\end{equation}\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-3" class="theorem"><strong>Theorem 1.1  (path integral formulation) </strong></span>The kernel satisfies <span class="math display">\[K(x_b, t_b, x_a, t_a)=\left\langle x_b, t_b|x_a, t_a \right\rangle\]</span>
+In other words, the Hamiltonian and Lagrangian formulation of quantum mechanics are
+compatible in the following way (assuming a time-indepent Hamiltonian)
+<span class="math display" id="eq:propagatorHamiltonian">\[\begin{equation}
+    \int D[q]\, \exp\left(\dfrac i \hbar \int_{t_a}^{t_b}dt\, \mathcal L(q(t), \dot q(t), t)\right)
+    = \left\langle x_b\left|\exp\left(-\dfrac i \hbar(t_b-t_a)H\right)\right|x_a \right\rangle
+    \tag{1.4}
+\end{equation}\]</span></p>
+</div>
+<p>Several remarks are in order:</p>
+<ul>
+<li>Every path <span class="math inline">\(q\)</span> contributes a factor with absolute value <span class="math inline">\(1\)</span>: contributions only differ in phase.
+Conceptually, the first-order endpoint-preserving variations vanish at the classical path (which satifies the
+Lagrangian equations of motion), resulting in in-phase contributions, while those paths far from
+the classical one are easily out of phase.</li>
+<li>The destructive interference far away from the classical path relies on the large value of <span class="math inline">\(\Delta S / \hbar\)</span>.
+This qualifies how quantum mechanics degenerates to classical mechanics in the limit <span class="math inline">\(\hbar\to 0\)</span>, or when action
+scales are large when compared to <span class="math inline">\(\hbar\)</span>, as in the case for most macroscopic systems.</li>
+<li>Should we choose to describe our system as an evolving field <span class="math inline">\(\Psi(x, t)\)</span> instead of a path <span class="math inline">\(q(t)\)</span>,
+the path-integral formulation generalizes in a straightforward way:
+<span class="math display">\[\int D[\Psi]\exp\left(\dfrac i \hbar\int d^4x\, \mathcal L(\Psi, \dot \Psi, t)\right)\]</span></li>
+<li>We’re assuming spinless particles.
+There are subtle ties to commutativity here.</li>
+<li>The position basis in <span class="math inline">\(K(b, a)=\langle x_b|U(t_b-t_a)|x_a\rangle\)</span> is special. It is nontrivial to use the same
+Lagrangian formalism should we choose a different basis for the propagator.</li>
+</ul>
+<p>The propagator <span class="math inline">\(K\)</span> determines the dynamics. We take the basis <span class="math inline">\(|x, t\rangle\)</span>
+and view the system state as defined on the whole space-time, with time evolution via varying <span class="math inline">\(t\)</span>:
+<span class="math display" id="eq:propagatorEvolution">\[\begin{equation}
+\begin{split}
+    \psi(x, t)
+        &amp;= \left\langle\psi|x, t \right\rangle = \langle\psi|{\sum}_{x&#39;}\langle x, t|x&#39;, t_0\rangle|x&#39;, t_0\rangle\\
+        &amp;= {\sum}_{x&#39;}K(x, t, x&#39;, t_0)\langle\psi|x&#39;, t_0\rangle\\
+        &amp;= {\sum}_{x&#39;}K(x, t, x&#39;, t_0)\psi(x&#39;, t_0)
+\end{split}
+\tag{1.5}
+\end{equation}\]</span></p>
+<p>Alternatively, assuming a time-invariant Hamiltonian and an energy basis <span class="math inline">\(\{|n, t\rangle\}\)</span>
+<span class="math display" id="eq:propagatorEnergyEigenstates">\[\begin{equation}
+\begin{split}
+        K(x, t, x&#39;, t&#39;)
+        &amp;= \langle x, t|x&#39;, t&#39;\rangle
+        = \sum \langle x, t&#39;|n\rangle\langle n|x, t\rangle\\
+        &amp;= \sum_n \exp\left(-\dfrac i \hbar E_n(t-t&#39;)\right)\psi_n^*(x)\psi_n(x&#39;)
+\end{split}
+\tag{1.6}
+\end{equation}\]</span>
+The propagator satisfies the Schrodinger equation: fixing <span class="math inline">\(x&#39;, t&#39;\)</span>
+and recalling equation <a href="path-integrals.html#eq:propagatorHamiltonian">(1.4)</a>
+<span class="math display">\[\begin{equation}
+    i\hbar\partial_{t} K(x, t, x&#39;, t&#39;) = H_t K(x, t, x&#39;, t&#39;)
+\end{equation}\]</span></p>
+<div class="remark">
+<p><span id="unlabeled-div-4" class="remark"><em>Remark</em>. </span>The dynamics of the system is captured by a one-parameter family of unitaries <span class="math inline">\(U_t\)</span>,
+obtained by integrating the exponential of the Hamiltonian (or computing the Schrodinger
+equation), which send initial states <span class="math inline">\(|\psi_0\rangle\)</span> to <span class="math inline">\(|\psi_t\rangle\)</span>.
+The propagator is simply the representation of this unitary in the position basis.
+To see why, recall the action of a linear operator <span class="math inline">\(A\)</span> with matrix representation <span class="math inline">\((A_{ij})\)</span>
+in a finite-dimensional Hilbert space
+<span class="math display">\[
+    (Av)_i = \sum_j A_{ij} v_j
+\]</span>
+The matrix element representation <span class="math inline">\(A_{ij}\)</span> may be viewed instead as a map <span class="math inline">\(A(i, j)=A_{ij}\)</span>
+and the states similar maps <span class="math inline">\(v(j) = v_j\)</span>.
+<span class="math display">\[
+    (Av)(i) = \sum_j A(i, j)v(j)
+\]</span>
+The direct analogue of this in infinite-dimensional Hilbert space is to replace summing
+over the discrete index <span class="math inline">\(j\)</span> with integration over a continuous variable <span class="math inline">\(x\)</span>
+<span class="math display">\[
+    \psi_t(x) = (U_t\, \psi_0)(x) = \int K_{0\to t}(x, x&#39;)\psi_0(x&#39;)\, dx&#39;
+\]</span></p>
+</div>
+</div>
+<div id="integration-over-paths" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Integration over paths<a href="path-integrals.html#integration-over-paths" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consider the following method of parameterizing all possible paths <span class="math inline">\((x_a, t_a)\to (x_b, t_b)\)</span>.
+Discretize time by units of <span class="math inline">\(\epsilon\)</span>: let <span class="math inline">\(t_0=t_a, t_N=t_b, N\epsilon = t_b-t_a\)</span>, and <span class="math inline">\(t_{j+1}=t_j+\epsilon\)</span>.
+<span class="math display">\[\begin{equation}
+    K(b, a)\sim \lim_{\epsilon \to 0, N\epsilon = \Delta t}\int\cdots \int (dx_1\cdots dx_{N-1}) \exp\left(\dfrac i \hbar S[q(x_1\cdots x_{N-1})]\right)
+\end{equation}\]</span>
+Note that <span class="math inline">\(x_0, x_N\)</span> are fixed, so they are not variables to be integrated.
+Under this parameterization, the values <span class="math inline">\(\{x_1\cdots x_{N-1}\}\)</span> parameterizes a path <span class="math inline">\(q\)</span> under the following substitution:
+<span class="math display">\[\begin{equation}\begin{aligned}
+    S[q]&amp;=\int_{t_a}^{t_b}\mathcal L(q, \dot q, t)\, dt = \sum_{j=0}^{N-1}\mathcal L\left(x_i, \dfrac{x_{i+1}-x_i}{\epsilon}, t\right)
+\end{aligned}\end{equation}\]</span></p>
+</div>
+<div id="separable-lagrangian" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Separable Lagrangian<a href="path-integrals.html#separable-lagrangian" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let <span class="math inline">\(q_{\mathrm{cl}}\)</span> denote the classical path satisfying Euler-Lagrange equations.
+Consider the following quantity for an endpoint-preserving perturbation <span class="math inline">\(\eta\)</span> and time-invariant Lagrangian:
+<span class="math display">\[\begin{equation}
+\begin{aligned}
+    \mathcal L(q_{\mathrm{cl}}+\epsilon \eta, \dot q_{\mathrm{cl}}+\epsilon \dot \eta)  
+    &amp;= \sum_{n=1}^\infty \dfrac 1 {n!} \left[\epsilon \left(\eta \partial_{q} + \dot \eta \partial_{\dot q}\right)\right]^n \mathcal L(q_{\mathrm{cl}}, \dot q_{\mathrm{cl}}, t) \\
+    &amp;= \left[1 +
+        \epsilon (\eta \partial_{q} + \dot \eta \partial_{\dot q}) +
+        \epsilon^2\left(\eta^2 \partial_{q}^2 + 2(\eta \partial_{q})(\dot \eta d_{\dot q}) + \dot \eta^2 \partial_{\dot q}^2\right)
+        +O(\epsilon^3)\right]\mathcal L_{\mathrm{cl}}
+\end{aligned}
+\end{equation}\]</span>
+The zeroth-order term denotes the classical action, the first-order term vanishes by the
+Euler-Lagrange equations, and the second-order terms preserve the quadratic coefficients.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-5" class="theorem"><strong>Theorem 1.2  (quadratic Lagrangians are separable) </strong></span>For quadratic Lagrangians of the form
+<span class="math display">\[\mathcal L(q, \dot q, t)=Aq^2+B\dot q^2\]</span>
+Both the Lagrangian and the action separate linearly by classical paths
+<span class="math display">\[\begin{equation}\begin{aligned}
+    \mathcal L(q_{\mathrm{cl}} + \eta, \dot q_{\mathrm{cl}} + \dot \eta) &amp;=
+        \mathcal L(q_{\mathrm{cl}}, \dot q_{\mathrm{cl}}) + \mathcal L(\eta, \dot \eta) \\
+    S[q_{\mathrm{cl}}+\eta] &amp;= S[q_{\mathrm{cl}}] + S[\eta]
+\end{aligned}\end{equation}\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-6" class="theorem"><strong>Theorem 1.3  (propagator for separable Lagrangian) </strong></span>When the Lagrangian separates, the propagator in equation <a href="path-integrals.html#eq:defPropagator">(1.3)</a> takes the following form.
+The path integral over <span class="math inline">\(\eta\)</span> is agnostic towards <span class="math inline">\(x_a, x_b\)</span> and only depends on <span class="math inline">\(t_b-t_a\)</span> since the Lagrangian
+is time-invariant.
+<span class="math display" id="eq:separablePropagator">\[\begin{equation}
+\begin{split}
+    K(x_b, t_b, x_a, t_a)&amp;=\int D[q]\, \exp\left(\dfrac i \hbar S[q]\right)
+    =\int D[\eta]\, \exp\left(\dfrac i \hbar S[q_{\mathrm{cl}}+\eta]\right) \\
+    &amp;= \exp\left(\dfrac i \hbar S_{\mathrm{cl}}\right) \int D[\eta]\, \exp\left(\dfrac i \hbar S[\eta]\right)
+    =A(t_b-t_a)\exp\left(\dfrac i \hbar S_{\mathrm{cl}}\right)
+\end{split}
+\tag{1.7}
+\end{equation}\]</span></p>
+</div>
+<div class="example">
+<p><span id="exm:unlabeled-div-7" class="example"><strong>Example 1.2  (free particle) </strong></span>Recall a free particle has Lagrangian <span class="math inline">\(\mathcal L(x, \dot x)=\dfrac 1 2 m \dot x\)</span>.
+<span class="math display">\[\begin{equation}
+    K(x, t, x&#39;, t&#39;) = \sqrt{\dfrac m {2\pi i \hbar \Delta t}}\exp\left(\dfrac{im(x-x&#39;)^2}{2\hbar\Delta t}\right)
+\end{equation}\]</span>
+Note the appearance of classical action in the spatially dependent exponential term.</p>
+</div>
+<div class="example">
+<p><span id="exm:unlabeled-div-8" class="example"><strong>Example 1.3  (simple harmonic oscillator) </strong></span>Consider the following Lagrangian
+<span class="math display">\[L=\dfrac {m \dot x^2}{2} - \dfrac{m \omega^2}{2}x^2\]</span>
+The corresponding classical action is
+<span class="math display">\[
+    S_{\mathrm{cl}}=\frac{m \omega}{2 \sin(\omega \Delta t)}   \left(\left(x_a^2+x_b^2\right) \cos (\omega  \Delta t)-2 x_a x_b\right)
+\]</span>
+Recalling the simple Harmonic oscillator solution are all real and of the following form
+<span class="math display">\[\psi_n(x)=\dfrac 1 {\sqrt{2^nn!}}\left(\dfrac{m\omega}{\pi \hbar}\right)^{1/4}\exp\left(-\dfrac{m\omega x^2}{2\hbar}\right)
+    H_n \left(\sqrt{\dfrac{m\omega}{\hbar}x}\right)\]</span>
+Perform this substitution and invoke equation <a href="path-integrals.html#eq:propagatorEnergyEigenstates">(1.6)</a>
+<span class="math display">\[
+    \sqrt{\dfrac{m\omega}{\hbar}}x_a\mapsto \xi, \sqrt{\dfrac{m\omega}{\hbar}}x_b\mapsto \eta
+\]</span>
+<span class="math display">\[
+    K=\sqrt{\dfrac{m\omega}{2\pi \hbar i \sin \omega \Delta t}}
+        \exp \left(\dfrac 1 2 (\xi^2+\eta^2)-\dfrac{\xi^2+\eta^2 - 2\xi\eta \exp(-i\Delta t \omega)}{1-\exp(-2i\Delta t\omega)}\right)
+\]</span>
+The exponential term is the exponential of the classical action.
+<span class="math display">\[\begin{equation}
+    K(b, a)=\sqrt{\dfrac{m\omega}{2\pi \hbar i \sin \omega \Delta t}}\exp\left(\dfrac i \hbar S_\mathrm{cl}\right)
+\end{equation}\]</span></p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

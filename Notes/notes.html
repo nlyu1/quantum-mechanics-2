@@ -1,0 +1,2620 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Nicholas Lyu" />
+  <meta name="dcterms.date" content="2023-12-13" />
+  <title>Quantum Mechanics</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Quantum Mechanics</h1>
+<p class="author">Nicholas Lyu</p>
+<p class="date">2023-12-13</p>
+</header>
+<p>These notes are for the fall 2023 iteration of Harvard’s
+second-semester undergraduate quantum mechanics, Physics 143b, taught by
+Sonia Paban. The course includes a brief introduction to path integrals,
+followed by perturbation theory applied to hydrogen energy levels, then
+quantum dynamics, WKB approximation, scattering, and density
+operators.</p>
+<p>These notes deviate from the course material by</p>
+<ul>
+<li><p>a section on symmetry and conservation laws, adapted from
+Griffiths.</p></li>
+<li><p>an interaction-picture explanation of time-dependent perturbation
+theory, adapted from MIT’s online lecture notes.</p></li>
+<li><p>the adiabatic theorem from Weinberg’s <em>Lectures on Quantum
+Mechanics</em>.</p></li>
+<li><p>does not include density operators.</p></li>
+</ul>
+<p>A note on notations: <span
+class="math inline"><em>d</em>/<em>d</em><em>x</em>, ∂/∂<em>x</em></span>
+are abbreviated <span
+class="math inline"><em>d</em><sub><em>x</em></sub>, ∂<sub><em>x</em></sub></span>.
+Summation over a free index which does not appear on the left hand side
+are occasionally omitted to reduce clutter. Function arguments are
+occasionally integerchanged with subscripts to reduce clutter.</p>
+<h1 id="path-integrals">Path Integrals</h1>
+<h2 id="gaussian-integrals">Gaussian Integrals</h2>
+<p>A single-variable Gaussian integral may be evaluated by a change into
+spherical coordinates: <span
+class="math display">$$G(a)=\int_{-\infty}^\infty dx\,
+\exp(-ax^2)=\sqrt{\dfrac\pi a}$$</span></p>
+<p>More generally, we may consider a general Gaussian integral for a
+positive definite <span
+class="math inline"><em>n</em> × <em>n</em></span> matrix <span
+class="math inline"><em>A</em></span> and offset <span
+class="math inline"><em>ω</em></span>. <span
+class="math display">$$\label{eqn:real_multivariable_gaussian}
+    \int_{-\infty}^\infty(dx_1\cdots dx_n)\, \exp\left(-x^TAx +
+\omega^Tx\right)=
+    \exp\left(\dfrac 1 4
+\omega^TA^{-1}\omega\right)\sqrt{\dfrac{\pi^N}{\det A}}$$</span> The
+integral is evaluated by diagonalizing <span
+class="math inline"><em>A</em></span> and completing the square, as
+below: <span class="math display">$$x^TAx - \omega^Tx = \left(x -
+\dfrac{A^{-1}\omega}2\right)^TA\left(x-\dfrac{A^{-1}\omega}2\right)
+- \dfrac 1 4 \omega^TA^{-1}\omega$$</span></p>
+<p>We may also consider integrating imaginary, oscillating
+exponentials:</p>
+<ul>
+<li><p>Put in by hand a convergence factor <span
+class="math inline">exp (−<em>δ</em><em>x</em><sup>2</sup>)</span>, then
+take <span class="math inline"><em>δ</em> → 0</span></p></li>
+<li><p>Perform the change of variables <span
+class="math inline">$x'=\sqrt{-i\alpha} x$</span></p></li>
+</ul>
+<p>The following integrals from <a
+href="https://en.wikipedia.org/wiki/Common_integrals_in_quantum_field_theory">Wikipedia</a>
+are helpful: <span
+class="math display">$$\label{eqn:complex_multivariable_gaussian}
+\begin{aligned}
+    \int_{-\infty}^\infty d^nx\, \exp\left(-\dfrac 1 2x^T A x +
+\omega^Tx \right) &amp;= \sqrt{\dfrac{(2\pi)^n}{\det A}}\exp
+        \left(\dfrac 1 2 \omega^T A^{-1} \omega\right)
+    \\
+    \int_{-\infty}^\infty d^nx\, \exp\left(-\dfrac 1 2x^T A x +
+i\omega^Tx \right) &amp;= \sqrt{\dfrac{(2\pi)^n}{\det A}}\exp
+    \left(-\dfrac 1 2 \omega^T A^{-1} \omega\right)
+    \\
+    \int_{-\infty}^\infty d^nx\, \exp\left(-\dfrac i 2x^T A x +
+i\omega^Tx \right) &amp;= \sqrt{\dfrac{(2\pi i)^n}{\det A}}\exp
+    \left(-\dfrac i 2 \omega^T A^{-1} \omega\right)
+\end{aligned}$$</span></p>
+<h2 id="propagator">Propagator</h2>
+<p>Recall that in Lagrangian mechanics, the Lagrangian <span
+class="math inline">ℒ(<em>q</em>,<em>q̇</em>,<em>t</em>)</span> is
+usually associated with <span
+class="math inline"><em>T</em> − <em>V</em></span>. Based on the
+Lagrangian, one may define the action functional as below, where <span
+class="math inline"><em>t</em><sub>1</sub>, <em>t</em><sub>2</sub></span>
+may be omitted if clear from context. <span
+class="math display"><em>S</em><sub><em>t</em><sub>1</sub>, <em>t</em><sub>2</sub></sub>[<em>q</em>] = ∫<sub><em>t</em><sub><em>a</em></sub></sub><sup><em>t</em><sub><em>b</em></sub></sup>ℒ(<em>q</em>(<em>t</em>),<em>q̇</em>(<em>t</em>),<em>t</em>)</span></p>
+<div class="example">
+<p><strong>Example 1</strong> (Classical free particle). <em>Recall a
+free point particle with <span
+class="math display">ℒ = <em>m</em><em>ẋ</em><sup>2</sup>/2</span> The
+Lagrangian e.o.m and the resulting classical path are <span
+class="math display">$$m\ddot x = 0\implies
+x_{\mathrm{cl}}(t)=\dfrac{x_b-x_a}{t_b-t_a}(x-t_a)+x_a$$</span> The
+corresponding classical action is <span
+class="math display">$$S[x_{\mathrm{cl}}] =
+        \int_{t_a}^{t_b} dt\, \dfrac 1 2 m
+\left(\dfrac{x_b-x_a}{t_b-t_a}\right)^2
+        = \dfrac{m(x_b-x_a)^2}{2(t_b-t_a)}$$</span></em></p>
+</div>
+<p>The theorem below shows how the path integral formulation quantum
+mechanics is based classical Lagrangian mechanics. The following theorem
+demonstrates its relation to the Hamiltonian formulation of quantum
+mechanics.</p>
+<div class="definition">
+<p><strong>Definition 1</strong> (propagator). <em>Given the Lagrangian
+for a system, its <strong>propagator</strong>, or
+<strong>kernel</strong>, is the following integral over all paths <span
+class="math inline"><em>q</em></span> such that <span
+class="math inline"><em>q</em>(<em>t</em><sub><em>a</em></sub>) = <em>x</em><sub><em>a</em></sub>, <em>q</em>(<em>t</em><sub><em>b</em></sub>) = <em>x</em><sub><em>b</em></sub></span>
+<span class="math display">$$\label{eqn:def_propagator}
+        K(x_b, t_b, x_a, t_a)=\int D[q]\, \exp\left(\dfrac i \hbar
+S[q]\right)
+        =\int D[q]\, \exp\left(\dfrac i \hbar \int_{t_a}^{t_b}dt\,
+\mathcal L(q(t), \dot q(t), t)\right)$$</span></em></p>
+</div>
+<div class="theorem">
+<p><strong>Theorem 1</strong> (path integral formulation). <em>The
+kernel satisfies <span
+class="math display"><em>K</em>(<em>x</em><sub><em>b</em></sub>,<em>t</em><sub><em>b</em></sub>,<em>x</em><sub><em>a</em></sub>,<em>t</em><sub><em>a</em></sub>) = ⟨<em>x</em><sub><em>b</em></sub>,<em>t</em><sub><em>b</em></sub>|<em>x</em><sub><em>a</em></sub>,<em>t</em><sub><em>a</em></sub>⟩</span>
+In other words, the Hamiltonian and Lagrangian formulation of quantum
+mechanics are compatible in the following way (assuming a time-indepent
+Hamiltonian) <span
+class="math display">$$\label{eqn:propagator_hamiltonian}
+        \int D[q]\, \exp\left(\dfrac i \hbar \int_{t_a}^{t_b}dt\,
+\mathcal L(q(t), \dot q(t), t)\right)
+        = \left\langle x_b\left|\exp\left(-\dfrac i
+\hbar(t_b-t_a)H\right)\right|x_a \right\rangle$$</span></em></p>
+</div>
+<div class="remark">
+<p><strong>Remark 1</strong>. <em>Several remarks are in order:</em></p>
+<ul>
+<li><p><em>Every path <span class="math inline"><em>q</em></span>
+contributes a factor with absolute value <span
+class="math inline">1</span>: contributions only differ in phase.
+Conceptually, the first-order endpoint-preserving variations vanish at
+the classical path (which satifies the Lagrangian equations of motion),
+resulting in in-phase contributions, while those paths far from the
+classical one are easily out of phase.</em></p></li>
+<li><p><em>The destructive interference far away from the classical path
+relies on the large value of <span
+class="math inline"><em>Δ</em><em>S</em>/ℏ</span>. This qualifies how
+quantum mechanics degenerates to classical mechanics in the limit <span
+class="math inline">ℏ → 0</span>, or when action scales are large when
+compared to <span class="math inline">ℏ</span>, as in the case for most
+macroscopic systems.</em></p></li>
+<li><p><em>Should we choose to describe our system as an evolving field
+<span class="math inline"><em>Ψ</em>(<em>x</em>,<em>t</em>)</span>
+instead of a path <span
+class="math inline"><em>q</em>(<em>t</em>)</span>, the path-integral
+formulation generalizes in a straightforward way: <span
+class="math display">$$\int D[\Psi]\exp\left(\dfrac i \hbar\int d^4x\,
+\mathcal L(\Psi, \dot \Psi, t)\right)$$</span></em></p></li>
+<li><p><em>We’re assuming spinless particles. There are subtle ties to
+commutativity here.</em></p></li>
+<li><p><em>The position basis in <span
+class="math inline"><em>K</em>(<em>b</em>,<em>a</em>) = ⟨<em>x</em><sub><em>b</em></sub>|<em>U</em>(<em>t</em><sub><em>b</em></sub>−<em>t</em><sub><em>a</em></sub>)|<em>x</em><sub><em>a</em></sub>⟩</span>
+is special. We cannot use the Lagrangian should we choose a different
+basis for the propagator.</em></p></li>
+</ul>
+</div>
+<p>The propagator <span class="math inline"><em>K</em></span> determines
+the dynamics. We take the basis <span
+class="math inline">|<em>x</em>, <em>t</em>⟩</span> and view the system
+state as defined on the whole space-time, with time evolution via
+varying <span class="math inline"><em>t</em></span>: <span
+class="math display">$$\begin{aligned}\label{eqn:propagator_evolution}
+    \psi(x, t)
+        &amp;= \left\langle\psi|x, t \right\rangle =
+\langle\psi|{\sum}_{x'}\langle x, t|x', t_0\rangle|x', t_0\rangle\\
+        &amp;= {\sum}_{x'}K(x, t, x', t_0)\langle\psi|x', t_0\rangle\\
+        &amp;= {\sum}_{x'}K(x, t, x', t_0)\psi(x', t_0)
+\end{aligned}$$</span> Alternatively, assuming a time-invariant
+Hamiltonian and an energy basis <span
+class="math inline">{|<em>n</em>, <em>t</em>⟩}</span> <span
+class="math display">$$\begin{aligned}\label{eqn:propagator_energy_eigenstates}
+    K(x, t, x', t')
+        &amp;= \langle x, t|x', t'\rangle\\
+        &amp;= {\sum}_n \langle x, t'|n\rangle\langle n|x, t\rangle\\
+        &amp;= {\sum}_n \exp\left(-\dfrac i \hbar
+E_n(t-t')\right)\psi_n^*(x)\psi_n(x')
+\end{aligned}$$</span> The propagator satisfies the Schrodinger
+equation: fixing <span
+class="math inline"><em>x</em>′, <em>t</em>′</span> (recall equation <a
+href="#eqn:propagator_hamiltonian" data-reference-type="ref"
+data-reference="eqn:propagator_hamiltonian">[eqn:propagator_hamiltonian]</a>)
+<span
+class="math display"><em>i</em>ℏ∂<sub><em>t</em></sub><em>K</em>(<em>x</em>,<em>t</em>,<em>x</em>′,<em>t</em>′) = <em>H</em><sub><em>t</em></sub><em>K</em>(<em>x</em>,<em>t</em>,<em>x</em>′,<em>t</em>′)</span></p>
+<div class="remark">
+<p><strong>Remark 2</strong>. <em>The dynamics of the system is captured
+by a one-parameter family of unitaries <span
+class="math inline"><em>U</em><sub><em>t</em></sub></span>, obtained by
+integrating the exponential of the Hamiltonian (or computing the
+Schrodinger equation), which send initial states <span
+class="math inline">|<em>ψ</em><sub>0</sub>⟩</span> to <span
+class="math inline">|<em>ψ</em><sub><em>t</em></sub>⟩</span>. The
+propagator is simply the representation of this unitary in the position
+basis. To see why, recall the action of a linear operator <span
+class="math inline"><em>A</em></span> with matrix representation <span
+class="math inline">(<em>A</em><sub><em>i</em><em>j</em></sub>)</span>
+in a finite-dimensional Hilbert space <span
+class="math display">(<em>A</em><em>v</em>)<sub><em>i</em></sub> = ∑<sub><em>j</em></sub><em>A</em><sub><em>i</em><em>j</em></sub><em>v</em><sub><em>j</em></sub></span>
+The matrix element representation <span
+class="math inline"><em>A</em><sub><em>i</em><em>j</em></sub></span> may
+be viewed instead as a map <span
+class="math inline"><em>A</em>(<em>i</em>,<em>j</em>) = <em>A</em><sub><em>i</em><em>j</em></sub></span>
+and the states similar maps <span
+class="math inline"><em>v</em>(<em>j</em>) = <em>v</em><sub><em>j</em></sub></span>.
+<span
+class="math display">(<em>A</em><em>v</em>)(<em>i</em>) = ∑<sub><em>j</em></sub><em>A</em>(<em>i</em>,<em>j</em>)<em>v</em>(<em>j</em>)</span>
+The direct analogue of this in infinite-dimensional Hilbert space is to
+replace summing over the discrete index <span
+class="math inline"><em>j</em></span> with integration over a continuous
+variable <span class="math inline"><em>x</em></span> <span
+class="math display"><em>ψ</em><sub><em>t</em></sub>(<em>x</em>) = (<em>U</em><sub><em>t</em></sub> <em>ψ</em><sub>0</sub>)(<em>x</em>) = ∫<em>K</em><sub>0 → <em>t</em></sub>(<em>x</em>,<em>x</em>′)<em>ψ</em><sub>0</sub>(<em>x</em>′) <em>d</em><em>x</em>′</span></em></p>
+</div>
+<h2 id="integration-over-paths">Integration over paths</h2>
+<p>Consider the following method of parameterizing all possible paths
+<span
+class="math inline">(<em>x</em><sub><em>a</em></sub>,<em>t</em><sub><em>a</em></sub>) → (<em>x</em><sub><em>b</em></sub>,<em>t</em><sub><em>b</em></sub>)</span>.
+Discretize time by units of <span class="math inline"><em>ϵ</em></span>:
+let <span
+class="math inline"><em>t</em><sub>0</sub> = <em>t</em><sub><em>a</em></sub>, <em>t</em><sub><em>N</em></sub> = <em>t</em><sub><em>b</em></sub>, <em>N</em><em>ϵ</em> = <em>t</em><sub><em>b</em></sub> − <em>t</em><sub><em>a</em></sub></span>,
+and <span
+class="math inline"><em>t</em><sub><em>j</em> + 1</sub> = <em>t</em><sub><em>j</em></sub> + <em>ϵ</em></span>.
+<span class="math display">$$K(b, a)\sim \lim_{\epsilon \to 0, N\epsilon
+= \Delta t}\int\cdots \int (dx_1\cdots dx_{N-1}) \exp\left(\dfrac i
+\hbar S[q(x_1\cdots x_{N-1})]\right)$$</span> Note that <span
+class="math inline"><em>x</em><sub>0</sub>, <em>x</em><sub><em>N</em></sub></span>
+are fixed, so they are not variables to be integrated. Under this
+parameterization, the values <span
+class="math inline">{<em>x</em><sub>1</sub>⋯<em>x</em><sub><em>N</em> − 1</sub>}</span>
+parameterizes a path <span class="math inline"><em>q</em></span> under
+the following substitution: <span class="math display">$$\begin{aligned}
+    S[q]&amp;=\int_{t_a}^{t_b}\mathcal L(q, \dot q, t)\, dt =
+\sum_{j=0}^{N-1}\mathcal L\left(x_i, \dfrac{x_{i+1}-x_i}{\epsilon},
+t\right)
+\end{aligned}$$</span></p>
+<h2 id="separable-lagrangian">Separable Lagrangian</h2>
+<p>Let <span class="math inline"><em>q</em><sub>cl</sub></span> denote
+the classical path satisfying Euler-Lagrange equations. Consider the
+following quantity for an endpoint-preserving perturbation <span
+class="math inline"><em>η</em></span> and time-invariant Lagrangian:
+<span class="math display">$$\begin{aligned}
+    \mathcal L(q_{\mathrm{cl}}+\epsilon \eta, \dot
+q_{\mathrm{cl}}+\epsilon \dot \eta)  
+    &amp;= \sum_{n=1}^\infty \dfrac 1 {n!} \left[\epsilon \left(\eta
+\partial_{q} + \dot \eta \partial_{\dot q}\right)\right]^n \mathcal
+L(q_{\mathrm{cl}}, \dot q_{\mathrm{cl}}, t) \\
+    &amp;= \left[1 +
+        \epsilon (\eta \partial_{q} + \dot \eta \partial_{\dot q}) +
+        \epsilon^2\left(\eta^2 \partial_{q}^2 + 2(\eta
+\partial_{q})(\dot \eta d_{\dot q}) + \dot \eta^2 \partial_{\dot
+q}^2\right)
+        +O(\epsilon^3)\right]\mathcal L_{\mathrm{cl}}
+\end{aligned}$$</span> The zeroth-order term denotes the classical
+action, the first-order term vanishes by the Euler-Lagrange equations,
+and the second-order terms preserve the quadratic coefficients.</p>
+<div class="theorem">
+<p><strong>Theorem 2</strong> (quadratic Lagrangians are separable).
+<em>For quadratic Lagrangians of the form <span
+class="math display">ℒ(<em>q</em>,<em>q̇</em>,<em>t</em>) = <em>A</em><em>q</em><sup>2</sup> + <em>B</em><em>q̇</em><sup>2</sup></span>
+Both the Lagrangian and the action separate linearly by classical paths
+<span class="math display">$$\begin{aligned}
+        \mathcal L(q_{\mathrm{cl}} + \eta, \dot q_{\mathrm{cl}} + \dot
+\eta) &amp;=
+            \mathcal L(q_{\mathrm{cl}}, \dot q_{\mathrm{cl}}) + \mathcal
+L(\eta, \dot \eta) \\
+        S[q_{\mathrm{cl}}+\eta] &amp;= S[q_{\mathrm{cl}}] + S[\eta]
+    \end{aligned}$$</span></em></p>
+</div>
+<div class="theorem">
+<p><strong>Theorem 3</strong> (propagator for separable Lagrangian).
+<em>When the Lagrangian separates, the propagator in equation <a
+href="#eqn:def_propagator" data-reference-type="ref"
+data-reference="eqn:def_propagator">[eqn:def_propagator]</a> takes the
+following form. The path integral over <span
+class="math inline"><em>η</em></span> is agnostic towards <span
+class="math inline"><em>x</em><sub><em>a</em></sub>, <em>x</em><sub><em>b</em></sub></span>
+and only depends on <span
+class="math inline"><em>t</em><sub><em>b</em></sub> − <em>t</em><sub><em>a</em></sub></span>
+since the Lagrangian is time-invariant. <span
+class="math display">$$\begin{aligned}\label{eqn:separable_propagator}
+        K(x_b, t_b, x_a, t_a)&amp;=\int D[q]\, \exp\left(\dfrac i \hbar
+S[q]\right)
+        =\int D[\eta]\, \exp\left(\dfrac i \hbar
+S[q_{\mathrm{cl}}+\eta]\right) \\
+        &amp;= \exp\left(\dfrac i \hbar S_{\mathrm{cl}}\right) \int
+D[\eta]\, \exp\left(\dfrac i \hbar S[\eta]\right)
+        =A(t_b-t_a)\exp\left(\dfrac i \hbar S_{\mathrm{cl}}\right)
+    \end{aligned}$$</span></em></p>
+</div>
+<div class="example">
+<p><strong>Example 2</strong> (free particle). <em>Recall a free
+particle has Lagrangian <span class="math inline">$\mathcal L(x, \dot
+x)=\dfrac 1 2 m \dot x$</span>. <span class="math display">$$K(x, t, x',
+t') = \sqrt{\dfrac m {2\pi i \hbar \Delta
+t}}\exp\left(\dfrac{im(x-x')^2}{2\hbar\Delta t}\right)$$</span> Note the
+appearance of classical action in the spatially dependent exponential
+term.</em></p>
+</div>
+<div class="example">
+<p><strong>Example 3</strong> (simple harmonic oscillator). <em>Consider
+the following Lagrangian <span class="math display">$$L=\dfrac {m \dot
+x^2}{2} - \dfrac{m \omega^2}{2}x^2$$</span> The corresponding classical
+action is <span class="math display">$$S_{\mathrm{cl}}=\frac{m \omega}{2
+\sin(\omega \Delta t)}   \left(\left(x_a^2+x_b^2\right) \cos
+(\omega  \Delta t)-2 x_a x_b\right)$$</span> Recalling the simple
+Harmonic oscillator solution are all real and of the following form
+<span class="math display">$$\psi_n(x)=\dfrac 1
+{\sqrt{2^nn!}}\left(\dfrac{m\omega}{\pi
+\hbar}\right)^{1/4}\exp\left(-\dfrac{m\omega x^2}{2\hbar}\right)
+        H_n \left(\sqrt{\dfrac{m\omega}{\hbar}x}\right)$$</span> Perform
+this substitution and invoke equation <a
+href="#eqn:propagator_energy_eigenstates" data-reference-type="ref"
+data-reference="eqn:propagator_energy_eigenstates">[eqn:propagator_energy_eigenstates]</a>
+<span class="math display">$$\sqrt{\dfrac{m\omega}{\hbar}}x_a\mapsto
+\xi, \sqrt{\dfrac{m\omega}{\hbar}}x_b\mapsto \eta$$</span> <span
+class="math display">$$K=\sqrt{\dfrac{m\omega}{2\pi \hbar i \sin \omega
+\Delta t}}
+            \exp \left(\dfrac 1 2 (\xi^2+\eta^2)-\dfrac{\xi^2+\eta^2 -
+2\xi\eta \exp(-i\Delta t \omega)}{1-\exp(-2i\Delta
+t\omega)}\right)$$</span> The exponential term is the exponential of the
+classical action. <span class="math display">$$K(b,
+a)=\sqrt{\dfrac{m\omega}{2\pi \hbar i \sin \omega \Delta
+t}}\exp\left(\dfrac i \hbar S_\mathrm{cl}\right)$$</span></em></p>
+</div>
+<h1 id="time-independent-perturbation-theory">Time Independent
+Perturbation Theory</h1>
+<p>Suppose we successfully solved for the eigensystem <span
+class="math inline">{<em>E</em><sub><em>n</em></sub><sup>0</sup>, <em>ψ</em><sub><em>n</em></sub><sup>0</sup>}</span>
+for a time-independent Hamiltonian <span
+class="math inline"><em>H</em><sup>0</sup></span>. Perturbation theory
+approximates the eigensystem for the perturbed Hamiltonian <span
+class="math display"><em>H</em> = <em>H</em><sup>0</sup> + <em>λ</em><em>H</em>′</span>
+The key assumption of perturbation theory is that <em>the eigensystem
+has a power series expansion in terms of <span
+class="math inline"><em>λ</em></span></em>. We use this assumption and
+the known solutions for <span class="math inline"><em>λ</em> = 0</span>
+to solve for the perturbed eigensystem at <span
+class="math inline"><em>λ</em> = 1</span>. Concretely,</p>
+<p><span class="math display">$$\begin{aligned}
+
+    \psi_n &amp;= \psi_n^0 + \lambda \psi_n^1 + \lambda^2 \psi_n^2 +
+\cdots \\
+    E_n &amp;= E_n^0 + \lambda E_n^1 + \lambda^2 E_n^2 + \cdots \\
+
+\end{aligned}$$</span></p>
+<p>The subscript denotes the eigensystem index and superscript
+correction order. Substitute into the eigenvalue equation for <span
+class="math inline"><em>H</em></span> to yield <span
+class="math display">(<em>H</em><sup>0</sup>+<em>λ</em><em>H</em>′)(<em>ψ</em><sub><em>n</em></sub><sup>0</sup>+<em>λ</em><em>ψ</em><sub><em>n</em></sub><sup>1</sup>+⋯) = (<em>E</em><sub><em>n</em></sub><sup>0</sup>+<em>λ</em><em>E</em><sub><em>n</em></sub><sup>1</sup>+⋯)(<em>ψ</em><sub><em>n</em></sub><sup>0</sup>+<em>λ</em><em>ψ</em><sub><em>n</em></sub><sup>1</sup>+⋯)</span>
+By assumption this equation holds independently for every power of <span
+class="math inline"><em>λ</em></span>. In the zeroth order <span
+class="math display"><em>H</em><sup>0</sup><em>ψ</em><sub><em>n</em></sub><sup>0</sup> = <em>E</em><sub><em>n</em></sub><sup>0</sup><em>ψ</em><sub><em>n</em></sub><sup>0</sup></span>
+To the first and second orders</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:independent
+first-second perturbation}
+
+    H^0\psi_n^1 + H'\psi_n^0 &amp;= E_n^0\psi_n^1 + E_n^1\psi_n^0 \\
+    H^0\psi_n^2 + H'\psi_n^1 &amp;= E_n^0 \psi_n^2 + E_n^1\psi_n^1 +
+E_n^2 \psi_n^0
+
+\end{aligned}$$</span></p>
+<div class="remark">
+<p><strong>Remark 3</strong>. <em>The power series expansion assumption
+of perturbation theory is not generally true. The solutions to a
+physical system is not generally smooth around <span
+class="math inline"><em>λ</em> = 0</span>, as positive and negative
+coupling may lead to qualitatively different behaviors (consider a
+two-body system with attractive compared to repulsive interaction). This
+manifests mathematically in the divergence of higher-order terms. It is
+a miracle that we can use the first few terms in the perturbation series
+with a good conscience in the first place.</em></p>
+</div>
+<h2 id="nondegenerate-theory">Nondegenerate theory</h2>
+<p>Take the inner product of the first equation in <a
+href="#eqn:independent first-second perturbation"
+data-reference-type="ref"
+data-reference="eqn:independent first-second perturbation">[eqn:independent
+first-second perturbation]</a> with <span
+class="math inline"><em>ψ</em><sub><em>n</em></sub><sup>0</sup></span>
+to isolate a component <span
+class="math display">⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>H</em><sup>0</sup>|<em>ψ</em><sub><em>n</em></sub><sup>1</sup>⟩ + ⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>H</em>′|<em>ψ</em><sub><em>n</em></sub><sup>0</sup>⟩ = <em>E</em><sub><em>n</em></sub><sup>0</sup>⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>ψ</em><sub><em>n</em></sub><sup>1</sup>⟩+<em>E</em><sub><em>n</em></sub><sup>1</sup>⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>ψ</em><sub><em>n</em></sub><sup>0</sup>⟩</span>
+Hamiltonian <span class="math inline"><em>H</em><sup>0</sup></span> is
+Hermitian, so the first terms on both sides of the equation cancel, The
+first-order energy correction is an matrix element of <span
+class="math inline"><em>H</em>′</span> in the orthonormal basis <span
+class="math inline">{|<em>ψ</em><sub><em>n</em></sub><sup>0</sup>⟩}</span>.
+<span
+class="math display"><em>E</em><sub><em>n</em></sub><sup>1</sup> = ⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>H</em>′|<em>ψ</em><sub><em>n</em></sub><sup>0</sup>⟩</span>
+For the first order eigenstate correction, rewrite equation <a
+href="#eqn:independent first-second perturbation"
+data-reference-type="ref"
+data-reference="eqn:independent first-second perturbation">[eqn:independent
+first-second perturbation]</a> as an equation in <span
+class="math inline"><em>ψ</em><sub><em>n</em></sub><sup>1</sup></span>.
+<span
+class="math display">(<em>H</em><sup>0</sup>−<em>E</em><sub><em>n</em></sub><sup>0</sup>)<em>ψ</em><sub><em>n</em></sub><sup>1</sup> =  − (<em>H</em>′−<em>E</em><sub><em>n</em></sub><sup>1</sup>)<em>ψ</em><sub><em>n</em></sub><sup>0</sup></span>
+Any solution has freedom under <span
+class="math inline"><em>ψ</em><sub><em>n</em></sub><sup>1</sup> ↦ <em>ψ</em><sub><em>n</em></sub><sup>1</sup> + <em>α</em><em>ψ</em><sub><em>n</em></sub><sup>0</sup></span>.
+Expand <span
+class="math inline"><em>ψ</em><sub><em>n</em></sub><sup>1</sup></span>
+in the orthonormal basis</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:perturbation
+expansion}
+
+    \psi_n^1 = \sum_{m\neq n} c_m^{(n)} \psi_m^0
+
+\end{aligned}$$</span> Substitute into the equation <span
+class="math display">∑<sub><em>m</em> ≠ <em>n</em></sub>(<em>E</em><sub><em>m</em></sub><sup>0</sup>−<em>E</em><sub><em>n</em></sub><sup>0</sup>)<em>c</em><sub><em>m</em></sub><sup>(<em>n</em>)</sup><em>ψ</em><sub><em>m</em></sub><sup>0</sup> =  − (<em>H</em>′−<em>E</em><sub><em>n</em></sub><sup>1</sup>)<em>ψ</em><sub><em>n</em></sub><sup>0</sup></span>
+Again, to isolate components take the inner product with <span
+class="math inline"><em>ψ</em><sub><em>l</em></sub><sup>0</sup></span>
+for <span class="math inline"><em>l</em> ≠ <em>n</em></span> <span
+class="math display">(<em>E</em><sub><em>l</em></sub><sup>0</sup>−<em>E</em><sub><em>n</em></sub><sup>0</sup>)<em>c</em><sub><em>l</em></sub><sup>(<em>n</em>)</sup> =  − ⟨<em>ψ</em><sub><em>l</em></sub><sup>0</sup>|<em>H</em>′|<em>ψ</em><sub><em>n</em></sub><sup>0</sup>⟩</span>
+Solve for <span
+class="math inline"><em>c</em><sub><em>l</em></sub><sup>(<em>n</em>)</sup></span>
+and substitute into <a href="#eqn:perturbation expansion"
+data-reference-type="ref"
+data-reference="eqn:perturbation expansion">[eqn:perturbation
+expansion]</a> yields the first-order eigenfunction corrections <span
+class="math display">$$|\psi_n^1\rangle= \sum_{m\neq n}
+\dfrac{\left\langle\psi_m^0|H'|\psi_n^0 \right\rangle}{E_n^0 -
+E_m^0}|\psi_m^0\rangle$$</span> For <span
+class="math inline"><em>E</em><sub><em>n</em></sub><sup>2</sup></span>,
+consider the second equation in <a
+href="#eqn:independent first-second perturbation"
+data-reference-type="ref"
+data-reference="eqn:independent first-second perturbation">[eqn:independent
+first-second perturbation]</a>. Inner product with <span
+class="math inline"><em>ψ</em><sub><em>n</em></sub><sup>0</sup></span>
+to isolate components <span
+class="math display">⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>H</em><sup>0</sup>|<em>ψ</em><sub><em>n</em></sub><sup>2</sup>⟩ + ⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>H</em>′|<em>ψ</em><sub><em>n</em></sub><sup>1</sup>⟩ = <em>E</em><sub><em>n</em></sub><sup>0</sup>⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>ψ</em><sub><em>n</em></sub><sup>2</sup>⟩+<em>E</em><sub><em>n</em></sub><sup>1</sup>⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>ψ</em><sub><em>n</em></sub><sup>1</sup>⟩ + <em>E</em><sub><em>n</em></sub><sup>2</sup>⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>ψ</em><sub><em>n</em></sub><sup>0</sup>⟩</span>
+Again, the first term on both sides cancel, so <span
+class="math display"><em>E</em><sub><em>n</em></sub><sup>2</sup> = ⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>H</em>′|<em>ψ</em><sub><em>n</em></sub><sup>1</sup>⟩ − <em>E</em><sub><em>n</em></sub><sup>1</sup>⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>ψ</em><sub><em>n</em></sub><sup>1</sup>⟩</span>
+Recall that we excluded <span
+class="math inline"><em>ψ</em><sub><em>n</em></sub><sup>0</sup></span>
+in the expansion for <span
+class="math inline"><em>ψ</em><sub><em>n</em></sub><sup>1</sup>⟩</span>
+in  <a href="#eqn:perturbation expansion" data-reference-type="ref"
+data-reference="eqn:perturbation expansion">[eqn:perturbation
+expansion]</a> so <span
+class="math inline">⟨<em>ψ</em><sub><em>n</em></sub><sup>0</sup>|<em>ψ</em><sub><em>n</em></sub><sup>1</sup>⟩ = 0</span>,
+then putting our results in one place:</p>
+<div class="mdframed">
+<p><span class="math display">$$\begin{aligned}\label{eqn:perturbation
+results}
+
+    E_n^1 &amp;= \langle\psi_n^0|H'|\psi_n^0\rangle\\
+    |\psi_n^1\rangle&amp;= \sum_{m\neq n}
+    \dfrac{\left\langle\psi_m^0|H'|\psi_n^0 \right\rangle}{E_n^0 -
+E_m^0}|\psi_m^0\rangle\\
+    E_n^2 &amp;=
+    \sum_{m\neq n} \dfrac{|\langle\psi_m^0|H'|\psi_n^0\rangle|^2}{E_n^0
+- E_m^0}
+
+\end{aligned}$$</span></p>
+</div>
+<h2 id="degenerate-theory">Degenerate theory</h2>
+<p>In the case of degeneracy, we need to think more rigorously about our
+solutions:</p>
+<p>The first order equation <span
+class="math inline"><em>H</em><sup>0</sup><em>ψ</em><sub><em>n</em></sub><sup>0</sup> = <em>E</em><sub><em>n</em></sub><sup>0</sup><em>ψ</em><sub><em>n</em></sub><sup>0</sup></span>
+is under-determined: when the eigenspace <span
+class="math inline"><em>E</em><sub><em>n</em></sub><sup>0</sup></span>
+is of dimension greater than <span class="math inline">1</span>, there
+are many eigenstates which satisfy the first-order equation. The problem
+when we consider the first-order eigenstate correction <span
+class="math display">$$|\psi_n^{1}\rangle = \sum_{m \neq n}
+    \frac{\langle \psi_m^0 | H' | \psi_n^0 \rangle}
+    {E_n^0 - E_m^0} | \psi_m^0 \rangle$$</span> It is not defined in
+case of degeneracy, when <span
+class="math inline"><em>E</em><sub><em>n</em></sub><sup>0</sup> = <em>E</em><sub><em>m</em></sub><sup>0</sup></span>
+for some <span class="math inline"><em>n</em> ≠ <em>m</em></span>. The
+same holds for the second order energy correction.</p>
+<p>One way to make sense of the first-order eigenfunction correction
+equation is choose a “good” basis for the degenerate eigenspace such
+that <span
+class="math display">∀<em>n</em> ≠ <em>m</em>, <em>E</em><sub><em>n</em></sub><sup>0</sup> = <em>E</em><sub><em>m</em></sub><sup>0</sup> ⟹ ⟨<em>ψ</em><sub><em>m</em></sub><sup>0</sup>|<em>H</em>′|<em>ψ</em><sub><em>n</em></sub><sup>0</sup>⟩ = 0</span>
+This allows us to cancel the zero denominators in <a
+href="#eqn:perturbation results" data-reference-type="ref"
+data-reference="eqn:perturbation results">[eqn:perturbation results]</a>
+with a zero enumerator and hope that no higher-order degeneracy exists
+so the indeterminate form is <span class="math inline">0</span>. We need
+the following definition to make precise what we mean by finding a
+“good” eigenbasis for <span
+class="math inline"><em>H</em><sup>0</sup></span> with respect to a
+perturbation <span class="math inline"><em>H</em>′</span>.</p>
+<div class="definition">
+<p><strong>Definition 2</strong> (subspace projection of an operator).
+<em>the projection of an operator <span
+class="math inline"><em>H</em> : <em>V</em> → <em>V</em></span> onto a
+subspace <span class="math inline"><em>W</em> ⊂ <em>V</em></span> <span
+class="math inline"><em>H</em><sub>|<em>W</em></sub> : <em>W</em> → <em>W</em></span>
+is <span class="math display">$$H_{|W} : W \xrightarrow \iota V
+\xrightarrow{H} V \xrightarrow{P_{V \to W}} W$$</span> Given an
+orthonormal basis <span class="math inline">{|<em>i</em>⟩}</span> for
+<span class="math inline"><em>W</em></span>, the matrix representation
+of <span class="math inline"><em>H</em><sub>|<em>W</em></sub></span> is
+<span
+class="math inline"><em>W</em><sub><em>i</em><em>j</em></sub> = ⟨<em>i</em>|<em>H</em>|<em>j</em>⟩</span>.</em></p>
+</div>
+<div class="example">
+<p><strong>Example 4</strong> (operator in <span
+class="math inline">ℂ<sup>3</sup></span>). <em>The subspace projection
+of the operator <span class="math display">$$A = \begin{pmatrix}
+            a_{11} &amp; a_{12} &amp; a_{13} \\ a_{21} &amp; a_{22}
+&amp; a_{23} \\ a_{31} &amp; a_{32} &amp; a_{33}
+        \end{pmatrix}$$</span> onto the subspace spanned by the first
+and third basis elements is <span
+class="math display">$$A_{|\mathrm{span}(e_1, e_3)} =
+        \begin{pmatrix}
+            a_{11} &amp; a_{13} \\ a_{31} &amp; a_{33}
+        \end{pmatrix}$$</span> Formally, this is done by removing the
+second row and column.</em></p>
+</div>
+<div class="definition">
+<p><strong>Definition 3</strong> (good basis for perturbation).
+<em><span class="math inline">ℬ = {|<em>i</em>⟩}</span> is “good” basis
+for perturbing <span class="math inline"><em>H</em><sup>0</sup></span>
+with respect to <span class="math inline"><em>H</em>′</span> if, for
+every eigenspace <span
+class="math inline"><em>W</em> ⊂ <em>V</em></span> of <span
+class="math inline"><em>H</em></span> with basis <span
+class="math inline">𝒜 ⊆ ℬ</span>, the representation of <span
+class="math inline"><em>H</em>′<sub>|<em>W</em></sub></span> under <span
+class="math inline">𝒜</span> is diagonal. In other words <span
+class="math display">∀|<em>m</em>⟩,|<em>n</em>⟩ ∈ 𝒜, <em>m</em> ≠ <em>n</em> : <em>H</em>′<sub><em>m</em><em>n</em></sub> = 0</span></em></p>
+</div>
+<div class="remark">
+<p><strong>Remark 4</strong>. <em>Finding a good basis is weaker than
+finding a simultaneous eigenbasis for <span
+class="math inline"><em>H</em><sup>0</sup>, <em>H</em>′</span>, which
+does not exist when <span
+class="math inline">[<em>H</em><sup>0</sup>,<em>H</em>′] ≠ 0</span>. A
+good basis <em>always</em> exists by applying the spectral theorem to
+the projection of <span class="math inline"><em>H</em>′</span> on each
+eigenspace of <span
+class="math inline"><em>H</em><sup>0</sup></span>.</em></p>
+</div>
+<p>The following results helps us find a good basis easily under certain
+conditions.</p>
+<div class="theorem">
+<p><strong>Theorem 4</strong> (characterization of commutativity).
+<em>Two normal operators <span
+class="math inline"><em>A</em>, <em>B</em></span> commute if and only if
+they leave the eigenspaces of each other invariant.</em></p>
+<p><em><em>Proof:</em> Assume commutativity, and let <span
+class="math inline"><em>x</em></span> be an eigenvector of <span
+class="math inline"><em>A</em></span> with eigenvalue <span
+class="math inline"><em>λ</em></span>, then <span
+class="math inline"><em>B</em><em>A</em><em>x</em> = <em>λ</em><em>B</em><em>x</em> = <em>A</em>(<em>B</em><em>x</em>)</span>,
+so <span class="math inline"><em>B</em><em>x</em></span> is also an
+eigenvector of <span class="math inline"><em>A</em></span> with
+eigenvalue <span class="math inline"><em>λ</em></span>. Conversely, let
+<span class="math inline"><em>x</em><sub><em>i</em></sub></span> be an
+eigenbasis for <span class="math inline"><em>A</em></span> such that
+<span
+class="math inline"><em>A</em><em>x</em><sub><em>i</em></sub> = <em>λ</em><sub><em>i</em></sub><em>x</em><sub><em>i</em></sub>, <em>A</em><em>B</em><em>x</em><sub><em>i</em></sub> = <em>λ</em><sub><em>i</em></sub><em>B</em><em>x</em><sub><em>i</em></sub></span>.
+Given an arbitrary vector <span
+class="math inline"><em>v</em> = <em>c</em><sub><em>i</em></sub><em>x</em><sub><em>i</em></sub></span>,
+we have <span
+class="math display"><em>B</em><em>A</em><em>v</em> = <em>c</em><sub><em>i</em></sub><em>B</em><em>A</em><em>x</em><sub><em>i</em></sub> = <em>c</em><sub><em>i</em></sub><em>λ</em><sub><em>i</em></sub><em>B</em><em>x</em><sub><em>i</em></sub> = <em>c</em><sub><em>i</em></sub><em>A</em><em>B</em><em>x</em><sub><em>i</em></sub> = <em>A</em><em>B</em><em>v</em></span></em></p>
+</div>
+<p>This applies in particular two Hermitian operators. In a subspace
+spanned by eigenvectors of <span class="math inline"><em>A</em></span>
+with distinct eigenvalues, commutativity forces <span
+class="math inline"><em>H</em></span> to be diagonal.</p>
+<div class="lemma">
+<p><strong>Lemma 5</strong>. <em>Given commuting Hermitian operators
+<span class="math inline"><em>H</em></span>, <span
+class="math inline"><em>A</em></span>, <span
+class="math inline"><em>H</em><sub>|<em>W</em></sub></span> is diagonal
+for every subspace <span class="math inline"><em>W</em></span> spanned
+by an orthonormal set of eigenvectors of <span
+class="math inline"><em>A</em></span> with distinct
+eigenvalues.</em></p>
+<p><em><em>Proof:</em> By <span
+class="math inline"><em>A</em><em>H</em> = <em>H</em><em>A</em></span>,
+<span
+class="math inline">⟨<em>i</em>|<em>H</em>|<em>j</em>⟩ = <em>λ</em><sub><em>j</em></sub><sup>−1</sup>⟨<em>i</em>|<em>A</em><em>H</em>|<em>j</em>⟩ = <em>λ</em><sub><em>i</em></sub><sup>−1</sup>⟨<em>i</em>|<em>H</em><em>A</em>|<em>j</em>⟩</span>.
+Since <span
+class="math inline"><em>λ</em><sub><em>i</em></sub> ≠ <em>λ</em><sub><em>j</em></sub></span>,
+<span
+class="math inline">⟨<em>i</em>|<em>H</em>|<em>j</em>⟩ = 0</span>.</em></p>
+</div>
+<p>Note commutativity is not transitive: <span
+class="math inline">[<em>A</em>,<em>H</em><sup>0</sup>] = [<em>A</em>,<em>H</em>′] = 0</span>
+does not imply <span
+class="math inline">[<em>H</em><sup>0</sup>,<em>H</em>′] = 0</span>. The
+following theorem is the main result of this section.</p>
+<div class="theorem">
+<p><strong>Theorem 6</strong> (convenient good basis condition).
+<em>Given Hermitian <span
+class="math inline"><em>H</em><sup>0</sup>, <em>H</em>′</span>. An
+eigenbasis <span class="math inline">{|<em>i</em>⟩}</span> for <span
+class="math inline"><em>H</em><sup>0</sup></span> is a good basis if
+there exists an operator <span class="math inline"><em>A</em></span>
+such that <span
+class="math inline">[<em>A</em>,<em>H</em><sup>0</sup>] = [<em>A</em>,<em>H</em>′] = 0</span>
+and each subset of <span class="math inline">{|<em>i</em>⟩}</span>
+corresponding to a degenerate subspace of <span
+class="math inline"><em>H</em><sup>0</sup></span> are eigenvectors of
+<span class="math inline"><em>A</em></span> with distinct
+eigenvalues.</em></p>
+<p><em><em>Proof:</em> Given such an <span
+class="math inline"><em>A</em></span> and mutual eigenbasis <span
+class="math inline">{|<em>i</em>⟩}</span> between <span
+class="math inline"><em>A</em>, <em>H</em><sup>0</sup></span>, consider
+each degenerate eigenspace <span class="math inline"><em>W</em></span>
+of <span class="math inline"><em>H</em><sup>0</sup></span>. By the lemma
+above, <span
+class="math inline"><em>H</em>′<sub>|<em>W</em></sub></span> must be
+diagonal in this basis.</em></p>
+</div>
+<div class="remark">
+<p><strong>Remark 5</strong>. <em>The converse to the theorem is not
+true. Given a good basis and <span
+class="math inline">[<em>A</em>,<em>H</em><sup>0</sup>] = 0</span>, the
+fact that <span
+class="math inline"><em>H</em>′<sub>|<em>W</em></sub></span> is diagonal
+for each degenerate eigenspace does not mean that it has to leave it
+invariant. Consider a good basis <span
+class="math inline"><em>b</em><sub><em>i</em></sub></span> which is a
+shared eigenbasis for <span
+class="math inline"><em>H</em><sup>0</sup>, <em>A</em></span> with
+eigenvalues <span
+class="math inline"><em>λ</em><sub><em>i</em></sub>, <em>ρ</em><sub><em>i</em></sub></span>
+for the two operators respectively. Assume <span
+class="math inline"><em>λ</em><sub>1</sub> = <em>λ</em><sub>2</sub></span>,
+then <span
+class="math inline"><em>ρ</em><sub>1</sub> ≠ <em>ρ</em><sub>2</sub></span>.
+It suffices to find a <span class="math inline"><em>H</em>′</span> whose
+projection onto the span of <span
+class="math inline"><em>b</em><sub>1</sub>, <em>b</em><sub>2</sub></span>
+is diagonal but changes some eigenspace of <span
+class="math inline"><em>A</em></span>. The span of <span
+class="math inline"><em>b</em><sub>1</sub>, <em>b</em><sub>2</sub></span>
+belongs to distinct eigenspaces of <span
+class="math inline"><em>A</em></span> by <span
+class="math inline"><em>ρ</em><sub>1</sub> ≠ <em>ρ</em><sub>2</sub></span>,
+the following <span class="math inline"><em>H</em>′</span> suffices for
+nonzero <span
+class="math inline"><em>H</em>′<sub>13</sub>, <em>H</em>′<sub>23</sub></span>.
+All representations are in the good basis. <span
+class="math display">$$H = \begin{pmatrix}
+            \lambda_1 \\ &amp; \lambda_2=\lambda_1 \\
+&amp;&amp;\lambda_3
+        \end{pmatrix}, \quad
+        A = \begin{pmatrix}
+            \rho_1 \\ &amp; \rho_2\neq \rho_1 \\ &amp;&amp;\rho_3
+        \end{pmatrix}, \quad
+        H' = \begin{pmatrix}
+            H'_{11} &amp;&amp; H'_{13} \\ &amp; H'_{22} &amp; H'_{23} \\
+&amp;&amp;H'_{33}
+        \end{pmatrix}$$</span></em></p>
+</div>
+<div class="remark">
+<p><strong>Remark 6</strong>. <em>The operator <span
+class="math inline"><em>A</em></span> is usually of two forms:</em></p>
+<ul>
+<li><p><em>a unitary symmetry exhibited by both <span
+class="math inline"><em>H</em><sup>0</sup>, <em>H</em>′</span>. The
+condition in the theorem above boils down to degenerate eigenstates of
+<span class="math inline"><em>H</em><sup>0</sup></span> having different
+behaviors under the application of the symmetry. See the example
+below.</em></p></li>
+<li><p><em>a Hermitian observable whose eigenstates coincide with energy
+eigenstates of <span
+class="math inline"><em>H</em><sup>0</sup>, <em>H</em>′</span>. The
+theorem condition translates to degenerate eigenstates of <span
+class="math inline"><em>H</em><sup>0</sup></span> having different
+observable values. For example, <span
+class="math inline"><em>H</em>, <em>L</em><sub><em>z</em></sub>, <em>L</em><sup>2</sup></span></em></p></li>
+</ul>
+</div>
+<div class="example">
+<p><strong>Example 5</strong> (oscillator). <em>Consider a particle in
+two-dimensional oscillator potential <span class="math display">$$H =
+\frac{p^2}{2m} + \frac{1}{2} m\omega^2 (x^2 + y^2), \quad
+        H' = \epsilon m \omega^2 x y$$</span> The first excited state is
+two-fold degenerate with one basis <span
+class="math display">$$\begin{aligned}
+        \psi_0^{a} &amp;= \psi_0 \phi_1 = \alpha y
+\exp\left(-\frac{\beta^2 (x^2 + y^2)}{2}\right) \\
+        \psi_0^{b} &amp;= \psi_1 \phi_0 = \alpha x
+\exp\left(-\frac{\beta^2 (x^2 + y^2)}{2}\right)
+    
+\end{aligned}$$</span> One can show that <span
+class="math inline"><em>H</em>′<sub><em>a</em><em>b</em></sub> ≠ 0</span>,
+so this is not a good basis. <span class="math inline"><em>H</em></span>
+has continuous rotational symmetry and reflections, while <span
+class="math inline"><em>H</em>′</span> is invariant under <span
+class="math inline"><em>A</em> : (<em>x</em>,<em>y</em>) ↦ (−<em>x</em>,−<em>y</em>)</span>
+and <span
+class="math inline"><em>A</em>′ : (<em>x</em>,<em>y</em>) ↦ (<em>y</em>,<em>x</em>)</span>.
+Both <span class="math inline"><em>A</em>, <em>A</em>′</span> both
+commute with <span
+class="math inline"><em>H</em>, <em>H</em>′</span>.</em></p>
+<ul>
+<li><p><em><span
+class="math inline"><em>ψ</em><sub>0</sub><sup><em>a</em></sup>, <em>ψ</em><sub>0</sub><sup><em>b</em></sup></span>
+are degenerate eigenvectors of <span
+class="math inline"><em>A</em></span>, so <span
+class="math inline"><em>A</em></span> does not give us a good
+basis.</em></p></li>
+<li><p><em><span
+class="math inline"><em>ψ</em><sub>0</sub><sup><em>a</em></sup>, <em>ψ</em><sub>0</sub><sup><em>b</em></sup></span>
+are not eigenvectors of <span class="math inline"><em>A</em>′</span>,
+but <span class="math inline">$\frac{1}{\sqrt{2}} (\psi_0^{a} \pm
+\psi_0^{b})$</span> are with eigenvalues <span
+class="math inline"> ± 1</span>. They constitute the desired basis in
+which <span class="math inline"><em>H</em>′</span> is
+diagonal.</em></p></li>
+</ul>
+</div>
+<h1 id="structure-of-hydrogen">Structure of Hydrogen</h1>
+<h2 id="fine-structure">Fine structure</h2>
+<h3 id="relativistic-correction-to-kinetic-energy">Relativistic
+correction to kinetic energy</h3>
+<p>The lowest-order correction Hamiltonian due to relativistic
+correction to kinetic energy is <span
+class="math display">$$\label{eqn:relativistic_hamiltonian}
+    H'_r = -\dfrac{p^4}{8m^3c^2}$$</span> Exploiting the Hermiticity of
+<span class="math inline"><em>p</em></span>, the first-order correction
+is <span class="math display">$$E_r^1=-\dfrac{1}{8m^3c^2}\left\langle
+p^2\psi|p^2\psi \right\rangle$$</span> For our unperturbed <span
+class="math inline">|<em>ψ</em>⟩</span>, which are solved for
+non-relativistically, <span
+class="math inline"><em>p</em><sup>2</sup> = 2<em>m</em>(<em>E</em>−<em>V</em>)</span>,
+so <span class="math display">$$\begin{aligned}\label{eqn:rel_corr}
+    E^1_r &amp;= -\dfrac 1{2mc^2}\left\langle(E-V)^2 \right\rangle \\
+        &amp;= -\dfrac 1{2mc^2}\left(E_n^2 - 2E_n \left\langle V
+\right\rangle + \left\langle V^2 \right\rangle\right) \\
+        &amp;=-\dfrac{(E_n)^2}{2mc^2}\left[\dfrac{4n}{l+1/2}-3\right]
+\end{aligned}$$</span> Several quantities which are handy in such
+evaluations when we use the basis <span
+class="math inline"><em>n</em>, <em>l</em>, <em>m</em><sub><em>l</em></sub></span>
+<span class="math display">$$\left\langle\dfrac 1 r \right\rangle =
+\dfrac 1 {n^2 a} \quad \left\langle\dfrac 1 {r^2} \right\rangle = \dfrac
+1 {(l+1/2)n^3a^2}\quad
+    \left\langle\dfrac 1 {r^3} \right\rangle = \dfrac 1
+{l(l+1/2)(l+1)n^3a^3}$$</span></p>
+<p>The perturbation is spherically symmetric, so <span
+class="math inline"><em>L</em><sup>2</sup>, <em>L</em><sub><em>z</em></sub></span>
+commute with both <span
+class="math inline"><em>H</em>, <em>H</em>′<sub><em>r</em></sub></span>
+and <span
+class="math inline">|<em>n</em>, <em>l</em>, <em>m</em>⟩</span> are
+distinct eigenstates of <span
+class="math inline">(<em>L</em><sup>2</sup>,<em>L</em><sub><em>z</em></sub>)</span>,
+taken together, allowing us to use nondegenerate perturbation theory.
+Relativistic correction to the kinetic energy lifts the <span
+class="math inline"><em>l</em></span>-degeneracy. Our complete set of
+commuting observables (recall <a href="#def:csco"
+data-reference-type="ref" data-reference="def:csco">[def:csco]</a>) are
+<span
+class="math inline"><em>H</em>, <em>L</em><sup>2</sup>, <em>L</em><sub><em>z</em></sub>, <em>S</em><sup>2</sup>, <em>S</em><sub><em>z</em></sub></span>.</p>
+<h3 id="spin-orbit-coupling">Spin-orbit coupling</h3>
+<p>From the electron’s frame, the proton’s motion generates a magnetic
+field which couples to the electron spin. <span
+class="math display">$$\label{eqn:spin_orbit_coupling}
+    H'_{\mathrm{so}} = \left(\dfrac{e^2}{8\pi \epsilon_0}\right)\dfrac 1
+{m^2c^2r^3}\bf{S\cdot L}$$</span> The energy spectrum is degenerate in
+<span
+class="math inline"><em>m</em>, <em>m</em><sub><em>s</em></sub></span>
+yet <span
+class="math inline">[<strong>S</strong>⋅<strong>L</strong>,<em>L</em><sub><em>z</em></sub>], [<strong>S</strong> <strong>⋅</strong> <strong>L</strong>,<em>S</em><sub><em>z</em></sub>] ≠ 0</span>.
+Therefore we cannot use <span
+class="math inline"><em>m</em>, <em>s</em></span> as our quantum
+numbers. Consider instead the total angular momentum <span
+class="math display">$$\label{def:J}
+    \bf{J\equiv L + S}$$</span> We propose an addition of angular
+momentum transformation, which replaces the complete set of commuting
+observables for a Hamiltonian from <span
+class="math inline"><em>L</em><sup>2</sup>, <em>L</em><sub><em>z</em></sub>, <em>S</em><sup>2</sup>, <em>S</em><sub><em>z</em></sub></span>
+with <span
+class="math inline"><em>J</em><sup>2</sup>, <em>L</em><sup>2</sup>, <em>S</em><sup>2</sup>, <em>J</em><sub><em>z</em></sub></span>
+corresponding to quantum numbers <span
+class="math inline"><em>j</em>, <em>l</em>, <em>s</em>, <em>m</em><sub><em>j</em></sub></span>.
+We first need to verify commutativity with <span
+class="math inline"><em>H</em>′<sub>so</sub></span>.</p>
+<div class="proposition">
+<p><strong>Proposition 7</strong>. <em><span
+class="math inline">[<strong>J</strong>,<strong>S</strong> <strong>⋅</strong> <strong>L</strong>] = 0</span></em></p>
+<p><em><em>Proof:</em> Without loss of generality consider <span
+class="math inline"><em>J</em><sub><em>z</em></sub></span>, <span
+class="math display">$$\begin{aligned}
+        [J_z, \mathbf{S\cdot L}]
+            &amp;= [S_z+L_z, S_xL_x+S_yL_y+S_zL_z] \\
+            &amp;= [S_z, S_x]L_x + [S_z, S_y]L_y + [L_z, L_x]S_x + [L_z,
+L_y]S_y \\
+            &amp;= S_yL_x - S_xL_y + L_yS_x - L_xS_y = 0
+    \end{aligned}$$</span></em></p>
+</div>
+<p>Also note that <span class="math inline">$\mathbf{S\cdot L} = \dfrac
+1 2 (J^2 - L^2 - S^2)$</span>, so <span
+class="math inline"><em>H</em>′<sub>so</sub></span> commutes with <span
+class="math inline"><em>L</em><sup>2</sup>, <em>S</em><sup>2</sup>, <em>J</em><sup>2</sup>, <em>J</em><sub><em>z</em></sub></span>.</p>
+<div class="proposition">
+<p><strong>Proposition 8</strong>. <em><span
+class="math inline"><em>H</em>′<sub>so</sub></span> commutes with <span
+class="math inline"><em>J</em><sup>2</sup>, <em>L</em><sup>2</sup>, <em>S</em><sup>2</sup>, <em>J</em><sub><em>z</em></sub></span>.</em></p>
+<p><em><em>Proof:</em> The previous proposition shows that <span
+class="math inline"><em>H</em>′<sub>so</sub></span> commutes with <span
+class="math inline"><em>J</em><sub><em>z</em></sub></span>. To show
+commutativity with the other observables, note that <span
+class="math display">$$\mathbf{S\cdot L} = \dfrac 1 2 (J^2 - L^2 -
+S^2)$$</span> The three operators <span
+class="math inline"><em>L</em><sup>2</sup>, <em>S</em><sup>2</sup>, <em>J</em><sup>2</sup></span>
+pairwise commute.</em></p>
+</div>
+<p>The eigenvalues of <span
+class="math inline"><strong>L</strong> <strong>⋅</strong> <strong>S</strong></span>
+are then <span
+class="math display">$$\dfrac{\hbar^2}2\left[j(j+1)-l(l+1)-s(s+1)\right]$$</span>
+Substituting total spin <span
+class="math inline"><em>s</em> = 1/2</span></p>
+<figure id="fig:fs_zeeman">
+<img src="src/n=2_hydrogen_fs.png" />
+<figcaption>Fine-structure and Zeeman corrections for <span
+class="math inline"><em>n</em> = 2</span></figcaption>
+</figure>
+<p><span
+class="math display">$$E^1_{\mathrm{so}}=\dfrac{(E_n)^2}{mc^2}\cdot
+\dfrac{n\left[j(j+1)-l(l+1)-3/4\right]}{l(l+1/2)(l+1)}$$</span> Luckily,
+this combines neatly with the contribution from the relativistic
+correction to give the fine structure correction <span
+class="math display">$$E^1_{\mathrm{fs}}=\dfrac{(E_n)^2}{2mc^2}\left(3-\dfrac{4n}{j+1/2}\right)$$</span></p>
+<div id="tbl:hydrogen_fs">
+<table>
+<caption>Energy levels of a spin <span class="math inline">1/2</span>
+particle for <span class="math inline"><em>n</em> ≤ 3</span>, arranged
+in <span class="math inline">(<em>n</em>,<em>j</em>)</span> </caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span
+class="math inline"><em>n</em></span></th>
+<th style="text-align: center;"><span
+class="math inline"><em>j</em></span></th>
+<th style="text-align: center;"><span
+class="math inline"><em>l</em></span></th>
+<th style="text-align: center;"><span
+class="math inline"><em>m</em><sub><em>j</em></sub></span></th>
+<th style="text-align: center;">degeneracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">1</span></td>
+<td style="text-align: center;"><span
+class="math inline">1/2</span></td>
+<td style="text-align: center;"><span
+class="math inline">{0}</span></td>
+<td style="text-align: center;"><span
+class="math inline">{ ± 1/2}</span></td>
+<td style="text-align: center;"><span class="math inline">2</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">2</span></td>
+<td style="text-align: center;"><span
+class="math inline">1/2</span></td>
+<td style="text-align: center;"><span
+class="math inline">{0, 1}</span></td>
+<td style="text-align: center;"><span
+class="math inline">{ ± 1/2}</span></td>
+<td style="text-align: center;"><span class="math inline">4</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span
+class="math inline">3/2</span></td>
+<td style="text-align: center;"><span
+class="math inline">{1}</span></td>
+<td style="text-align: center;"><span
+class="math inline">{ ± 1/2,  ± 3/2}</span></td>
+<td style="text-align: center;"><span class="math inline">4</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">3</span></td>
+<td style="text-align: center;"><span
+class="math inline">1/2</span></td>
+<td style="text-align: center;"><span
+class="math inline">{0}</span></td>
+<td style="text-align: center;"><span
+class="math inline">{ ± 1/2}</span></td>
+<td style="text-align: center;"><span class="math inline">2</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span
+class="math inline">3/2</span></td>
+<td style="text-align: center;"><span
+class="math inline">{1, 2}</span></td>
+<td style="text-align: center;"><span
+class="math inline">{ ± 1/2,  ± 3/2}</span></td>
+<td style="text-align: center;"><span class="math inline">8</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span
+class="math inline">5/2</span></td>
+<td style="text-align: center;"><span
+class="math inline">{2}</span></td>
+<td style="text-align: center;"><span
+class="math inline">{ ± 1/2,  ± 3/2,  ± 5/2}</span></td>
+<td style="text-align: center;"><span class="math inline">6</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Combined with the Bohr formula, the energy now depend on both <span
+class="math inline"><em>n</em>, <em>j</em></span>.</p>
+<div class="mdframed">
+<p><span class="math display">$$\label{eqn:fs_energy_level}
+    E_{nj} = -\dfrac{(E_0)^2}{n^2}\left[1 +
+\dfrac{\alpha^2}{n^2}\left(\dfrac{n}{j+1/2} - \dfrac 3
+4\right)\right]$$</span></p>
+</div>
+<p>Our complete set of commuting observables are <span
+class="math inline"><em>H</em>, <em>L</em><sup>2</sup>, <em>S</em><sup>2</sup>, <em>J</em><sup>2</sup>, <em>J</em><sub><em>z</em></sub></span>
+corresponding to quantum numbers <span
+class="math inline"><em>n</em>, <em>l</em>, <em>s</em>, <em>j</em>, <em>m</em><sub><em>j</em></sub></span>.
+Given <span class="math inline"><em>n</em></span>, we still have
+considerable degeneracy in <span
+class="math inline"><em>j</em>, <em>l</em>, <em>m</em><sub><em>j</em></sub></span>
+(table <a href="#tbl:hydrogen_fs" data-reference-type="ref"
+data-reference="tbl:hydrogen_fs">1</a>).</p>
+<h2 id="zeeman-effect">Zeeman effect</h2>
+<p>Zeeman effect characterizes the energy corrections of an atom under
+external magnetic field.</p>
+<div class="definition">
+<p><strong>Definition 4</strong> (gyromagnetic ratio). <em>The
+gyromagnetic ratio <span class="math inline"><em>γ</em></span> of a
+system is the ratio between its magnetic moment and angular momentum.
+<span
+class="math display"><strong>μ</strong> = <em>γ</em><strong>L</strong></span>
+For a classically rotating body, <span class="math inline">$\gamma =
+\dfrac q{2m}$</span>.</em></p>
+</div>
+<div class="definition">
+<p><strong>Definition 5</strong> (Bohr magneton). <em>The Bohr magneton
+provides the natural unit for gyromagnetic ratio of atomic systems.
+<span class="math display">$$\mu_B \equiv
+\dfrac{e\hbar}{2m_e}$$</span></em></p>
+</div>
+<p>For an electron, the gyromagnetic ratio for orbital motion and spin
+are different: that for the spin is roughly twice its classical value.
+Note that <span class="math inline"><strong>μ</strong></span> scales
+inversely with mass. <span class="math display">$$\bm \mu = \bm \mu_l +
+\bm \mu_s = \dfrac{\mu_B}{\hbar}\left(\mathbf{L} +
+2\mathbf{S}\right)$$</span> In an external magnetic field <span
+class="math inline"><strong>B</strong></span>, a hydrogenic atom has the
+following correction <span class="math display">$$H'_Z = -\bm \mu \cdot
+\mathbf{B}=\dfrac{\mu_B} {\hbar}\left(\mathbf{L} +
+2\mathbf{S}\right)\cdot \mathbf{B}$$</span></p>
+<h3 id="weak-field-zeeman-effect">Weak-field Zeeman effect</h3>
+<p>When <span
+class="math inline"><em>B</em> ≪ <em>B</em><sub>int</sub></span>, we let
+<span
+class="math inline"><em>H</em><sup>0</sup> = <em>H</em><sub>Bohr</sub> + <em>H</em>′<sub><em>f</em><em>s</em></sub></span>.
+The zeroth-order eigenstates are given by by <span
+class="math inline"><em>L</em><sup>2</sup>, <em>S</em><sup>2</sup>, <em>J</em><sup>2</sup>, <em>J</em><sub><em>z</em></sub></span>.
+Without loss of generality, let <span class="math inline">$\mathbf{B} =
+B\hat {\mathbf{z}}$</span>, then (<span
+class="math inline"><em>Z</em></span> is for Zeeman) <span
+class="math display">$$\label{eqn:zeeman_hamiltonian}
+    H'_Z = \dfrac{\mu_B B}{\hbar}\left(L_z + 2S_z\right)$$</span> After
+we have thus aligned the external field in the <span
+class="math inline"><em>z</em></span>-direction, the correction <span
+class="math inline"><em>H</em>′<sub><em>Z</em></sub></span> commutes
+with our complete set of operators and is diagonal in the <span
+class="math inline"><em>l</em>, <em>s</em>, <em>j</em>, <em>m</em><sub><em>j</em></sub></span>
+basis, in which case <span class="math display">$$\begin{aligned}
+    E^1_Z &amp;= \dfrac{\mu_B B}{\hbar}\langle L_z + 2S_z\rangle\\
+          &amp;= \dfrac{\mu_B B}{\hbar}\left(J_z + \langle
+S_z\right)\rangle
+\end{aligned}$$</span> We now consider <span
+class="math inline">⟨<em>S</em><sub><em>z</em></sub>⟩</span>: the total
+angular momentum <span
+class="math inline"><strong>J</strong> = <strong>L</strong> + <strong>S</strong></span>
+is constant, so the time average of <span
+class="math inline"><strong>S</strong></span> is its projection along
+<span class="math inline"><strong>J</strong></span> (see Griffiths for
+detailed explanation) <span class="math display">$$\begin{aligned}
+    \langle S_z\rangle&amp;= \dfrac{\langle\mathbf{S\cdot
+J}\rangle}{J^2}J_z \\
+    &amp;= \langle\dfrac 1 2\left(J^2 + S^2 -
+L^2\right)\rangle\dfrac{\hbar m_j}{j(j+1)} \\
+    &amp;= \dfrac{j(j+1)+s(s+1)-l(l+1)}{2j(j+1)}\hbar m_j \\
+    &amp;= (g_J-1) m_j
+\end{aligned}$$</span> Here we introduced the Landé <span
+class="math inline"><em>g</em></span>-factor <span
+class="math inline"><em>g</em><sub><em>J</em></sub></span>. The matrix
+element for energy correction is <span
+class="math display">⟨<em>n</em>, <em>l</em>, <em>s</em>, <em>j</em>, <em>m</em><sub><em>j</em></sub>|<em>H</em>′<sub><em>Z</em></sub>|<em>n</em>, <em>l</em>, <em>s</em>, <em>j</em>, <em>m</em><sub><em>j</em></sub>⟩ = <em>E</em><sub><em>Z</em></sub><sup>1</sup> = <em>μ</em><sub><em>B</em></sub><em>g</em><sub><em>J</em></sub><em>m</em><sub><em>j</em></sub><em>B</em></span>
+Note that this correction is linear in <span
+class="math inline"><em>m</em><sub><em>j</em></sub></span>. Combined
+with equation <a href="#eqn:fs_energy_level" data-reference-type="ref"
+data-reference="eqn:fs_energy_level">[eqn:fs_energy_level]</a>, the
+energy levels accounting for fine structure and weak-field Zeeman effect
+is <span class="math display">$$E_{nj} = -\dfrac{(E_0)^2}{n^2}\left[1 +
+\dfrac{\alpha^2}{n^2}\left(\dfrac{n}{j+1/2} - \dfrac 3 4\right)\right] +
+\mu_B g_Jm_j B$$</span></p>
+<h3 id="strong-field-zeeman-effect">Strong-field Zeeman effect</h3>
+<p>When the external magnetic field dominates the proton’s magnetic
+field, we take <span
+class="math inline"><em>H</em><sup>0</sup> = <em>H</em><sub>Bohr</sub> + <em>H</em>′<sub><em>Z</em></sub></span>
+and <span class="math inline"><em>H</em>′<sub>fs</sub></span> to be the
+perturbation.</p>
+<p>Originally, <span
+class="math inline"><em>H</em><sub>Bohr</sub></span> is degenerate in
+<span
+class="math inline"><em>l</em>, <em>s</em>, <em>m</em><sub><em>l</em></sub>, <em>m</em><sub><em>s</em></sub></span>,
+and equation <a href="#eqn:zeeman_hamiltonian" data-reference-type="ref"
+data-reference="eqn:zeeman_hamiltonian">[eqn:zeeman_hamiltonian]</a>
+suggests that the states with the same <span
+class="math inline"><em>m</em><sub><em>l</em></sub> + 2<em>m</em><sub><em>s</em></sub></span>
+are degenerate eigenstates of <span
+class="math inline"><em>H</em><sup>0</sup></span>. To apply
+non-degenerate perturbation theory, our basis must arise from a set
+commuting operators complementing <span
+class="math inline"><em>H</em><sup>0</sup>, <em>H</em>′<sub>fs</sub></span>
+which additionally lifts the degeneracy in <span
+class="math inline"><em>l</em>, <em>s</em>, <em>m</em><sub><em>l</em></sub> + 2<em>m</em><sub><em>s</em></sub></span>.
+One such set is <span
+class="math inline"><em>L</em><sup>2</sup>, <em>S</em><sup>2</sup>, <em>J</em><sup>2</sup>, <em>J</em><sub><em>z</em></sub></span>.
+<span
+class="math display"><em>E</em><sub>fs</sub><sup>1</sup> = ⟨<em>n</em>, <em>l</em>, <em>m</em><sub><em>l</em></sub>, <em>m</em><sub><em>s</em></sub>|<em>H</em>′<sub><em>r</em></sub>+<em>H</em>′<sub>so</sub>|<em>n</em>, <em>l</em>, <em>m</em><sub><em>l</em></sub>, <em>m</em><sub><em>s</em></sub>⟩</span>
+Here <span class="math inline">⟨<em>H</em>′<sub><em>r</em></sub>⟩</span>
+commutes with the operators for our basis, so we can use equation <a
+href="#eqn:rel_corr" data-reference-type="ref"
+data-reference="eqn:rel_corr">[eqn:rel_corr]</a>. For the spin-orbit
+term, <span
+class="math inline">⟨<em>S</em><sub><em>z</em></sub><em>L</em><sub><em>z</em></sub>⟩ = ℏ<sup>2</sup><em>m</em><sub><em>l</em></sub><em>m</em><sub><em>s</em></sub></span>.
+Substitute the indeterminate quotient with <span
+class="math inline">1</span> when <span
+class="math inline"><em>l</em> = 0</span>. <span
+class="math display">$$E^1_{\mathrm{fs}} = -\dfrac{E_0}{n^3}\alpha^2
+\left[\dfrac 3 {4n} - \dfrac{l(l+1) -
+m_lm_s}{l(l+1/2)(l+1)}\right]$$</span></p>
+<figure id="fig:zeeman">
+<img src="src/zeeman.png" />
+<figcaption>Zeeman effect for <span
+class="math inline"><em>n</em> = 2, <em>l</em> = 1</span></figcaption>
+</figure>
+<p>Equation <a href="#eqn:zeeman_hamiltonian" data-reference-type="ref"
+data-reference="eqn:zeeman_hamiltonian">[eqn:zeeman_hamiltonian]</a>
+dominates in the strong field regime, while the fine structure
+characterized by <a href="#eqn:relativistic_hamiltonian"
+data-reference-type="ref"
+data-reference="eqn:relativistic_hamiltonian">[eqn:relativistic_hamiltonian]</a>,
+<a href="#eqn:spin_orbit_coupling" data-reference-type="ref"
+data-reference="eqn:spin_orbit_coupling">[eqn:spin_orbit_coupling]</a>
+dominates in the weak field regime. The quantum numbers which
+distinguish between energy levels in the strong-field regime is then
+<span
+class="math inline"><em>n</em>, <em>l</em>, <em>s</em>, <em>m</em><sub><em>l</em></sub> + 2<em>m</em><sub><em>s</em></sub></span>,
+while those in the weak-field regime are <span
+class="math inline"><em>n</em>, <em>l</em>, <em>s</em>, <em>j</em>, <em>m</em><sub><em>j</em></sub></span>.
+The asymptotic slope in the figure above is determined by <span
+class="math inline"><em>m</em><sub><em>l</em></sub> + 2<em>m</em><sub><em>s</em></sub></span>.</p>
+<figure id="fig:cg_coef">
+<img src="src/clebsch-gordan.jpeg" />
+<figcaption>Clebsch-Gordan coefficients</figcaption>
+</figure>
+<h1 id="time-dependent-systems">Time-dependent Systems</h1>
+<p>Consider quantum systems whose Hamiltonian may be time-dependent. For
+most systems, the Hamiltonian consists of a solvable time-independent
+<span class="math inline"><em>H</em><sup>0</sup></span> and a
+time-dependent <span class="math inline"><em>H</em>′(<em>t</em>)</span>.
+<span
+class="math display"><em>H</em>(<em>t</em>) = <em>H</em><sup>0</sup> + <em>H</em>′(<em>t</em>)</span>
+When <span class="math inline"><em>H</em>′(<em>t</em>)</span> is weak
+compared to <span class="math inline"><em>H</em><sup>0</sup></span>, we
+may resort to time-dependent perturbation theory. Consider <span
+class="math inline"><em>H</em><sup>0</sup></span> with eigenstates <span
+class="math inline"><em>ψ</em><sub><em>a</em></sub>, <em>ψ</em><sub><em>b</em></sub></span>
+and energy <span
+class="math inline"><em>E</em><sub><em>a</em></sub>, <em>E</em><sub><em>b</em></sub></span>.
+For an arbitrary state, <span
+class="math display">|<em>ψ</em>⟩=∑<em>c</em><sub><em>n</em></sub>|<em>n</em>⟩</span>
+The time-evolution of a state under <span
+class="math inline"><em>H</em><sup>0</sup> + <em>H</em>′(<em>t</em>)</span>
+is <span class="math display">$$\label{eqn:time-dependent solution}
+    |\psi(t)\rangle= \sum c_n(t) \exp\left(-\dfrac i \hbar E_n t\right)
+|n\rangle$$</span> In general, <span
+class="math inline"><em>c</em><sub><em>n</em></sub>(<em>t</em>)</span>
+are time-dependent and only constantly <span
+class="math inline">1</span> when <span
+class="math inline">∂<sub><em>t</em></sub><em>H</em>′(<em>t</em>) = 0</span>.
+The probability of finding state in <span
+class="math inline">|<em>n</em>⟩</span> at time <span
+class="math inline"><em>t</em></span> is <span
+class="math inline">|<em>c</em><sub><em>n</em></sub>(<em>t</em>)|<sup>2</sup></span>,
+which are subject to normalization <span
+class="math display">∑|<em>c</em><sub><em>n</em></sub>(<em>t</em>)|<sup>2</sup> = 1</span>
+Consider the Schrödinger equation for this system <span
+class="math display">$$\label{eqn:time-dependent Schrodinger}
+    \partial_{t} |\psi(t)\rangle= -\dfrac i \hbar\left[H^0+H'(t)\right]
+|\psi(t)\rangle$$</span> Substituting equation <a
+href="#eqn:time-dependent solution" data-reference-type="ref"
+data-reference="eqn:time-dependent solution">[eqn:time-dependent
+solution]</a> yields <span class="math display">$$\begin{aligned}
+    i \hbar\partial_{t} \left[\sum c_n(t) \exp\left(-\dfrac i \hbar E_n
+t\right) |n\rangle\right] &amp;=
+        \left[H^0 + H'(t)\right]\left[\sum c_n(t) \exp\left(-\dfrac i
+\hbar E_n t\right) |n\rangle\right] \\
+\end{aligned}$$</span> Expanding the left hand side (we suppress
+summation to avoid clutter) <span class="math display">$$i
+\hbar\partial_{t} \left[c_n(t) \exp\left(-\dfrac i \hbar E_n t\right)
+|n\rangle\right] =
+    i\hbar\dot c_n \exp\left(-\dfrac i \hbar E_nt\right)|n\rangle
+        + E_n c_n \exp\left(-\dfrac i \hbar
+E_nt\right)|n\rangle$$</span> On the right hand side, the first term
+cancels with the last term on the left hand side above <span
+class="math display">$$H^0\left[c_n(t) \exp\left(-\dfrac i \hbar E_n
+t\right) |n\rangle\right]
+        = E_n c_n \exp\left(-\dfrac i \hbar
+E_nt\right)|n\rangle$$</span> The equation we’re left with cannot be
+directly isolated component-wise for <span
+class="math inline"><em>n</em></span> because <span
+class="math inline"><em>H</em>′(<em>t</em>)</span> is not generally
+diagonal. <span class="math display">$$\sum_n
+H'(t)c_n(t)\exp\left(-\dfrac i \hbar E_nt\right)|n\rangle= \sum_n i
+\hbar\dot c_n \exp\left(-\dfrac i \hbar E_nt\right)|n\rangle$$</span> To
+isolate <span
+class="math inline"><em>ċ</em><sub><em>m</em></sub></span>, apply <span
+class="math inline">⟨<em>m</em>|</span> and denote the matrix element
+<span
+class="math inline"><em>H</em>′<sub><em>m</em><em>n</em></sub>(<em>t</em>) = ⟨<em>m</em>|<em>H</em>′(<em>t</em>)|<em>n</em>⟩</span>.
+<span class="math display">$$\sum_n H'_{mn} \exp\left(-\dfrac i \hbar
+E_nt\right) c_n = i\hbar\dot c_m \exp\left(-\dfrac i \hbar
+E_mt\right)$$</span> Let <span
+class="math inline"><em>ω</em><sub><em>n</em><em>m</em></sub> = (<em>E</em><sub><em>n</em></sub>−<em>E</em><sub><em>m</em></sub>)/ℏ</span>,
+the Schrodinger equation <a href="#eqn:time-dependent Schrodinger"
+data-reference-type="ref"
+data-reference="eqn:time-dependent Schrodinger">[eqn:time-dependent
+Schrodinger]</a> may be rewritten exactly as a system of <span
+class="math inline"><em>n</em></span> coupled first-order differential
+equations <span class="math display">$$\label{eqn:time-dependent
+systems}
+    \dot c_n(t) = -\dfrac i \hbar\sum_m H'_{nm}(t) \exp\left(i
+\omega_{nm} t\right) c_m(t)$$</span></p>
+<h2 id="interaction-picture">Interaction Picture</h2>
+<p>The following section is adapted from these <a
+href="https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2018/89ef6d5958ee59bae9a91345c3d8c8e4_MIT8_06S18ch4.pdf">lecture
+notes</a> from MIT. We may rephrase the derivation in the previous
+section more concisely in terms of the interaction picture. We adopt a
+frame in which the energy eigenstates of <span
+class="math inline"><em>H</em><sup>0</sup></span>, as they would
+normally evolve, remains constant. Formally, consider the transform
+<span class="math display">$$\begin{aligned}
+    |\tilde \psi(t)\rangle&amp;= U(t)^\dag|\psi(t)\rangle, \quad U(t)
+&amp;= \exp\left(-\dfrac i \hbar H^0 t\right)
+\end{aligned}$$</span> Note that <span
+class="math inline">[<em>H</em><sup>0</sup>,<em>U</em>(<em>t</em>)] = 0</span>,
+the Schrodinger equation transforms accordingly. We use the subscript to
+denote time variable to reduce clutter:</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:transformed
+se'}
+
+    \partial_{t} |\tilde \psi_t\rangle&amp;= \partial_{t} \left(U^\dag_t
+|\psi_t\rangle\right)  
+    = \dfrac i \hbar H^0 |\tilde \psi_t\rangle+ U^\dag_t
+\left(\partial_{t} |\psi_t\rangle\right) \\
+    &amp;= \dfrac i \hbar H^0 |\tilde \psi_t\rangle- U^\dag_t
+\left[\dfrac i \hbar(H^0+H'_t)|\psi_t\rangle\right] \\
+    &amp;= \dfrac i \hbar H^0|\tilde \psi_t\rangle- \dfrac i
+\hbar\left(U_t^\dag H^0 U_t\right)\left(U_t^\dag |\psi_t\rangle\right)
+        - \dfrac i \hbar\left(U_t^\dag H_t'U_t\right)\left(U_t^\dag
+|\psi_t\rangle\right) \\
+    &amp;= -\dfrac i \hbar\left(U_t^\dag H_t'U_t \right) U_t^\dag
+|\psi_t\rangle= -\dfrac i \hbar\tilde H_t' |\tilde \psi_t\rangle
+
+\end{aligned}$$</span> This frame change eliminates <span
+class="math inline"><em>H</em><sup>0</sup></span> and leaves only <span
+class="math inline"><em>H̃</em>′<sub><em>t</em></sub> = <em>U</em><sub><em>t</em></sub><sup>†</sup><em>H</em><sub><em>t</em></sub>′<em>U</em><sub><em>t</em></sub></span>.
+Let <span
+class="math inline">{<em>c</em><sub><em>j</em></sub>(<em>t</em>)}</span>
+the expansion of the ket in our new frame with respect to the eigenbasis
+<span class="math inline">|<em>ψ</em><sub><em>n</em></sub>⟩</span> of
+<span class="math inline"><em>H</em><sup>0</sup></span></p>
+<p><span class="math display">$$\begin{aligned}
+
+    |\tilde \psi_t\rangle= \sum c_n(t) |\psi_{n}\rangle
+
+\end{aligned}$$</span></p>
+<p>These are exactly the de-wiggled coefficients we have introduced in
+the previous section. We can recover the evolution of the ket in our
+original frame by <span
+class="math inline">|<em>ψ</em><sub><em>t</em></sub>⟩=<em>U</em><sub><em>t</em></sub>|<em>ψ̃</em><sub><em>t</em></sub>⟩</span>
+by <span class="math inline"><em>U</em><sub><em>t</em></sub></span>,
+which is diagonal in this eigenbasis <span
+class="math display">|<em>ψ</em><sub><em>t</em></sub>⟩=<em>U</em><sub><em>t</em></sub>∑<em>c</em><sub><em>n</em></sub>(<em>t</em>)|<em>ψ</em><sub><em>n</em></sub>⟩ = ∑<em>e</em><sup>−<em>i</em><em>E</em><sub><em>n</em></sub><em>t</em>/ℏ</sup><em>c</em><sub><em>n</em></sub>(<em>t</em>)|<em>ψ</em><sub><em>n</em></sub>⟩</span>
+In terms of this concrete basis, the Schrodinger equation <a
+href="#eqn:transformed se&#39;" data-reference-type="ref"
+data-reference="eqn:transformed se&#39;">[eqn:transformed se']</a> reads
+<span class="math display">$$\dot {\tilde c}_n(t) = \langle\psi_n|
+\left(\partial_{t} |\tilde \psi_t\rangle\right)
+    = -\dfrac i \hbar\sum_m \tilde c_m(t) \langle\psi_n|\tilde
+H'_t|\psi_m\rangle$$</span> We can simplify the matrix element by noting
+that <span
+class="math display">⟨<em>ψ</em><sub><em>n</em></sub>|<em>H̃</em>′<sub><em>t</em></sub>|<em>ψ</em><sub><em>m</em></sub>⟩ = ⟨<em>ψ</em><sub><em>n</em></sub>|<em>e</em><sup><em>i</em><em>H</em><sup>0</sup><em>t</em>/ℏ</sup><em>H</em>′<sub><em>t</em></sub><em>e</em><sup>−<em>i</em><em>H</em><sup>0</sup><em>t</em>/ℏ</sup>|<em>ψ</em><sub><em>m</em></sub>⟩ = <em>e</em><sup><em>i</em>(<em>E</em><sub><em>n</em></sub>−<em>E</em><sub><em>m</em></sub>)<em>t</em>/ℏ</sup><em>H</em>′<sub><em>n</em><em>m</em></sub>(<em>t</em>)</span>
+This leaves us equation <a href="#eqn:time-dependent systems"
+data-reference-type="ref"
+data-reference="eqn:time-dependent systems">[eqn:time-dependent
+systems]</a>.</p>
+<h2 id="time-dependent-perturbation-theory">Time-Dependent Perturbation
+Theory</h2>
+<p>So far everything is exact. To obtain a perturbative solution,
+introduce <span class="math inline"><em>λ</em></span> and assume that
+<span class="math inline">|<em>ψ̃</em><sub><em>t</em></sub>⟩</span> can
+be expanded in <span class="math inline"><em>λ</em></span>: <span
+class="math display">$$\begin{aligned}
+    H_t &amp;= H^0 + \lambda H'_t \\
+    |\tilde \psi_t\rangle&amp;= |\tilde \psi^0_t\rangle+ \lambda |\tilde
+\psi^1_t\rangle+
+        \lambda^2|\tilde \psi^2_t\rangle+ \cdots \\
+    \partial_{t} |\tilde \psi_t\rangle&amp;= -\dfrac i \hbar\lambda
+\tilde H'_t|\tilde \psi_t\rangle
+\end{aligned}$$</span> Equating by powers of <span
+class="math inline"><em>λ</em></span>, the time-derivative of <span
+class="math inline"><em>n</em></span>-th component is coupled to <span
+class="math inline"><em>H</em>′<sub><em>t</em></sub></span> acting on
+<span class="math inline">(<em>n</em>−1)</span>-th component. <span
+class="math display">$$\begin{aligned}\label{eqn:time-dependent
+perturbation}
+    \partial_{t} |\tilde \psi^0_t\rangle&amp;= 0 \\
+    \partial_{t} |\tilde \psi^1_t\rangle&amp;= -\dfrac i \hbar\tilde
+H'_t|\psi^0_t\rangle\\
+    \vdots \quad &amp;= \quad \vdots \\
+    \partial_{t} |\tilde \psi^{n+1}_t\rangle&amp;= -\dfrac i \hbar\tilde
+H'_t|\psi^n_t\rangle
+\end{aligned}$$</span> Our interacting picture transform degenerates to
+the identity at <span class="math inline"><em>t</em> = 0</span>.
+Equating the power series approximation, which holds for all <span
+class="math inline"><em>λ</em></span>, yields the initial conditions
+<span class="math display">$$\begin{aligned}
+    |\psi_0\rangle&amp;= |\tilde \psi^0_0\rangle+ \lambda |\tilde
+\psi^1_0\rangle+ \cdots \\
+    |\tilde \psi^0_0\rangle&amp;= |\tilde \psi_t^0\rangle=
+|\psi_0\rangle\\
+    |\tilde \psi^n_\sim\rangle&amp;= 0, \quad n&gt;0
+\end{aligned}$$</span> An initial state <span
+class="math inline">|<em>ψ</em><sub>0</sub>⟩</span> gives us the
+constant <span class="math inline">(<em>n</em>=0)</span>-th order
+solutions <span
+class="math inline">|<em>ψ̃</em><sub><em>t</em></sub><sup>0</sup>⟩</span>.
+in the transformed frame, <span
+class="math inline">|<em>ψ̃</em><sub>0</sub>⟩</span> is constant, i.e.
+the zeroth order solution evolves only according to <span
+class="math inline"><em>H</em><sup>0</sup></span>. Using the zero
+initial condition, The following terms in equation <a
+href="#eqn:time-dependent perturbation" data-reference-type="ref"
+data-reference="eqn:time-dependent perturbation">[eqn:time-dependent
+perturbation]</a> is solved by succesive integration. <span
+class="math display">$$\begin{aligned}
+    |\tilde \psi_t^1\rangle&amp;= -\dfrac i \hbar\int_0^t H'_{t'}
+|\psi_{t'}^0\rangle\, dt' \\
+    |\tilde \psi_t^2\rangle&amp;= -\dfrac i \hbar\int_0^t H'_{t'}
+|\psi_{t'}^1\rangle\, dt'
+    = -\dfrac i \hbar\int_0^t H'_{t'} \left(-\dfrac i \hbar\int_0^{t'}
+H'_{t''} |\psi_{t''}^0\rangle\, dt''\right) \, dt' \\
+    &amp;= -\dfrac 1 {\hbar^2}\int_0^t H'_{t'}\int_0^{t'} H'_{t''}
+|\psi_{t''}^0\rangle\, dt''\, dt' \\
+    |\tilde \psi_t^3\rangle&amp;= -\dfrac i \hbar\int_0^t
+H'_{t'}|\psi_{t'}^2\rangle\, dt' = \cdots
+\end{aligned}$$</span> In concrete terms, consider an initial state
+<span class="math inline">|<em>ψ</em><sub>0</sub>⟩</span>. We first
+consider the Fourier expansion of a ket <span
+class="math inline">|<em>ψ̃</em><sub><em>t</em></sub>⟩</span> in the
+transformed frame in terms of the eigenstates of <span
+class="math inline"><em>H</em><sup>0</sup></span>. <span
+class="math display">|<em>ψ̃</em><sub><em>t</em></sub>⟩=∑<sub><em>k</em></sub>|<em>ψ̃</em><sub><em>t</em></sub><sup><em>k</em></sup>⟩ = ∑<sub><em>k</em>, <em>j</em></sub><em>c̃</em><sub><em>j</em></sub><sup><em>k</em></sup>(<em>t</em>)|<em>j</em>⟩</span>
+They are related to the Fourier expansion of <span
+class="math inline">|<em>ψ</em><sub><em>t</em></sub>⟩</span> in the
+original frame via <span class="math display">$$\tilde c_j^k(t) =
+\exp\left(-\dfrac i \hbar E_j t\right)c_j^k(t)$$</span> In concrete
+components, the zeroth order correction is the constant initial
+condition. <span class="math display">$$\begin{aligned}
+    |\tilde \psi^0_t\rangle&amp;= \sum \tilde c_j^0(t) |j\rangle= \sum
+\exp\left(-\dfrac i \hbar E_j t\right) c_j^0 |j\rangle\\
+    |\psi_t^0\rangle&amp;= \exp\left(\dfrac i \hbar H^0 t\right)|\tilde
+\psi_0\rangle= |\psi_0\rangle
+\end{aligned}$$</span> Introduce <span
+class="math inline"><em>ω</em><sub><em>k</em><em>j</em></sub> = exp (<em>i</em>(<em>E</em><sub><em>k</em></sub>−<em>E</em><sub><em>j</em></sub>)/ℏ)</span>,
+the first-order components read <span
+class="math display">$$\begin{aligned}
+    \tilde c_k^1(t)
+    &amp;= \langle k|\tilde \psi_t^1\rangle
+        = -\dfrac i \hbar\langle k |\int_0^t H'_{t'}  \sum
+\exp\left(-\dfrac i \hbar E_j t\right) c_j^0 |j\rangle\, dt' \\
+        &amp;= -\dfrac i \hbar\sum_j \int_0^t \langle
+k|H'_{t'}|j\rangle\exp\left(-\dfrac i \hbar E_j t\right) c_j^0\, dt' \\
+    c_k^1 &amp;= -\exp\left(\dfrac i \hbar E_k t \right) \tilde c_k^1(t)
+\\
+    &amp;= -\exp\left(\dfrac i \hbar E_k t \right)\dfrac i \hbar\sum_j
+\int_0^t \langle k|H'_{t'}|j\rangle\exp\left(-\dfrac i \hbar E_j
+t\right) c_j^0\, dt' \\
+    &amp;= -\dfrac i \hbar\sum_j c_j(0) \int_0^t \langle
+k|H'_{t'}|j\rangle\exp(i\omega_{kj})\, dt'
+\end{aligned}$$</span> The second-order components read <span
+class="math display">$$\begin{aligned}
+    \tilde c_k^2(t)
+    &amp;= \langle k|\tilde \psi_t^2\rangle= -\dfrac 1 {\hbar^2}\int_0^t
+\langle k| H'_{t'}\int_0^{t'} H'_{t''} |\psi_{t''}^0\rangle\, dt''\,
+dt'\\
+    &amp;= -\dfrac 1 {\hbar^2}\sum_j \int_0^t \langle k|
+H'_{t'}|j\rangle\int_0^{t'} \langle j|H'_{t''} |\psi_{t''}^0\rangle\,
+dt''\, dt'\\
+    &amp;= -\dfrac 1 {\hbar^2}\sum_{j, l} \int_0^t \langle k|
+H'_{t'}|j\rangle\int_0^{t'} \langle j|H'_{t''} \exp\left(-\dfrac i \hbar
+E_l t\right) c_l^0|l\rangle\, dt''\, dt'\\
+    c_k^2(t) &amp;= -\exp\left(\dfrac i \hbar E_k t \right) \tilde
+c_k^2(t) \\
+    &amp;= -\dfrac 1 {\hbar^2}\sum_{j, l} \int_0^t \exp\left(\dfrac i
+\hbar(E_k-E_j+E_j) t \right) \langle k| H'_{t'}|j\rangle\int_0^{t'}
+        \exp\langle j|H'_{t''} \exp\left(-\dfrac i \hbar E_l t\right)
+c_l^0|l\rangle\, dt''\, dt'\\
+    &amp;= -\dfrac 1 {\hbar^2}\sum_{j, l} c_l(0) \int_0^t
+\exp(i\omega_{kj}t)\langle k| H'_{t'}|j\rangle\int_0^{t'}
+\exp(i\omega_{jl}t)\langle j|H'_{t''} |l\rangle\, dt''\, dt'\\
+\end{aligned}$$</span> Taken together and let <span
+class="math inline"><em>H</em>′<sub><em>a</em><em>b</em></sub>(<em>t</em>) = ⟨<em>a</em>|<em>H</em>′(<em>t</em>)|<em>b</em>⟩</span>,
+the second-order approximation is</p>
+<p><span
+class="math display">$$\begin{aligned}\label{eqn:sec_order_time_perturbation}
+
+    c_k(0) &amp;-\dfrac i \hbar\sum_j c_j(0) \int_0^t H'_{kj}(t')
+\exp(i\omega_{kj}t)\, dt' \\
+    &amp;-\dfrac 1 {\hbar^2}\sum_{j, l} c_l(0) \int_0^t
+\exp(i\omega_{kj}t) H'_{kj}(t') \int_0^{t'}
+\exp(i\omega_{jl}t)H'_{jl}(t'')\, dt''\, dt'
+
+\end{aligned}$$</span> Griffiths forgoes the polynomial picture
+altogether. Substitute <span
+class="math inline"><em>c</em><sub><em>m</em></sub>(<em>t</em>) = <em>c</em><sub><em>m</em></sub>(0)</span>
+into the right hand side of equation <a
+href="#eqn:time-dependent systems" data-reference-type="ref"
+data-reference="eqn:time-dependent systems">[eqn:time-dependent
+systems]</a> to obtain the first order coefficients (not corrections)
+<span class="math display">$$\label{eqn:first-order coefficient}
+    c_n^{(1)}(t) = c_n(0) - \dfrac i \hbar\sum_m c_m(0)\int_0^t
+H'_{nm}(t')\exp(i\omega_{nm}t')\, dt'$$</span> For the second-order,
+substitute <span
+class="math inline"><em>c</em><sub><em>m</em></sub>(<em>t</em>)</span>
+in equation <a href="#eqn:first-order coefficient"
+data-reference-type="ref"
+data-reference="eqn:first-order coefficient">[eqn:first-order
+coefficient]</a> into <a href="#eqn:time-dependent systems"
+data-reference-type="ref"
+data-reference="eqn:time-dependent systems">[eqn:time-dependent
+systems]</a>.</p>
+<p>We wish to emphasize the theme of polynomial approximation in
+perturbation theory, even in time-dependent systems. We start by
+introducing a tilde frame which eliminates <span
+class="math inline"><em>H</em><sup>0</sup></span> and assuming that
+time-evolution in this frame is expandable in succesive powers of <span
+class="math inline"><em>λ</em></span>. In this frame, the zeroth order
+solution is constant, and higher-order corrections are coupled to the
+perturbative action of <span class="math inline"><em>H</em>′</span> on
+the immediately lower order. We switch back to the original frame after
+performing the polynomial approximation.</p>
+<h2 id="sinusoidal-perturbations">Sinusoidal Perturbations</h2>
+<p>Consider a two-level system with sinusoidal perturbation</p>
+<p><span
+class="math display">$$\begin{aligned}\label{eqn:sinusoidal_perturb}
+
+    H'(r, t) &amp;= V(r)\cos \omega t \\
+    H'_{ab}(t) &amp;= \langle\psi_a | V |\psi_b\rangle\cos\omega t =
+V_{ab}\cos \omega t
+
+\end{aligned}$$</span> Assuming initial level <span
+class="math inline"><em>a</em></span> and that diagonal matrix elements
+vanish, to the first order in <a href="#eqn:sec_order_time_perturbation"
+data-reference-type="ref"
+data-reference="eqn:sec_order_time_perturbation">[eqn:sec_order_time_perturbation]</a>
+<span class="math display">$$\begin{aligned}
+    c_b(t)
+    &amp;= -\dfrac i \hbar V_{ba}\int_0^t \cos\omega t
+\exp(i\omega_{ba}t)\, dt'\\
+    &amp;= -\dfrac{i V_{ba}}{2\hbar} \int_0^t \left[\exp(i(\omega_0 +
+\omega) t') + \exp(i(\omega_0 - \omega)t')\right]\, dt' \\
+    &amp;= -\dfrac{V_{ba}}{2\hbar}\left[\dfrac{\exp(i(\omega_0 +
+\omega)t) - 1}{\omega_0 + \omega} + \dfrac{\exp(i(\omega_0 - \omega)t) -
+1}{\omega_0 - \omega}\right]
+\end{aligned}$$</span> Far-detuned frequency have negligible transition
+rates. Assuming <span
+class="math inline"><em>ω</em><sub>0</sub> + <em>ω</em> ≫ |<em>ω</em><sub>0</sub>−<em>ω</em>|</span>.
+Drop the first term. Let <span
+class="math inline"><em>Δ</em><sub><em>ω</em></sub> = <em>ω</em><sub>0</sub> − <em>ω</em></span></p>
+<p><span class="math display">$$\begin{aligned}
+
+    c_b(t)
+    &amp;\approx -\dfrac{V_{ba}}{2\hbar} \dfrac{\exp(i\Delta_\omega
+t/2)}{\Delta_\omega }
+        \left[\exp(i\Delta_\omega t/2) - \exp(-i\Delta_\omega
+t/2)\right] \\
+    &amp;= -i\dfrac{V_{ba}}{\hbar} \dfrac{\sin\left(\Delta_\omega
+t/2\right)}{\Delta_\omega } e^{i\Delta_\omega t/2}
+
+\end{aligned}$$</span></p>
+<p>The following transition probability should be trusted for <span
+class="math inline"><em>ω</em><sub>0</sub> + <em>ω</em> ≫ |<em>ω</em><sub>0</sub>−<em>ω</em>|</span>
+and relatively small probability. The most significant feature is
+flopping.</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:flopping}
+
+    P_{a\to b}(t)\approx \dfrac{|V_{ab}|^2}{\hbar^2}
+        \dfrac{\sin^2\left(\Delta_\omega t/2\right)}{\Delta_\omega^2}
+
+\end{aligned}$$</span></p>
+<h2 id="rabi-flopping">Rabi Flopping</h2>
+<p>Sinusoidal perturbation may be solved exactly if we begin by
+approximating <span class="math display">$$H'(r, t) = V(r)\cos(\omega t)
+\to \dfrac V 2 e^{-i\omega t}$$</span> Here, we ignore the <span
+class="math inline"><em>e</em><sup><em>i</em><em>ω</em><em>t</em></sup></span>
+earlier: in the Hamiltonian instead of as a perturbed term. The
+perturbation under this approximation is not Hermitian, but it allows us
+to solve equation <a href="#eqn:time-dependent systems"
+data-reference-type="ref"
+data-reference="eqn:time-dependent systems">[eqn:time-dependent
+systems]</a>. Again, consider a two-level system with <span
+class="math inline"><em>ω</em><sub>0</sub> = (<em>E</em><sub><em>b</em></sub>−<em>E</em><sub><em>a</em></sub>)/ℏ &gt; 0</span>
+starting out in state <span class="math inline"><em>a</em></span>, then
+<span class="math display">$$\dot c_a(t) = -\dfrac i \hbar
+H'_{ab}(t)e^{-i\omega_0 t} c_b(t)
+    ,\quad \dot c_b(t) = -\dfrac i \hbar H'_{ba}(t)e^{i\omega_0
+t}c_a(t)$$</span> We assume again that diagonal matrix elements vanish.
+Take another derivative of the equations above to uncouple <span
+class="math inline"><em>c</em><sub><em>a</em></sub>, <em>c</em><sub><em>b</em></sub></span>.</p>
+<h2 id="interaction-with-em-waves">Interaction with EM waves</h2>
+<p>Consider a monochromatic electromagnetic wave incident upon a
+hydrogenic atom. When its wavelength is long compared to the Bohr
+radius, to the first order of this ratio, the atom effectively acts as a
+dipole within a sinusoidally oscillating electric field: <span
+class="math display"><em>H</em>′ =  − <em>q</em><em>E</em><sub>0</sub><em>z</em>cos <em>ω</em><em>t</em></span>
+Then the matrix element for the perturbation reads <span
+class="math display"><em>H</em>′<sub><em>b</em><em>a</em></sub>(<em>t</em>) =  − <em>q</em>⟨<em>ψ</em><sub><em>b</em></sub>|<em>z</em>|<em>ψ</em><sub><em>a</em></sub>⟩<em>E</em><sub>0</sub>cos <em>ω</em><em>t</em></span></p>
+<h3 id="absorption-stimulated-emission">Absorption, Stimulated
+Emission</h3>
+<p>The selection rule for spatial components dictate <span
+class="math inline"><em>Δ</em><em>l</em> =  ± 1</span>, so diagonal
+matrix elements for <span class="math inline"><em>H</em>′</span> always
+vanish. Equivalently, note that <span
+class="math inline"><em>z</em>|<em>ψ</em>|<sup>2</sup></span> is odd in
+<span class="math inline"><em>z</em></span>. Then the problem is as
+in <a href="#eqn:sinusoidal_perturb" data-reference-type="ref"
+data-reference="eqn:sinusoidal_perturb">[eqn:sinusoidal_perturb]</a>
+with <span
+class="math inline"><em>V</em><sub><em>b</em><em>a</em></sub> =  − <em>q</em>⟨<em>ψ</em><sub><em>b</em></sub>|<em>z</em>|<em>ψ</em><sub><em>a</em></sub>⟩<em>E</em><sub>0</sub></span>.
+Substitution into equation <a href="#eqn:flopping"
+data-reference-type="ref"
+data-reference="eqn:flopping">[eqn:flopping]</a> yields</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:monochromatic
+transition}
+
+    P_{a\to b}(t) = P_{b\to a}(t) =
+    \left(\dfrac{q\langle\psi_a|z|\psi_b\rangle E_0}{\hbar}\right)^2
+        \dfrac{\sin^2\left(\Delta_\omega t/2\right)}{\Delta_\omega^2}
+
+\end{aligned}$$</span> Equal absorption and stimulation probability is
+by the first-order formula <a href="#eqn:first-order coefficient"
+data-reference-type="ref"
+data-reference="eqn:first-order coefficient">[eqn:first-order
+coefficient]</a>: <span class="math display">$$H'_{nm} =
+\overline{H'_{mn}}, \quad \omega_{nm} = -\omega_{mn}$$</span> The
+transition probability <span
+class="math inline"><em>P</em><sub><em>a</em> → <em>b</em></sub>(<em>t</em>) = |<em>c</em><sub><em>b</em></sub>(<em>t</em>)|<sup>2</sup></span>,
+computed with initial conditions <span
+class="math inline"><em>c</em><sub><em>n</em></sub>(0) = <em>δ</em><sub><em>n</em><em>a</em></sub></span>.</p>
+<h3 id="spontaneous-emission">Spontaneous Emission</h3>
+<p>We first generalize the perturbation result from a monochromatic,
+polarized, single-frequency electromagnetic wave to the general case.
+Recall the energy density of electromagnetic wave <span
+class="math display">$$u = \dfrac{\epsilon_0}{2}E_0^2$$</span>
+Substitute <span class="math inline"><em>E</em><sub>0</sub></span> with
+this equation into equation <a href="#eqn:monochromatic transition"
+data-reference-type="ref"
+data-reference="eqn:monochromatic transition">[eqn:monochromatic
+transition]</a> yields, for <span
+class="math inline"><em>V</em><sub><em>a</em><em>b</em></sub> = <em>q</em>⟨<em>ψ</em><sub><em>a</em></sub>|<em>z</em>|<em>ψ</em><sub><em>b</em></sub>⟩</span>
+<span class="math display">$$P_{b\to a}(t) =
+\dfrac{2u|V_{ab}|^2}{\epsilon_0 \hbar^2} \cdot
+        \dfrac{\sin^2\left(\Delta_\omega
+t/2\right)}{\Delta_\omega^2}$$</span> Let <span
+class="math inline"><em>d</em><em>u</em> = <em>ρ</em>(<em>ω</em>) <em>d</em><em>ω</em></span>
+denote some distribution of energy-frequency density. When the different
+components are phase-decorrelated (incoherent), we can conveniently
+perform the integral over the probability instead of the amplitude,
+yielding <span class="math display">$$P_{b\to a}(t) =
+\dfrac{2|V_{ab}|^2}{\epsilon_0 \hbar^2}
+        \int_0^\infty d\omega\,
+\rho(\omega)\left[\dfrac{\sin^2\left(\Delta_\omega
+t/2\right)}{\Delta_\omega^2}\right]$$</span> The bracket term is sharply
+peaked about <span
+class="math inline"><em>ω</em> = <em>ω</em><sub>0</sub></span>. We pull
+<span class="math inline"><em>ρ</em>(<em>ω</em>)</span> outside the
+integral <span class="math display">$$P_{b\to a}(t) \approx
+\dfrac{2|V_{ab}|^2}{\epsilon_0 \hbar^2} \rho(\omega_0)
+    \int_0^\infty d\omega\, \left[\dfrac{\sin^2\left(\Delta_\omega
+t/2\right)}{\Delta_\omega^2}\right]
+    =\dfrac{\pi |V_{ab}|^2}{\epsilon_0 \hbar^2}\rho(\omega_0)t$$</span>
+Note that integrating over an incoherent frequency spectrum gets rid of
+the flopping.</p>
+<div class="definition">
+<p><strong>Definition 6</strong> (transition rate). <em>The transition
+rate between two levels is defined as <span
+class="math display"><em>R</em><sub><em>b</em> → <em>a</em></sub> = ∂<sub><em>t</em></sub><em>P</em><sub><em>b</em> → <em>a</em></sub></span></em></p>
+</div>
+<p>The transition rate between two levels in an incoherent spectrum
+<span class="math inline"><em>ρ</em>(<em>ω</em>)</span> with uniform
+polarization and direction is <span class="math display">$$R_{b\to a} =
+\dfrac{\pi}{\epsilon_0\hbar^2}|V_{ab}|^2 \rho(\omega_0)$$</span>
+Averaging over all propagation and polarization directions introduces a
+factor of <span class="math inline">1/3</span> and <span
+class="math inline"><em>z</em> ↦ <strong>r</strong></span> since we are
+not restricted to the <span class="math inline"><em>z</em></span>
+direction.</p>
+<div class="mdframed">
+<p><span class="math display">$$R_{b\to a} =
+\dfrac{\pi}{3\epsilon_0\hbar^2}q^2|\langle\psi_a|\mathbf{r}|\psi_b\rangle|^2
+\rho(\omega_0)
+    = B\rho(\omega_0),\quad\quad B = \dfrac{\pi
+q^2|\langle\psi_b|\mathbf{r}|\psi_a\rangle|^2}{3\epsilon_0\hbar^2}$$</span></p>
+</div>
+<p>Denote by <span class="math inline"><em>A</em></span> the rate of
+particles leaving the higher energy level <span
+class="math inline"><em>B</em></span> by spontaneous emission.</p>
+<p><span class="math display">$$\begin{aligned}
+
+    d_t N_b
+        &amp;= -N_bA - N_b R_{b\to a} + N_a R_{a\to b} \\
+        &amp;= -N_bA - N_b B \rho(\omega_0) + N_a B \rho(\omega_0) \\
+
+\end{aligned}$$</span></p>
+<p>In thermal equilibrium <span
+class="math inline"><em>d</em><sub><em>t</em></sub><em>N</em><sub><em>b</em></sub> = 0</span>,
+<span
+class="math inline"><em>N</em><sub><em>a</em></sub>/<em>N</em><sub><em>b</em></sub> = exp (ℏ<em>ω</em><sub>0</sub>/<em>k</em><sub><em>B</em></sub><em>T</em>)</span>.
+Planck radiation formula gives <span
+class="math display">$$\rho(\omega_0) = \dfrac A {(N_a/N_b - 1)B} =
+\dfrac A {(e^{\hbar\omega_0 / \tau} - 1)B}
+        = \dfrac{\hbar\omega_0^3}{\pi^2c^3(e^{\hbar\omega / \tau} -
+1)}$$</span> This gives us the spontaneous emission coefficient</p>
+<div class="mdframed">
+<p><span class="math display">$$A =
+\dfrac{\omega_0^3q^2|\langle\psi_b|\mathbf{r}|\psi_a\rangle|^2}{3\pi
+\epsilon_0 \hbar c^3}$$</span></p>
+</div>
+<p>Assuming only spontaneous emission along decay modes with rate
+coefficients <span
+class="math inline"><em>A</em><sub>1</sub>, <em>A</em><sub>2</sub>, ⋯</span>
+and no replenishing mechanism, the population obeys <span
+class="math display">$$dN = -\left(\sum A_n\right) N\, dt \implies N(t)
+= N(0)\exp\left(-\dfrac t \tau\right),
+    \quad \tau = \left(\sum A_n\right)^{-1}$$</span> Here <span
+class="math inline"><em>τ</em></span> is the state’s lifetime. Recall
+the selection rules: matrix elements for a vector <span
+class="math inline"><strong>r</strong></span> obeys</p>
+<div class="mdframed">
+<p><span class="math display">$$\begin{aligned}
+    \Delta l = \pm 1,&amp;\quad\quad \Delta m = 0, \pm 1, \quad
+\text{for any component} \\
+    \Delta m = 0 \implies \langle n'l'm|x|nlm\rangle&amp;= \langle
+n'l'm|y|nlm\rangle= 0 \\
+    m' = m\pm 1 \implies \langle n'l'm'|x|nlm\rangle&amp;= \pm i \langle
+n'l'm|y|nlm\rangle= 0,
+    \langle n'l'm'|z|nlm\rangle= 0
+\end{aligned}$$</span></p>
+</div>
+<p>These rules (Griffiths 11.76) are very handy when evaluating
+transitions rates.</p>
+<h2 id="bound-to-continuum-transitions">Bound to Continuum
+Transitions</h2>
+<p>We can discretize a continuous energy spectrum by confining the
+system in a box of size <span class="math inline"><em>L</em></span>, use
+periodic (or impenetratable, the former is usually more convenient)
+boundary conditions to obtain a discrete spectrum, then take the limit
+as <span class="math inline"><em>L</em> → ∞</span>. This gives us the
+state density <span class="math inline"><em>ρ</em>(<em>E</em>)</span>
+with respect to energy. We consider a system, under sinusoidal
+perturbation, transitioning from a bound state to a continuum state with
+an energy in finite range <span
+class="math inline"><em>Δ</em><em>E</em></span> about <span
+class="math inline"><em>E</em><sub><em>f</em></sub></span>. Integrating
+equation <a href="#eqn:flopping" data-reference-type="ref"
+data-reference="eqn:flopping">[eqn:flopping]</a> yields <span
+class="math display">$$P_{a\to (E_b, \Delta E)}(t) =
+    \int_{E_b - \Delta E / 2}^{E_b + \Delta E/2}
+\dfrac{|V_{ab}|^2}{\hbar^2}
+    \left[\dfrac{\sin^2((\omega_0 - \omega) t/2)}{(\omega_0 -
+\omega)^2}\right]\rho(E)\, dE$$</span> Here <span
+class="math inline"><em>ω</em><sub>0</sub>(<em>E</em>) = (<em>E</em>−<em>E</em><sub><em>a</em></sub>)/ℏ</span>,
+and <span
+class="math inline"><em>ρ</em>(<em>E</em>) <em>d</em><em>E</em></span>
+is the number of states of between <span
+class="math inline"><em>E</em>, <em>E</em> + <em>d</em><em>E</em></span>.
+The bracket quantity is sharply peaked about <span
+class="math inline"><em>E</em> = <em>E</em><sub><em>f</em></sub></span>
+with width <span class="math inline">4<em>π</em>ℏ/<em>t</em></span>. For
+<span class="math inline"><em>t</em> ≫ 1</span>, approximate by pulling
+<span class="math inline"><em>ρ</em>(<em>E</em>)</span> out of the
+integral, which we also extend to infinity <span
+class="math display">$$P_{a\to E_b}(t\to \infty) = \dfrac\pi {2\hbar}
+|V_{ab}|^2 \rho(E_b)t$$</span> The transition rate in this limit is
+known as Fermi’s Golden Rule (sinusoidal perturbations)</p>
+<div class="mdframed">
+<p><span class="math display">$$\begin{aligned}\label{eqn:fermi's golden
+rule}
+
+    R_{a\to b} = \dfrac\pi {2\hbar} |V_{ab}|^2 \rho(E_b)
+
+\end{aligned}$$</span></p>
+</div>
+<p>Recall that <span
+class="math inline"><em>H</em>′(<em>r</em>,<em>t</em>) = <em>V</em>(<em>r</em>)cos (<em>ω</em><em>t</em>)</span>
+and <span
+class="math inline"><em>V</em><sub><em>a</em><em>b</em></sub> = ⟨<em>ψ</em><sub><em>a</em></sub>|<em>V</em>(<em>r</em>)|<em>ψ</em><sub><em>b</em></sub>⟩</span>.</p>
+<h2 id="adiabatic-theorem">Adiabatic theorem</h2>
+<p>The reference for this section is Weinberg, <em>Lectures on Quantum
+Mechanics, VI.6</em>.</p>
+<p>We consider a parameterized family of Hamiltonians <span
+class="math inline"><em>H</em><sub><em>s</em></sub></span>, where <span
+class="math inline"><em>s</em></span> is a slowly varying function <span
+class="math inline"><em>s</em>(<em>t</em>)</span> of time. By
+Hermiticity, <span
+class="math inline"><em>H</em><sub><em>s</em></sub></span> is
+diagonalizable for every <span class="math inline"><em>s</em></span>.
+Given a smooth path <span class="math inline"><em>s</em></span> with
+subscript <span class="math inline">0</span> denote the initial
+condition <span class="math inline"><em>t</em> = 0</span>, we can track
+how the eigenbasis <span
+class="math inline">{|<em>n</em><sub><em>s</em></sub>}</span> of <span
+class="math inline"><em>H</em><sub><em>s</em></sub></span> smoothly
+varies with <span class="math inline"><em>s</em>(<em>t</em>)</span> via
+a parameterized unitary <span
+class="math inline"><em>U</em>(<em>s</em>)</span> such that <span
+class="math display">|<em>n</em><sub><em>s</em></sub>⟩=<em>U</em>(<em>s</em>)|<em>n</em><sub>0</sub>⟩ ⟹ <em>U</em><sub><em>s</em></sub> = ∑<sub><em>n</em></sub>|<em>n</em><sub><em>s</em></sub>⟩⟨<em>n</em><sub>0</sub>|,  <em>U</em>(<em>s</em><sub>0</sub>) = Id</span>
+Consider a frame change parameterized by <span
+class="math inline"><em>U</em>(<em>t</em>)</span> <span
+class="math display"><em>H̃</em><sub><em>s</em></sub> = <em>U</em><sub><em>s</em></sub><sup>†</sup><em>H</em><sub><em>s</em></sub><em>U</em><sub><em>s</em></sub></span>
+In this frame, the eigenvectors of <span
+class="math inline"><em>H̃</em><sub><em>s</em></sub></span> are constant.
+Only eigenvalue dependence on <span
+class="math inline"><em>s</em></span> remains <span
+class="math display"><em>H̃</em><sub><em>s</em></sub>|<em>n</em><sub>0</sub>⟩=<em>U</em><sub><em>s</em></sub><sup>†</sup><em>H</em><sub><em>s</em></sub>|<em>n</em><sub><em>s</em></sub>⟩ = <em>E</em><sub><em>n</em></sub>(<em>s</em>)<em>U</em><sub><em>s</em></sub><sup>†</sup>|<em>n</em><sub><em>s</em></sub>⟩=<em>E</em><sub><em>n</em></sub>(<em>s</em>)|<em>n</em><sub>0</sub>⟩</span>
+Consider the corresponding state transformation (we now suppress <span
+class="math inline">|<em>n</em><sub>0</sub>⟩=|<em>n</em>⟩</span>) <span
+class="math display">|<em>ψ̃</em>(<em>t</em>)⟩=<em>U</em><sub><em>s</em></sub><sup>†</sup>|<em>ψ</em>(<em>t</em>)⟩</span>
+The Schrödinger equation transforms as</p>
+<p><span class="math display">$$\begin{aligned}
+
+    \partial_{t} |\tilde \psi(t)\rangle
+    &amp;= \left(\partial_{t} U_{s(t)}^\dag\right)|\psi(t)\rangle+
+        U^\dag_s \left(\partial_{t} |\psi(t)\rangle\right) \\
+    &amp;= \left(\partial_{t} U_{s(t)}^\dag\right)|\psi(t)\rangle+
+        U^\dag_s \left(-\dfrac i \hbar H_s |\psi(t)\right) \\
+    &amp;= \left(\partial_{t} U_{s(t)}^\dag\right)U_s |\tilde
+\psi(t)\rangle
+        -\dfrac i \hbar\tilde H_s |\tilde \psi(t)\rangle\\
+    &amp;= -\dfrac i \hbar\left[\tilde H_{s(t)} +
+\Delta(t)\right]|\tilde \psi(t)\rangle
+
+\end{aligned}$$</span></p>
+<p>This looks like the “normal” time-evolution of the frame-shifted
+state under the frame-shifted Hamiltonian, with an additional term <span
+class="math display"><em>Δ</em>(<em>t</em>) = <em>i</em>ℏ(∂<sub><em>t</em></sub><em>U</em><sub><em>s</em>(<em>t</em>)</sub>)<sup>†</sup><em>U</em><sub><em>s</em></sub></span>
+We introduce another coordinate transform parameterized by the unitary
+operator <span class="math inline"><em>V</em>(<em>t</em>)</span>
+well-defined by the following differential equation, for <span
+class="math inline"> − <em>i</em><em>H̃</em><sub><em>s</em>(<em>t</em>)</sub></span>
+correctly skew-Hermitian: <span class="math display">$$\partial_{t} V(t)
+= -\dfrac i \hbar\tilde H_{s(t)}V(t)$$</span> In the eigenbasis <span
+class="math inline">{|<em>n</em><sub>0</sub>⟩}</span> for <span
+class="math inline"><em>H̃</em><sub><em>s</em>(<em>t</em>)</sub></span>
+(and also for <span
+class="math inline"><em>H</em><sub><em>s</em>(0)</sub></span>) the
+solution is explicit. <span class="math display">$$\langle
+n|V(t)|m\rangle= \delta_{nm}\exp \left(-\dfrac i \hbar\int_0^t
+E_n(s(t'))\, dt' \right)
+    = \delta_{nm} \exp\left(i\phi_n(t)\right)$$</span> Here <span
+class="math inline"><em>ϕ</em><sub><em>n</em></sub>(<em>t</em>)</span>
+is called the dynamical phse <span class="math display">$$\phi_n(t) =
+-\dfrac 1 \hbar\int_0^t E_n(s(t'))\, dt'$$</span> This frame further
+eliminates dependence on <span
+class="math inline"><em>H̃</em><sub><em>s</em>(<em>t</em>)</sub></span>.
+Define the transforms</p>
+<p><span class="math display">$$\begin{aligned}
+
+    |\bar \psi_t\rangle= V(t)^\dag |\tilde
+\psi(t)\rangle&amp;=  V(t)^\dag U_s^\dag |\psi(t)\rangle\\
+    \bar \Delta(t) &amp;= V(t)^\dag \Delta(t) V(t)
+
+\end{aligned}$$</span></p>
+<p><span
+class="math inline"><em>H̃</em><sub><em>s</em>(<em>t</em>)</sub></span>
+and <span class="math inline"><em>V</em>(<em>t</em>)</span> shares an
+eigenbasis. Only <span class="math inline"><em>Δ̄</em>(<em>t</em>)</span>
+remains in the Schrödinger equation:</p>
+<p><span class="math display">$$\begin{aligned}
+
+    \partial_{t} |\bar \psi(t)\rangle
+    &amp;= \left(\partial_{t} V(t)^\dag \right)|\tilde \psi(t)\rangle+
+V(t)^\dag \partial_{t} |\tilde \psi(t)\rangle\\
+    &amp;= \dfrac i \hbar\tilde H_{s(t)}V(t)^\dag |\tilde \psi(t)\rangle
+        -\dfrac i \hbar V(t)^\dag  \left[\tilde H_{s(t)} +
+\Delta(t)\right]|\tilde \psi(t)\rangle\\
+    &amp;= -\dfrac i \hbar V(t)^\dag \Delta(t)|\tilde \psi(t)\rangle=
+-\dfrac i \hbar\bar \Delta(t)|\bar \psi(t)\rangle
+
+\end{aligned}$$</span></p>
+<p>Consider the matrix elements of <span class="math inline">$\overline
+\Delta_{nm}(t)$</span> under its eigenbasis <span
+class="math inline">{|<em>n</em>⟩}</span></p>
+<p><span class="math display">$$\begin{aligned}
+
+    \langle n|\bar \Delta(t)|m\rangle&amp;= \langle n|V(t)^\dag
+\Delta(t)V(t)|m\rangle=
+    \exp\left(i[\phi_m(t)-\phi_n(t)]\right) \langle
+n|\Delta(t)|m\rangle\\
+    &amp;= \langle n|\Delta(t)|m\rangle\exp \left[\dfrac i \hbar\int_0^t
+dt'\, E_n(s(t')) - E_m(s(t'))\right]
+
+\end{aligned}$$</span></p>
+<p>In the absence of degeneracy, when the rate of change of <span
+class="math inline"><em>s</em>(<em>t</em>)</span> is very small compared
+to <span
+class="math inline">|<em>E</em><sub><em>n</em></sub>(<em>s</em>)−<em>E</em><sub><em>m</em></sub>(<em>s</em>)|/ℏ</span>,
+any duration that is significant with respect to <span
+class="math inline"><em>Δ</em><em>s</em>(<em>t</em>)</span> will cause
+the phase factor to oscillate many times. The only components of <span
+class="math inline"><em>Δ̄</em>(<em>t</em>)</span> which consistently
+contribute are the diagonal elements, by which</p>
+<p><span class="math display">$$\begin{aligned}
+
+    \bar \Delta(t)
+    &amp;= \sum_n \langle n|\bar \Delta(t)|n\rangle\, |n\rangle\langle
+n|
+    = \sum_n \langle n| \Delta(t)|n\rangle\, |n\rangle\langle n| \\
+    &amp;= \sum_n \langle n | \left[i\hbar\left(\partial_{t}
+U_{s(t)}\right)^\dag U_s\right] |n\rangle\, |n\rangle\langle n| \\
+    &amp;= i\hbar\sum_n \left(\partial_{t} \langle
+n_s|\right)|n_s\rangle\, |n\rangle\langle n| \\
+    &amp;= \sum \rho_n(t)|n\rangle\langle n|, \quad \rho_n(t) =
+i\hbar\left(\partial_{t} \langle n_s|\right)|n_s\rangle
+
+\end{aligned}$$</span></p>
+<p>The Schrodinger equation in the bar frame solves to</p>
+<p><span class="math display">$$\begin{aligned}
+
+    |\bar \psi(t)\rangle
+    &amp;= \sum_n \exp(i\gamma_n(t)) \langle n|\bar
+\psi_0\rangle|n\rangle
+    = \sum_n \exp(i\gamma_n(t)) \langle n|\psi_0\rangle|n\rangle
+
+\end{aligned}$$</span></p>
+<p>In particular, note that <span
+class="math inline">|<em>ψ̄</em>(0)⟩=|<em>ψ</em>(0)⟩</span> since both
+transforms are trivial at <span
+class="math inline"><em>t</em> = 0</span>. Here <span
+class="math inline"><em>γ</em><sub><em>n</em></sub>(<em>t</em>)</span>
+denotes the Berry phase <span class="math display">$$\gamma_n(t) =
+-\dfrac 1 \hbar\int_0^t \rho_n(t')\, dt'$$</span> Change back to the
+original frame, here <span
+class="math inline"><em>V</em>(<em>t</em>)</span> introduces <span
+class="math inline"><em>ϕ</em><sub><em>n</em></sub>(<em>t</em>)</span>
+and <span class="math inline"><em>U</em><sub><em>s</em></sub></span>
+effects <span
+class="math inline">|<em>n</em>⟩↦|<em>n</em><sub><em>s</em></sub>⟩</span>.</p>
+<p><span class="math display">$$\begin{aligned}
+
+    |\psi(t)\rangle
+    &amp;= U_{s(t)}V(t)|\bar \psi(t)\rangle\\
+    &amp;= \sum_n \exp(i\gamma_n(t))\exp(i\phi_n(t)) \langle n|\bar
+\psi_0\rangle|n_s\rangle
+
+\end{aligned}$$</span></p>
+<p>Apart from the dynamic and Berry phases <span
+class="math inline"><em>ϕ</em><sub><em>n</em></sub>(<em>t</em>), <em>γ</em><sub><em>n</em></sub>(<em>t</em>)</span>,
+the adiabatic approximation says that eigenstates vary smoothly with
+time.</p>
+<h1 id="wkb-approximation">WKB Approximation</h1>
+<p>The WKB approximation is a semiclassical approximation for an
+eigenstate when the rate of change of the potential is much smaller than
+the oscillation frequency (momentum) of the eigenstate. Consider the
+one-dimensional Schrodinger equation again <span
+class="math display">$$-\dfrac{\hbar^2}{2m}\partial_{x}^2 \psi(x) +
+V(x)\psi(x) = E\psi(x)$$</span> Let <span
+class="math inline">$p(x)\equiv \sqrt{2m[E-V(x)]}$</span>, this may be
+rewritten as <span class="math display">$$\label{eqn:1d schrodinger in
+momentum}
+    \partial_{x}^2\psi = -\dfrac{p^2}{\hbar^2}\psi$$</span> Substitute
+the following solution expression, for <span
+class="math inline"><em>A</em></span> and <span
+class="math inline"><em>ϕ</em></span> real functions: <span
+class="math display"><em>ψ</em>(<em>x</em>) = <em>A</em>(<em>x</em>)exp [<em>i</em><em>ϕ</em>(<em>x</em>)]</span>
+Calculate the first and second order derivatives</p>
+<p><span class="math display">$$\begin{aligned}
+
+    \partial_{x} \psi &amp;= (A'+i\phi')\exp(i\phi) \\
+    \partial_{x}^2 \psi &amp;= \left[A'' + 2iA'\phi' + iA\phi'' -
+A(\phi')^2\right]\exp(i\phi)
+
+\end{aligned}$$</span></p>
+<p>Substitute into the Schrodinger equation <a
+href="#eqn:1d schrodinger in momentum" data-reference-type="ref"
+data-reference="eqn:1d schrodinger in momentum">[eqn:1d schrodinger in
+momentum]</a>, we have <span class="math display">$$A'' + 2iA'\phi' +
+ia\phi'' - A(\phi')^2 = -\dfrac{p^2}{\hbar^2}A$$</span> Separate into
+real and imaginary components: <span
+class="math display">$$\begin{aligned}\label{eqn:se_wkb}
+    A'' - A(\phi')^2 = -\dfrac{p^2}{\hbar^2} A &amp;\iff A'' =
+A\left[(\phi')^2 - \dfrac{p^2}{\hbar^2}\right]  \\
+    2A'(x)\phi'(x) + A(x)\phi''(x) = 0 &amp;\iff \partial_{x}
+\left(A^2(x)\phi'(x)\right) = 0
+\end{aligned}$$</span> The second equation implies that <span
+class="math inline"><em>A</em><sup>2</sup>(<em>x</em>)</span> is
+constant, let <span
+class="math inline"><em>α</em> = <em>A</em><sup>2</sup>(<em>x</em>)<em>ϕ</em>′(<em>x</em>) ∈ ℝ</span>.
+Then <span class="math display">$$A(x) =
+\dfrac{\alpha}{\sqrt{\phi'(x)}}$$</span> We’re left with solving the
+real equation with only <span class="math inline"><em>ϕ</em></span>.
+Note that when <span class="math inline"><em>V</em>(<em>x</em>)</span>
+is constant, we have the free-particle solution <span
+class="math display">$$\psi(x) = A\exp\left(\dfrac i \hbar p x\right),
+\quad \phi(x) = \dfrac 1 \hbar p x$$</span> WKB makes the following
+power series expansion of <span
+class="math inline"><em>ϕ</em>(<em>x</em>)</span> (<span
+class="math inline"><em>S</em><sub>0</sub></span> has units of action).
+The variable is in <span class="math inline">ℏ<sup>2</sup></span> due to
+<span class="math inline">ℏ<sup>2</sup>/2<em>m</em></span> term in
+Schrodinger equation. <span class="math display">$$\phi(x) = \dfrac 1
+\hbar\sum_{n=0}^\infty \hbar^{2n}S_n(x) = \dfrac 1 \hbar S_0(x)
+    + \hbar S_1(x) + \hbar^3 S_2(x)+\cdots$$</span> Substitute this into
+the first equation in <a href="#eqn:se_wkb" data-reference-type="ref"
+data-reference="eqn:se_wkb">[eqn:se_wkb]</a> and equate by powers of
+<span class="math inline">ℏ</span>. Taking the first term <span
+class="math display">$$\begin{aligned}
+    \phi'(x) &amp;= \dfrac 1 \hbar S_0'(x) + \hbar S'_1(x) \\
+    A(x) &amp;= \dfrac{\alpha}{\sqrt{\frac 1 \hbar S'_0(x) + \hbar
+S'_1(x)}}
+\end{aligned}$$</span> Equate in powers of <span
+class="math inline">ℏ</span>. The first equation in <a
+href="#eqn:se_wkb" data-reference-type="ref"
+data-reference="eqn:se_wkb">[eqn:se_wkb]</a> is linear in <span
+class="math inline"><em>A</em></span>. The zeroth-order of <span
+class="math inline">ℏ</span> becomes <span
+class="math display">$$\begin{aligned}
+    \dfrac 1 {2m} S_0'^2(x) &amp;= E - V(x) \\
+    S_0(x) &amp;= \pm \int dx\, p(x)
+\end{aligned}$$</span> The WKB approximation takes this order, the
+integration bound can arbitrarily chosen for convenience since constants
+are absorbed into <span class="math inline"><em>α</em></span>&gt;</p>
+<div class="mdframed">
+<p><span class="math display">$$\label{eqn:wkb_wavefunction}
+    \psi_{\mathrm{WKB}}(x) =
+    \begin{cases}
+        \displaystyle \dfrac{\alpha}{p(x)}\exp \left(\pm \dfrac i
+\hbar\int^x dx\,p(x)\right) &amp; p(x)=\sqrt{2m[E-V(x)]}&gt;0 \\
+        \displaystyle \dfrac{\alpha}{|p(x)|} \exp\left(\pm \dfrac 1
+\hbar\int^x |p(x)|\, dx\right) &amp; E &lt; V(x)
+    \end{cases}$$</span></p>
+</div>
+<p>This is equivalent to solving for equation <a href="#eqn:se_wkb"
+data-reference-type="ref" data-reference="eqn:se_wkb">[eqn:se_wkb]</a>
+with <span class="math inline"><em>A</em>″ = 0</span>. Note that the
+amplitude scales inversely with classical momentum (velocity) at a point
+<span class="math display">$$|\psi(x)|^2\approx
+\dfrac{|C|^2}{p(x)}$$</span> We may approximate the accuracy by plugging
+this back into the two sides of the Schrodinger equation and noting the
+differences. It turns out to be the ratio between the characteristic
+wavelength of the wavefunction versus the potential’s rate of change.
+<span class="math display">$$\dfrac{|m\hbar V'(x)|}{p(x)^3}\ll
+1$$</span> The denominator blows up at turning points <span
+class="math inline"><em>E</em> = <em>V</em>(<em>x</em>)</span>. We can
+solve for regions around turning points with analytic solutions to a
+linear approximating potential (airy functions), then patch up with WKB
+approximations.</p>
+<h2 id="connection-formulas">Connection formulas</h2>
+<p>Assume that there is a classical turning point at <span
+class="math inline"><em>x</em><sub>0</sub></span></p>
+<div class="center">
+<figure>
+<img src="src/WKB connection.png" />
+</figure>
+</div>
+<h2 id="tunneling">Tunneling</h2>
+<p>Consider scattering across rectangular barrier at <span
+class="math inline">[0,<em>L</em>]</span> with surrounding <span
+class="math inline"><em>V</em> = 0</span>. <span
+class="math display">$$\psi(x) = \begin{cases}
+        A\exp(ikx) + B\exp(-ikx) &amp; x&lt;0 \\
+        \displaystyle
+        \dfrac C {\sqrt{|p(x)|}}\exp\left(\dfrac 1 \hbar\int_0^x
+|p(x')|\, dx'\right) +
+        \dfrac D {\sqrt{|p(x)|}}\exp\left(-\dfrac 1 \hbar\int_0^x
+|p(x')|\, dx'\right) &amp; 0&lt;x&lt;L \\
+        F\exp(ikx) &amp; L&lt;x
+\end{cases}$$</span> For large barriers, <span
+class="math inline"><em>C</em></span> must be small so the The tunneling
+probability related by the decrease of the exponential decay term across
+the barrier.</p>
+<div class="mdframed">
+<p><span class="math display">$$\label{eqn:wkb_tunneling}
+        T = \left|\dfrac F A\right|^2 \sim \exp\left(-\dfrac 2
+\hbar\int_0^L |p(x)|\, dx\right)$$</span></p>
+</div>
+<p>For general left-incident tunneling with regions <span
+class="math inline">1, 2, 3</span> being classically allowed, forbidden,
+and allowed, respectively. We have</p>
+<p><span class="math display">$$\begin{aligned}
+
+    \psi_{1}(x) &amp;= A\psi_{\mathrm{WKB}, \rightarrow}(x) +
+B\psi_{\mathrm{WKB}, \leftarrow}(x) \\
+    \psi_{2}(x) &amp;= C\psi_{\mathrm{WKB}, \rightarrow}(x) +
+D\psi_{\mathrm{WKB}, \leftarrow}(x) \\
+    \psi_{3}(x) &amp;= F\psi_{\mathrm{WKB}, \rightarrow}(x)\\
+
+\end{aligned}$$</span></p>
+<p>This tunneling formula turns out to be useful not only for barriers
+with <span class="math inline">0</span> surrounding potentials but also
+general barriers. Using the connection formulas from <span
+class="math inline">3 → 2 → 1</span> relates <span
+class="math inline"><em>A</em>, <em>B</em></span> as functions of <span
+class="math inline"><em>F</em></span>. The transmission coefficient
+coincides with equation <a href="#eqn:wkb_tunneling"
+data-reference-type="ref"
+data-reference="eqn:wkb_tunneling">[eqn:wkb_tunneling]</a>. However, the
+reflection coefficient calculates to <span
+class="math inline"><em>R</em> = |<em>B</em>/<em>A</em>|<sup>2</sup> = 1</span>.
+This violates the conservation of probability! We can only trust
+equation <a href="#eqn:wkb_tunneling" data-reference-type="ref"
+data-reference="eqn:wkb_tunneling">[eqn:wkb_tunneling]</a> for <span
+class="math inline"><em>T</em> ≪ 1</span>.</p>
+<h2 id="bound-approximations">Bound approximations</h2>
+<p>The WKB approximation gives us an approximate wavefunction.
+Connection formulas give how approximations change across turning points
+at which a raw approximation would break down. Every confining potential
+possibly yields bound states. A consistent, normalizable connection of 3
+approximations across classical turning points in the regions</p>
+<ul>
+<li><p>to the left of the confining potential (w.r.t. energy)</p></li>
+<li><p>inside the confining potential</p></li>
+<li><p>to the right of the confiniing potential</p></li>
+</ul>
+<p>yields the quantization condition for bound state energy.</p>
+<h3 id="two-infinite-walls">Two infinite walls</h3>
+<p>When there are two infinite vertical walls <span
+class="math inline"><em>x</em><sub>−</sub>, <em>x</em><sub>+</sub></span></p>
+<div class="mdframed">
+<p><span class="math display">$$\int_{x_-}^{x_+}dx \, \sqrt{2m(E -
+V(x))} = \pi \hbar n, \quad n=1, 2, \cdots$$</span></p>
+</div>
+<p>We begin by examining first case with two infinite vertical walls.
+Use the WKB approximation <a href="#eqn:wkb_wavefunction"
+data-reference-type="ref"
+data-reference="eqn:wkb_wavefunction">[eqn:wkb_wavefunction]</a> with
+lower bound at <span class="math inline"><em>x</em><sub>−</sub></span>,
+then <span class="math display">$$\psi_{\mathrm{WKB}}(x_+) = \dfrac 1
+{\sqrt{p(x_+)}}
+    \left(\alpha_1 \sin \phi(x_+) + \alpha_2\cos\phi(x_+)\right)=0,
+\quad
+    \phi(x) = \dfrac 1 \hbar\int_{x_-}^x p(x')\, dx'$$</span> We have
+<span class="math inline"><em>α</em><sub>2</sub> = 0</span> by boundary
+condition at <span class="math inline"><em>x</em><sub>−</sub></span>.
+The equation above then yields the desired quantization condition <span
+class="math inline"><em>ϕ</em>(<em>x</em><sub>+</sub>) = 0</span>.</p>
+<div class="example">
+<p><strong>Example 6</strong> (finite square well). <em>Consider a
+finite square well with <span
+class="math inline"><em>V</em>(<em>x</em>) − <em>V</em><sub>0</sub></span>
+in <span class="math inline">[0,<em>L</em>]</span> and zero elsewhere.
+Applying the first approximation yields <span
+class="math display">$$\int_0^L dx\, \sqrt{2m(E + V_0)} = L\sqrt{2m(E +
+V_0)} = \pi n \hbar
+        \implies E = \dfrac{n^2\pi^2\hbar^2}{2mL^2} - V_0$$</span> This
+is equivalent to a vertical shift of the infinite square well solution.
+While there is no single quantitative metric for how good the
+approximation is (as opposed to energy ratio), we can estimate by the
+magnitude of the next term in the expansion.</em></p>
+</div>
+<h3 id="one-infinite-wall">One infinite wall</h3>
+<p>When there is one infinite vertical wall at <span
+class="math inline"><em>x</em><sub>−</sub></span>, a smooth classical
+turning point at <span
+class="math inline"><em>x</em><sub>+</sub></span></p>
+<div class="mdframed">
+<p><span class="math display">$$\int_{x_-}^{x_+}dx\, \sqrt{2m(E - V(x))}
+= \pi \hbar\left(n + \dfrac 3 4\right),
+        \quad n = 0, 1, 2, \cdots$$</span></p>
+</div>
+<p>Begin with an asymptotic formula for the decay on the right side of
+the potential. <span class="math display">$$\psi_{x&gt;x_+}(x) =
+\dfrac{A}{\sqrt{k_1(x)}}\exp \left(-\dfrac 1 \hbar\int_{x_+}^x dx'\,
+k_1(x')\right)$$</span> Invoke connection at <span
+class="math inline"><em>x</em><sub>+</sub></span> <span
+class="math display">$$\psi_{x_-&lt;x&lt;x_+}(x)
+    = \frac{2A}{\sqrt{k_2(x)}} \cos \left(\dfrac 1 \hbar\int_{x}^{x_+}
+dx' k_2(x') - \frac{\pi}{4\hbar} \right)$$</span> The boundary condition
+that <span
+class="math inline"><em>ψ</em><sub><em>x</em><sub>−</sub> &lt; <em>x</em> &lt; <em>x</em><sub>+</sub></sub>(<em>x</em><sub>−</sub>) = 0</span>
+yields <span class="math display">$$\int_{x}^{x_+} dx' k_2(x') = \pi
+\hbar\left(n + \dfrac 3 4\right)$$</span></p>
+<h3 id="two-smooth-turning-points">Two smooth turning points</h3>
+<p>In case of smooth potential with classical turning points at <span
+class="math inline"><em>x</em><sub>−</sub> &lt; <em>x</em><sub>+</sub></span></p>
+<div class="mdframed">
+<p><span class="math display">$$\int_{x_-}^{x_+} dx\, \sqrt{2m(E -
+V(x))} = \pi \hbar\left(n + \dfrac 1 2\right)
+        ,\quad n = 0, 1, 2, \cdots$$</span></p>
+</div>
+<p>Begin with an asymptotic formula for the decay on the right side of
+the potential <span class="math display">$$\psi_{x&gt;x_+}(x) =
+\dfrac{A}{\sqrt{k_1(x)}}\exp \left(-\dfrac 1 \hbar\int_{x_+}^x dx'\,
+k_1(x')\right)$$</span> Invoke connection at <span
+class="math inline"><em>x</em><sub>+</sub></span> and manipulate it to
+fit the connection formula at <span
+class="math inline"><em>x</em><sub>−</sub></span>. Here we temporarily
+omit <span class="math inline">1/ℏ</span> to reduce clutter.</p>
+<p><span class="math display">$$\begin{aligned}
+
+    \psi_{x_-&lt;x&lt;x_+}(x)
+    &amp;= \frac{2A}{\sqrt{k_2(x)}} \cos \left( \int_{x}^{x_+} dx'
+k_2(x') - \frac{\pi}{4} \right) \\
+    &amp;= \frac{2A}{\sqrt{k_2(x)}} \cos \left( \left(\int_{x_-}^{x_+} -
+\int_{x_-}^{x}\right)
+        dx' k_2(x') - \frac{\pi}{4} \right) \\
+    &amp;= \frac{2A}{\sqrt{k_2(x)}} \cos \left( \int_{x_-}^{x}dx'\,
+k_2(x') - \left(\int_{x_-}^{x_+}
+        dx' k_2(x') + \frac{\pi}{4}\right)\right) \\
+    &amp;= \frac{2A}{\sqrt{k_2(x)}} \cos \left( \int_{x_-}^{x}dx'\,
+k_2(x') - \dfrac\pi 4 -
+        \left(\int_{x_-}^{x_+}dx' k_2(x') - \frac{\pi}{2}\right)\right)
+\\
+
+\end{aligned}$$</span></p>
+<p>Invoke the connection formula at <span
+class="math inline"><em>x</em><sub>−</sub></span> again with <span
+class="math display">$$\eta =  \frac{\pi}{2\hbar} - \dfrac 1
+\hbar\int_{x_-}^{x_+}dx' k_2(x')$$</span> In this classically forbidden
+region, <span
+class="math inline"><em>ψ</em><sub><em>x</em> &lt; <em>x</em><sub>−</sub></sub>(<em>x</em>)</span>
+must be a decaying function yet the connection yields an increasing
+exponential. This yields the desired quantization condition <span
+class="math inline">sin <em>η</em> = 0</span>, <span
+class="math display">$$\int_{x_-}^{x_+}dx' k_2(x') - \frac{\pi}{2} =
+n\pi \hbar, \quad\quad n=0, 1, 2\cdots$$</span> The other quantization
+formulas follows from a similar procedure, with infinite vertical walls
+yielding zero boundary condition.</p>
+<h1 id="scattering">Scattering</h1>
+<h2 id="classical-scattering">Classical scattering</h2>
+<p>In scattering problems, we assume a spatially and temporally uniform
+distribution of incoming beams along the incident axis. We also assume
+cylindrical symmetry parameterized by <span
+class="math inline">(<em>z</em>,<em>b</em>,<em>ϕ</em>)</span> denoting
+height, radius, and azimuthal angle, respectively. Below are the
+quantities involved in the problem.</p>
+<ul>
+<li><p>Impact prameter <span class="math inline"><em>b</em></span>,
+scattering angle <span class="math inline"><em>θ</em></span>.</p></li>
+<li><p>Particles incident within an infinitesimal patch of
+cross-sectional area <span
+class="math inline"><em>d</em><em>σ</em> = <em>b</em> <em>d</em><em>b</em> <em>d</em><em>φ</em></span>
+scatters into a solid angle (normalized area form) <span
+class="math inline"><em>d</em><em>Ω</em> = sin <em>θ</em> <em>d</em><em>θ</em> <em>d</em><em>φ</em></span>.</p></li>
+<li><p>Differential cross-section <span class="math inline">$d_\Omega
+\sigma = \dfrac b {\sin\theta}\left|d_\theta b \right|$</span>. Usually,
+the greater <span class="math inline"><em>θ</em></span> (more pronounced
+scattering), the smaller <span class="math inline"><em>b</em></span>,
+thus the absolute sign. <span
+class="math inline"><em>d</em><sub><em>Ω</em></sub><em>σ</em></span> is
+usually a quantity parameterized by <span
+class="math inline"><em>θ</em></span>. It asks: at angle <span
+class="math inline"><em>θ</em></span> from the scattering center, how
+much unit solid angle accounts for unit area increase in incident
+beams?</p></li>
+<li><p>The total cross-section <span
+class="math inline"><em>σ</em> = ∫<em>d</em><sub><em>Ω</em></sub><em>σ</em> <em>d</em><em>Ω</em></span>.
+It is the total cross-sectional area which will encounter scattering.
+For classical hard-sphere scattering, this is <span
+class="math inline"><em>π</em><em>R</em><sup>2</sup></span>.</p></li>
+<li><p>The luminosity <span class="math inline">ℒ</span> is the
+experimentally controllable parameter denoting the number of incident
+particles per unit cross-sectional area, per unit time. We have <span
+class="math inline"><em>d</em><em>N</em> = ℒ <em>d</em><em>σ</em></span>,
+so <span class="math inline">$d_\Omega\sigma = \dfrac 1 {\mathcal L}
+d_\Omega N$</span></p></li>
+</ul>
+<figure id="fig:scattering">
+<p><img src="src/scattering.jpeg" alt="image" /> <span
+id="fig:scattering" label="fig:scattering"></span></p>
+</figure>
+<h2 id="quantum-scattering-theory">Quantum scattering theory</h2>
+<p>Assuming that the scattering potential is localized and spherically
+symmetric, it admits separable solutions <span
+class="math display">$$\psi(r, \theta, \phi) = \sum_{l, m} \dfrac{u_{m,
+l}(r)}{r} Y^m_l(\theta, \phi)$$</span> Here <span
+class="math inline"><em>u</em></span> satisfies one-dimensional radial
+equation with effective potential</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:radial se}
+
+    -\dfrac{\hbar^2}{2m} \partial_{r}^2 u + \left[V(r) +
+\dfrac{\hbar^2}{2m} \dfrac{L^2}{r^2}\right]u = Eu
+
+\end{aligned}$$</span> For asymptotically large <span
+class="math inline"><em>k</em><em>r</em> ≫ 1</span>, the effective
+potential converges to the radial potential, which gives the general
+solution <span class="math display">$$\psi(r, \theta, \phi) =
+\dfrac{Y^m_l(\theta, \phi)}r\left(Ce^{ikr} + De^{-ikr}\right)$$</span>
+The outgoing scattering condition eliminates <span
+class="math inline"><em>D</em></span>. Our potential starts out with
+both polar and azimuthal symmetry. Incidence direction chooses a
+preferred <span class="math inline"><em>z</em></span>-axis and
+introduces <span class="math inline"><em>θ</em></span> dependence by
+breaking spherical symmetry However, the azimuthally symmetric incidence
+condition leaves our state <span
+class="math inline"><em>ϕ</em></span>-invariant. The only <span
+class="math inline"><em>ϕ</em></span>-invariant spherical harmonics are
+those with <span class="math inline"><em>m</em> = 0</span>, so we look
+for steady state solutions for <span
+class="math inline"><em>r</em> ≫ 1</span> of the following form:</p>
+<div class="mdframed">
+<p><span class="math display">$$\begin{aligned}\label{eqn:radiation
+state}
+
+    \psi(r, \theta) =
+    A\left[e^{ikz}+\left(\sum_{l=0}^\infty c_l
+Y^0_l(\theta)\right)\dfrac{e^{ikr}}{r}\right]
+    ,\quad k = \dfrac{2mE}{\hbar}
+
+\end{aligned}$$</span></p>
+</div>
+<p>The spherically normalized amplitudes in parantheses are collected
+into the <em>scattering amplitude</em> <span
+class="math inline"><em>f</em>(<em>θ</em>)</span>. The probability flux
+of a uniform beam through cross-sectional area <span
+class="math inline"><em>d</em><em>σ</em></span> is <span
+class="math display"><em>d</em><em>P</em> = |<em>ψ</em><sub>incident</sub>|<sup>2</sup> <em>d</em><em>σ</em> = |<em>A</em>|<sup>2</sup> <em>d</em><em>σ</em></span>
+This is equal to the probability that it scatters into the corresponding
+solid angle <span class="math inline"><em>d</em><em>Ω</em></span>: <span
+class="math display">$$dP = |\psi_{\mathrm{scattered}}|^2\, d\Omega =
+\dfrac{|Af|^2}{r^2} (r^2\, d\Omega)
+    = |Af|^2\, d\Omega$$</span> The differential cross-section is
+correspondingly <span
+class="math display"><em>d</em><sub><em>Ω</em></sub><em>σ</em> = |<em>f</em>(<em>θ</em>)|<sup>2</sup></span>
+The subsequent subsections introduce two methods to compute the
+scattering amplitudes.</p>
+<h2 id="partial-wave-analysis">Partial wave analysis</h2>
+<p>Partial wave analysis allows us to calculate the scattering
+amplitudes for localized <span
+class="math inline"><em>V</em>(<em>r</em>)</span> which <em>decays
+faster than <span class="math inline"><em>r</em><sup>2</sup></span></em>
+(this includes finite-range potentials).</p>
+<p>Consider equation <a href="#eqn:radial se" data-reference-type="ref"
+data-reference="eqn:radial se">[eqn:radial se]</a> again. When <span
+class="math inline"><em>V</em>(<em>r</em>)</span> decays faster than
+<span class="math inline"><em>r</em><sup>−2</sup></span>, our space can
+be split into three regions of interest (note that Coulomb potential is
+not well-localized in this sense).</p>
+<ul>
+<li><p>scattering region: <span
+class="math inline"><em>V</em> ≠ 0</span> and <span
+class="math inline"><em>k</em><em>r</em> ≫ 1</span>. Here a full
+consideration is needed.</p></li>
+<li><p>intermediate region: <span
+class="math inline"><em>V</em>(<em>r</em>) ≈ 0</span> but the
+centrifugal term <span class="math inline">$\dfrac{\hbar^2}{2m}
+\dfrac{L^2}{r^2}$</span> is still nonneglegible. The particle is
+radially “free".</p></li>
+<li><p>radiation zone: <span
+class="math inline"><em>k</em><em>r</em> ≫ 1</span>, so both <span
+class="math inline"><em>V</em>(<em>r</em>)</span> and the centrifugal
+terms are neglegible. The state in this regime is given by equation <a
+href="#eqn:radiation state" data-reference-type="ref"
+data-reference="eqn:radiation state">[eqn:radiation state]</a>.</p></li>
+</ul>
+<p>We consider the intermediate region, equation <a
+href="#eqn:radial se" data-reference-type="ref"
+data-reference="eqn:radial se">[eqn:radial se]</a> becomes</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:intermediate
+region se}
+
+    u(r) = Arj_l(kr) + Brn_l(kr)
+
+\end{aligned}$$</span> Here <span
+class="math inline"><em>n</em><sub><em>l</em></sub>, <em>j</em><sub><em>l</em></sub></span>
+are the spherical Bessel functions which somewhat represents sines and
+cosines. It is more helpful to change basis to linear combinations of
+the Bessels representing the analogue of complex exponentials, or the
+<em>spherical Hankel functions</em> which are asymptotically <span
+class="math inline"><em>e</em><sup>±<em>i</em><em>k</em><em>x</em></sup>/<em>r</em></span>
+<span
+class="math display"><em>h</em><sub><em>l</em></sub><sup>(1)</sup>(<em>x</em>) ≡ <em>j</em><sub><em>l</em></sub>(<em>x</em>) + <em>i</em><em>n</em><sub><em>l</em></sub>(<em>x</em>),  <em>h</em><sub><em>l</em></sub><sup>(2)</sup>(<em>x</em>) = <em>j</em><sub><em>l</em></sub>(<em>x</em>) − <em>i</em><em>n</em><sub><em>l</em></sub>(<em>x</em>)</span>
+Outgoing solutions are represented by Hankel functions of the first
+kind, so the intermediate region’s state is of the form <span
+class="math display">$$\psi(r, \theta) = A\left[e^{ikz} + \sum c_{m, l}
+Y^m_l(r, \theta)R_l(r)\right] =
+    A\left[e^{ikz} + \sum_{l=0}^\infty c_l h_l^{(1)}(kr)
+Y_l^0(\theta)\right]$$</span> Redefine expansion coefficients with the
+<em><span class="math inline"><em>l</em></span>-th partial wave
+amplitude</em> <span class="math inline">$c_l =
+i^{l+1}k\sqrt{4\pi(2l+1)}a_l$</span>; this parameterization turns out to
+be useful later. Substituting <span
+class="math inline"><em>Y</em><sub><em>l</em></sub><sup>0</sup>(<em>θ</em>)</span>
+yields <span class="math display">$$\psi(r, \theta) = A\left[e^{ikz} +
+    k\sum_{l=0}^\infty i^{l+1}(2l+1)a_lh^{(1)}_l(kr)
+P_l(\cos\theta)\right]$$</span> To use consistent spherical coordinates,
+we need to use Rayleigh’s formula</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:Rayleigh's
+formula}
+
+    e^{ikz} = \sum_{l=0}^\infty i^l(2l+1)j_l(kr)P_l(\cos\theta)
+
+\end{aligned}$$</span> The intermediate region’s state is then of the
+form</p>
+<div class="mdframed">
+<p><span class="math display">$$\begin{aligned}\label{eqn:intermediate
+region se}
+
+        \psi(r, \theta) = A
+        \sum_{l=0}^\infty i^{l}(2l+1)\left[j_l(kr)
+        + i k a_lh^{(1)}_l(kr)\right] P_l(\cos\theta)
+    
+\end{aligned}$$</span></p>
+</div>
+<p>The <span class="math inline"><em>l</em></span>-th partial wave
+amplitudes <span
+class="math inline"><em>a</em><sub><em>l</em></sub></span> are so
+defined because for large <span class="math inline"><em>r</em></span>,
+the Hankel functions approach <span
+class="math inline">(−<em>i</em>)<sup><em>l</em> + 1</sup><em>e</em><sup><em>i</em><em>k</em><em>r</em></sup>/<em>k</em><em>r</em></span>,
+so equation <a href="#eqn:intermediate region se"
+data-reference-type="ref"
+data-reference="eqn:intermediate region se">[eqn:intermediate region
+se]</a> approaches equation <a href="#eqn:radiation state"
+data-reference-type="ref"
+data-reference="eqn:radiation state">[eqn:radiation state]</a> with
+<span class="math display">$$f(\theta) = \sum_{l=0}^\infty c_l
+Y^0_l(\theta)
+    = \sum_{l=0}^\infty (2l+1)a_lP_l(\cos\theta)$$</span> The
+differential cross-section can be computed from the partial wave
+amplitudes by</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:quantum
+differential cross section}
+
+    d_\Omega \sigma(\theta) = |f(\theta)|^2 =
+    \sum_{l,
+l'}(2l+1)(2l'+1)a_l^*a_{l'}P_l(\cos\theta)P_{l'}(\cos\theta)
+
+\end{aligned}$$</span> Integrate over the solid angle to obtain the
+total cross section</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:quantum total
+cross section}
+
+    d_\Omega \sigma(\theta) = |f(\theta)|^2 =
+    4\pi \sum_{l=0}^\infty (2l+1)|a_l|^2
+
+\end{aligned}$$</span> When the centrifugal term dominates over the
+radial potential, the partial wave components are dominated by
+components with low angular momentum.</p>
+<p>For an algorithmic prescription of partial wave analysis:</p>
+<ul>
+<li><p>Choose a potential cutoff <span
+class="math inline"><em>R</em></span> beyond which to use equation <a
+href="#eqn:quantum differential cross section" data-reference-type="ref"
+data-reference="eqn:quantum differential cross section">[eqn:quantum
+differential cross section]</a>. Solve for the eigenstates of the
+potential for <span
+class="math inline"><em>r</em> ≤ <em>R</em></span>.</p></li>
+<li><p>Use matching boundary conditions to evaluate <span
+class="math inline"><em>a</em><sub><em>l</em></sub></span>.</p></li>
+<li><p>Use the partial wave amplitudes to calculate quantities of
+interest. If possible, for infinite-range but quickly-decaying
+potentials take <span
+class="math inline"><em>R</em> → ∞</span>.</p></li>
+</ul>
+<h2 id="integral-form-of-the-eigenvalue-equation">Integral form of the
+eigenvalue equation</h2>
+<p>The three-dimensional eigenvalue equation for the Hamiltonian may be
+rewritten as</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:3d se}
+
+    (\nabla^2 + k^2)\psi(\mathbf{r}) =
+\dfrac{2m}{\hbar^2}V(\mathbf{r})\psi(\mathbf{r}),
+    \quad k = \dfrac{\sqrt{2mE}}{\hbar}
+
+\end{aligned}$$</span> This has the superficial apearance of a Helmholtz
+equation <span class="math display">$$\left(\nabla^2 + k^2\right)\psi =
+Q, \quad Q(\mathbf{r}) =
+\dfrac{2m}{\hbar^2}V(\mathbf{r})\psi(\mathbf{r})$$</span> However, the
+important difference is that the inhomogeneous term <span
+class="math inline"><em>Q</em></span> now also depends on <span
+class="math inline"><em>ψ</em></span>. Recall that given a Green
+function <span class="math inline"><em>G</em>(<strong>r</strong>)</span>
+which solves the Helmholtz equation with a delta function “source”,
+integrating it gives the solution to the Helmholtz equation.</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:green
+condition}
+
+    (\nabla^2 + k^2)G(\mathbf{r}) = \delta^3(\mathbf{r})
+
+\end{aligned}$$</span> While a Green function will not allow us to write
+the closed form to the eigenvalue equation, it yields an equivalent
+equation (note that <span class="math inline"><em>ψ</em></span> also
+appears on the right hand side). <span
+class="math display"><em>ψ</em>(<strong>r</strong>) = ∫<em>d</em><sup>3</sup><strong>r</strong>′ <em>Q</em>(<strong>r</strong>′)<em>G</em>(<strong>r</strong>−<strong>r</strong>′)</span>
+To see that this equation is equivalent to equation <a href="#eqn:3d se"
+data-reference-type="ref" data-reference="eqn:3d se">[eqn:3d se]</a>,
+apply <span
+class="math inline">(∇<sup>2</sup>+<em>k</em><sup>2</sup>)</span> to
+both sides. <span
+class="math display">(∇<sup>2</sup>+<em>k</em><sup>2</sup>)<em>ψ</em>(<strong>r</strong>) = ∫<em>d</em><sup>3</sup><strong>r</strong>′(∇<sup>2</sup>+<em>k</em><sup>2</sup>)<em>G</em>(<strong>r</strong> <strong>−</strong> <strong>r</strong><strong>′</strong>)<em>Q</em>(<strong>r</strong>′) = ∫<em>δ</em>(<strong>r</strong> <strong>−</strong> <strong>r</strong><strong>′</strong>)<em>Q</em>(<strong>r</strong>′) <em>d</em><sup>3</sup><strong>r</strong>′ = <em>Q</em>(<strong>r</strong>)</span>
+One Green function which satisfies equation <a
+href="#eqn:green condition" data-reference-type="ref"
+data-reference="eqn:green condition">[eqn:green condition]</a> is <span
+class="math display">$$G(x) = -\dfrac{e^{ikr}}{4\pi r}$$</span> The free
+part of the eigenvalue equation solution is the kernel of <span
+class="math inline">∇<sup>2</sup> + <em>k</em><sup>2</sup></span>
+corresponding to the free-particle solutions. This allows us to write
+the general integral form of equation <a href="#eqn:3d se"
+data-reference-type="ref" data-reference="eqn:3d se">[eqn:3d
+se]</a>.</p>
+<div class="mdframed">
+<p><span class="math display">$$\begin{aligned}\label{eqn:integral se}
+
+    \psi(\mathbf{r}) = \psi_0(\mathbf{r}) -
+    \dfrac{m}{2\pi \hbar^2}\int \dfrac{e^{ik|\mathbf{r} -
+\mathbf{r}'|}}{|\mathbf{r} - \mathbf{r}'|}
+    V(\mathbf{r}')\psi(\mathbf{r}')d^3\mathbf{r}',
+\quad  (\nabla^2+k^2)\psi_0(\mathbf{r}) = 0
+
+\end{aligned}$$</span></p>
+</div>
+<h2 id="born-approximation">Born Approximation</h2>
+<p>Suppose <span class="math inline"><em>V</em></span> is localized
+about <span class="math inline"><strong>r</strong>′ = 0</span> and we
+wish to calculate <span
+class="math inline"><em>ψ</em>(<strong>r</strong>)</span> for points far
+away from the scattering center. The contributing terms all satisfy
+<span
+class="math inline">|<strong>r</strong>′| ≪ |<strong>r</strong>|</span>,
+so <span class="math display">$$|\mathbf{r} - \mathbf{r}'| \approx r -
+r'\cos\theta = r - \hat {\mathbf{r}} \cdot \mathbf{r}'$$</span></p>
+<figure id="fig:vector difference approx">
+<img src="src/vector difference approx.jpeg" />
+<figcaption>Intuition for <span
+class="math inline">|<strong>r</strong>−<strong>r</strong>′| ≈ <em>r</em> − <em>r</em>′cos <em>θ</em></span></figcaption>
+</figure>
+<p>This is an approximation up to the first order of <span
+class="math inline"><em>r</em>′/<em>r</em></span>. Let <span
+class="math inline"><strong>k</strong> = <em>k</em><em>r̂</em></span>,
+then <span class="math display">$$e^{ik|\mathbf{r} - \mathbf{r}'|}
+\approx e^{ikr}e^{i\mathbf{k\cdot r'}}
+    \implies \dfrac{e^{ik|\mathbf{r - r'}}|}{|\mathbf{r-r'}|} \approx
+    \dfrac{e^{ikr}}{r}e^{-i\mathbf{k\cdot r'}}
+    % \approx \df{e^{ikr}}{r}\left(1 - i\mbf k\cdot \mbf
+r'\right)$$</span> Substituting into equation <a href="#eqn:integral se"
+data-reference-type="ref" data-reference="eqn:integral se">[eqn:integral
+se]</a> with the free solution <span
+class="math inline"><em>ψ</em><sub>0</sub> = <em>e</em><sup><em>i</em><em>k</em><em>z</em></sup></span>
+reads</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:far born
+integral}
+
+    \psi(\mathbf{r}) \approx e^{ikz} -
+    \dfrac{m}{2\pi \hbar^2} \dfrac{e^{ikr}}{r}\int e^{-i\mathbf{k\cdot
+r'}}
+    V(\mathbf{r}')\psi(\mathbf{r}')\, d^3\mathbf{r}'
+
+\end{aligned}$$</span> Equation <a href="#eqn:far born integral"
+data-reference-type="ref"
+data-reference="eqn:far born integral">[eqn:far born integral]</a> is
+“exact” to the first order in <span
+class="math inline"><em>r</em>′/<em>r</em></span>, so it is actually
+exact for the purposes of calculating the scattering amplitudes, which
+are at asymptotically large <span class="math inline"><em>r</em></span>.
+Equation <a href="#eqn:far born integral" data-reference-type="ref"
+data-reference="eqn:far born integral">[eqn:far born integral]</a>
+standard form of the eigenstate in the radiation zone. Recall from <a
+href="#eqn:radiation state" data-reference-type="ref"
+data-reference="eqn:radiation state">[eqn:radiation state]</a> that the
+scattering amplitudes are the coefficients of <span
+class="math inline"><em>A</em><em>e</em><sup><em>i</em><em>k</em><em>r</em></sup>/<em>r</em></span>
+at large <span class="math inline"><em>r</em></span>, we can read off
+their <em>exact</em> values</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:wave amplitude
+equation}
+
+    f(\theta, \phi) = -\dfrac{m}{2\pi \hbar^2A}\int e^{-i\mathbf{k\cdot
+r'}}V(\mathbf{r}')\psi(\mathbf{r}')d^3\mathbf{r}'
+
+\end{aligned}$$</span> Note that the right hand side contains <span
+class="math inline"><em>ψ</em></span> so this is not a closed form. The
+Born approximation assumes that the incoming wave is not substantially
+altered by the scattering, so <span
+class="math display"><em>ψ</em>(<strong>r</strong>′) ≈ <em>ψ</em><sub>0</sub>(<strong>r</strong>′) = <em>A</em><em>e</em><sup><em>i</em><em>k</em><em>z</em>′</sup> = <em>A</em><em>e</em><sup><em>i</em><strong>k</strong>′ ⋅ <strong>r</strong>′</sup>,  <strong>k</strong>′ = <em>k</em><em>ẑ</em></span>
+This yields the first Born approximation for scattering amplitudes. The
+following holds when <em>the incident energy is large compared to the
+potential</em>.</p>
+<div class="mdframed">
+<p><span class="math display">$$\begin{aligned}\label{eqn:first born
+approximation}
+
+    f(\theta, \phi) \approx -\dfrac{m}{2\pi \hbar^2}
+    \int e^{i\mathbf{(k' - k)\cdot r'}}V(\mathbf{r}')d^3\mathbf{r}',
+\quad \mathbf{k}' = k\hat z, \mathbf{k} = k\hat r_{\theta, \phi}
+
+\end{aligned}$$</span></p>
+</div>
+<p>Note that <span class="math inline"><strong>k</strong>′</span> points
+in the direction of the incident beam, while <span
+class="math inline"><strong>k</strong></span> points in the scattering
+direction. Additionally, <em>when the energy of the incident beam is
+low</em> so that the wavelength is large compared to the scattering
+region, <span
+class="math inline"><em>e</em><sup><em>i</em><strong>(</strong><strong>k</strong><strong>−</strong><strong>k</strong><strong>′</strong><strong>)</strong> <strong>⋅</strong> <strong>r</strong><strong>′</strong></sup></span>
+is essentially constant over <span
+class="math inline"><strong>r</strong>′</span> for which <span
+class="math inline"><em>V</em>(<strong>r</strong>′)</span> is
+significant, in which case</p>
+<p><span class="math display">$$\begin{aligned}\label{eqn:low energy
+born approx}
+
+    f(\theta, \phi) \approx -\dfrac{m}{2\pi \hbar^2}\int
+V(\mathbf{r}')\, d^3\mathbf{r}'
+
+\end{aligned}$$</span> When the potential is spherically symmetric, the
+first Born approximation <a href="#eqn:first born approximation"
+data-reference-type="ref"
+data-reference="eqn:first born approximation">[eqn:first born
+approximation]</a> may be explicitly evaluated. The following equation
+does not require low incident energy, only the Born condition that the
+incident energy is large compared to the potential.</p>
+<div class="mdframed">
+<p><span class="math display">$$\begin{aligned}\label{eqn:spherical low
+energy born approx}
+
+        f(\theta) \approx -\dfrac{2m}{\hbar^2\kappa} \int_0^\infty
+rV(r)\sin(\kappa r)\, dr,
+        \quad \kappa = 2k\sin(\theta/2)
+    
+\end{aligned}$$</span></p>
+</div>
+</body>
+</html>

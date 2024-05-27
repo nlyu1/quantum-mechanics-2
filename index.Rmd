@@ -1,0 +1,60 @@
+---
+title: "Quantum Mechanics II"
+author: "Nicholas Lyu"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+# bibliography: [refs.bib]
+biblio-style: "numeric"
+split_bib: yes
+link-citations: true
+---
+
+\usepackage{cancel}
+\newcommand{\pd}[1]{\partial_{#1}}
+
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mbf}{\mathbf}
+\newcommand{\mrm}{\mathrm}
+\newcommand{\mca}{\mathcal}
+\newcommand{\mfk}{\mathfrak}
+
+\newcommand{\tr}{\mrm{tr}} 
+\newcommand{\df}{\dfrac}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\dag}{\dagger}
+
+\newcommand{\Cl}{\mca C}
+\newcommand{\Gr}{\mca G}
+\newcommand{\Pf}{\mrm{Pf}}
+\newcommand{\Pa}{\mca P}
+
+\newcommand{\poly}{\mrm{poly}}
+
+\newcommand{\hb}{\hbar}
+\newcommand{\intf}{\int_{-\infty}^\infty}
+\newcommand{\ang}[1]{\left\la #1 \right\ra}
+
+
+
+# Preface {-}
+These notes document fall 2023 iteration of Harvard's second-semester 
+undergraduate quantum mechanics, Physics 143b, taught by Sonia Paban. 
+The course includes a brief introduction to path integrals, 
+followed by perturbation theory applied 
+to hydrogen energy levels, then quantum dynamics, WKB approximation, 
+and scattering. 
+
+These notes deviate from the course material by 
+
+- a section on symmetry and conservation laws, adapted from Griffiths. 
+- an interaction-picture explanation of time-dependent perturbation theory, 
+        adapted from MIT's online lecture notes. 
+- the adiabatic theorem from Weinberg's \textit{Lectures on Quantum Mechanics}. 
+
+A note on notations: $d/dx, \partial /\partial x$ are abbreviated $d_x, \pd x$. 
+Summation over a free index which does not appear on the left hand side are occasionally 
+omitted to reduce clutter. 
+Function arguments are occasionally integerchanged with subscripts 
+to reduce clutter. 

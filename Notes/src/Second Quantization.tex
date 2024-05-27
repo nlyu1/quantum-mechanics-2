@@ -1,0 +1,142 @@
+\section{Second Quantization}
+This section uses Chapter 2 of~\cite{altland2010condensed} 
+available \href{https://www.tcm.phy.cam.ac.uk/~bds10/tp3/secqu.pdf}{here} and 
+these \href{https://ethz.ch/content/dam/ethz/special-interest/phys/theoretical-physics/cmtm-dam/documents/qg/Chapter_05-06.pdf} 
+{lecture notes} from ETH. 
+
+Particles belong to one of two indistinguishable classes: fermions or bosons, which are 
+antisymmetric and symmetric under particle exchange, respectively. Instead of explicitly 
+symmetrizing a wave function, we can instead adapt our mathematical formulation to 
+inherently account for indistinguishability and even varying number of particles. 
+
+\begin{definition}[occupation number state]
+    The occupation number state $|n_1, \cdots\ra$ denotes $n_i$ fermion or bosons 
+    in level $i$. The total number of particles is given by 
+    \[ 
+        N = \sum n_i 
+    \] 
+    The space of all occupation number states for all $N$ is called Fock space. 
+    Explicitly, let $S_\pm$ denote the (anti)-symmetrizer 
+    \[ 
+        S_\pm |i_1, \cdots, i_N\ra = \df 1 {N!} \sum_{P\in S_N} \sgn(P)\,  P|i_1, \cdots, i_N\ra 
+    \] 
+    the occupation state is $|n_1, \cdots\ra_{\pm} = S_\pm |i_1, \cdots, i_N\ra$ 
+\end{definition}
+\begin{proposition}
+    $\la n_1, \cdots|n'_1\cdots\ra = \prod \delta_{n_i, n'_i}, \quad 
+    \sum_{n_1, \cdots}|n_1, \cdots\ra \la n_1, \cdots| = 1$
+\end{proposition}
+\begin{definition}[creation and annihilation operators]
+    The creation and annihilation operators $a_i^\dag, a_i$ of a particle 
+    in level $i$ is defined to be 
+    \malign{
+        a_i^\dag |\cdots, n_i, \cdots\ra = \sqrt{n_i+1}|\cdots, n_i+1, \cdots\ra \\ 
+        a_i|\cdots, n_i+1, \cdots\ra = \sqrt{n_i+1}|\cdots, n_i, \cdots\ra 
+    }
+    the second equation follows from the first by the adjoint definition. 
+\end{definition}
+\begin{theorem}[commutation relations]
+    Consistent symmetrization implies 
+    \begin{flalign*}
+        && [a_i, a_j] &= [a_i^\dag, a_j^\dag] = 0, \quad [a_i, a_j^\dag] = \delta_{ij}I && \text{(bosons)} \\ 
+        && \{a_i, a_j\} &= \{a_i^\dag, a_j^\dag\} = 0, \quad \{a_i, a_j^\dag\} = \delta_{ij}I && \text{(fermions)}
+    \end{flalign*}
+    They are called the canonical commutation relations (CCRs). 
+
+    \prf we consider the fermions first. Given $|n_1, \cdots\ra=S_-|i_1, \cdots, i_N\ra$, we have 
+    \malign{
+        a_k^\dag a_j^\dag |n_1, \cdots\ra &= S_-|i_1, \cdots, i_N, j, k\ra  \\ 
+        a_j^\dag a_k^\dag |n_1, \cdots\ra &= S_-|i_1, \cdots, i_N, k, j\ra 
+    }
+    Now they differ by a sign since $|i_1, \cdots, i_N, j, k\ra, |i_1, \cdots, i_N, k, j\ra$ 
+    differ by a transposition $(N+1, N_2)$, so $\{a_i^\dag, a_j^\dag\}=0$. 
+    Further note that antisymmetrization annihilates a vector if it contains any duplicate 
+    basis, so $n_i=0, 1$. We omit the rest of the proof. 
+\end{theorem}
+\textbf{todo}
+\begin{corollary}
+    For fermions, the CCRs imply 
+    \begin{flalign*}
+        && a_j^2 = (a_j^\dag)^2 = 0,& \quad a_ja_j^\dag = I - a_j^\dag a_j \\ 
+        && a_ja_k^\dag = -a_k^\dag a_j,& \quad a_ja_k = -a_ka_j && j\neq k
+    \end{flalign*}
+    For bosons, 
+    \begin{flalign*}
+        a_ja_j^\dag = I + a_j^\dag a_j, \quad a_ja_k^\dag = a_k^\dag a_j, \quad a_ja_k = a_ka_j
+    \end{flalign*}
+\end{corollary}
+Let $V$ be the Hilbert space of one particle, then the occupation (Fock) space 
+is $\mca F \cong V^0\oplus V^1\oplus V^2\oplus \cdots$. 
+\begin{definition}[vacuum and general states]
+    The vacuum state, denoted $|0\ra$ or $|\Omega\ra$, is the state annihilated by all annihilation operators. 
+    One can also explicitly write out the occupation number state, for $\zeta=\pm 1$ denoting bosons 
+    and fermions, respectively 
+    \[ 
+        |(n_i)\ra = \df 1 {\sqrt{\prod (n_i!)}} \left[\prod (a_i^\dag)^{n_i}\right]|\Omega\ra 
+    \] 
+\end{definition}
+\begin{corollary}
+    Pauli exclusion principle: for fermions $(a_i^\dag)^2=0$.  
+    No single particle state can be occupied by more than one fermion. 
+\end{corollary}
+\begin{definition}[occupation number operator]
+    the occupation number operator is the Hermitian operator defined by 
+    \[ 
+        N_i = a_i^\dag a_i, \quad N_i|(n_i)\ra = n_i |(n_i)\ra 
+    \] 
+    For both fermions and bosons, it satisfies 
+    \[ 
+        N_j (a_j^\dag)^n|\Omega\ra = n (a_j^\dag)^n|\Omega\ra, \quad [N_j, a_{k\neq j}^{(\dag)}]=0
+    \] 
+    The total particle number operator is 
+    \[ 
+        N = \sum a_i^\dag a_i 
+    \] 
+\end{definition}
+Note that the level index $i$ implicitly assumes a basis (e.g. position or momentum, 
+or spin along a particular direction). Suppose we wish to change into another basis $j$. 
+\begin{proposition}
+    change of basis formula $a^\dag_j = \la i|j\ra a_i^\dag, a_j = \la j|i\ra a_i$. 
+
+    \prf note that single kets $|i\ra = a_i^\dag |\Omega\ra$. Then $|j\ra = a_j^\dag|\Omega\ra $, then 
+    \[ 
+        |j\ra = \la i|j\ra |i\ra = \la i|j\ra (a_i^\dag |\Omega) = a_j^\dag |\Omega\ra 
+    \] 
+\end{proposition}
+\begin{proposition} the second quantization of a single-particle operator $O\in \End(V)$ is 
+    \[ 
+        O = \la i|O|j\ra a_i^\dag a_j 
+    \] 
+    
+    \prf 
+    Suppose $O$ is a single-particle operator with eigenbasis $o_\lambda, |\lambda\ra$. 
+    In the second-quantization scheme, it has the representation 
+    \[ 
+        O = o_\lambda n_\lambda 
+    \] 
+    In other words, it counts how many particles are in each of the $|\lambda\ra$ eigenstates and 
+    assigns the proper weights to them. Using a change of basis into arbitrary basis indexed by $i$ 
+    or $j$ 
+    \[ 
+        o_\lambda n_\lambda 
+        = \la \lambda|O|\lambda\ra a_\lambda^\dag a_\lambda 
+        = \la \lambda|O|\lambda\ra \la i|\lambda\ra \la \lambda |j\ra a_i^\dag a_j \\ 
+        = \la i|O|j\ra a_i^\dag a_j 
+    \] 
+\end{proposition}
+We next consider the second quantization of two-body interaction operators. 
+\begin{proposition}
+    $V = \la i, j|V|k, l\ra a_i^\dag a_j^\dag a_ka_l$ 
+\end{proposition}
+\begin{definition}[field operators]
+    Let $|\br\ra$ denote a particle localized at $\br$. This constitutes a special 
+    basis. Given creation and annihilation operators in some basis indexed by $i$, denote 
+    \[ 
+        \la \br|i\ra = \phi_i(\br)
+    \] 
+    the creation and annihilation operators in the position basis, are called 
+    the field operators 
+    \[ 
+        \hat \psi^\dag(r) = \phi_i^*(\br)a_i^\dag 
+    \] 
+\end{definition}

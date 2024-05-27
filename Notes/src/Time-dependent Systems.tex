@@ -1,0 +1,573 @@
+\section{Time-dependent Systems}
+
+Consider quantum systems whose Hamiltonian may be time-dependent. 
+For most systems, the Hamiltonian consists of a solvable time-independent $H^0$ and 
+a time-dependent $H'(t)$. 
+\[ 
+    H(t)=H^0+H'(t)
+\] 
+When $H'(t)$ is weak compared to $H^0$, we may resort to 
+time-dependent perturbation theory. 
+Consider $H^0$ with eigenstates $\psi_a, \psi_b$ and energy $E_a, E_b$. 
+For an arbitrary state, 
+\[ 
+    |\psi\ra = \sum c_n|n\ra 
+\] 
+The time-evolution of a state under $H^0+H'(t)$ is 
+\begin{equation}\label{eqn:time-dependent solution}
+    |\psi(t)\ra = \sum c_n(t) \exp\left(-\df i \hb E_n t\right) |n\ra 
+\end{equation}
+In general, $c_n(t)$ are time-dependent and only constantly $1$ when $\pd t H'(t) = 0$. 
+The probability of finding state in $|n\ra$ at time $t$ is $|c_n(t)|^2$, 
+which are subject to normalization 
+\[ 
+    \sum |c_n(t)|^2 = 1
+\] 
+Consider the Schrödinger equation for this system 
+\begin{equation}\label{eqn:time-dependent Schrodinger}
+    \pd t |\psi(t)\ra = -\df i \hb \left[H^0+H'(t)\right] |\psi(t)\ra
+\end{equation}
+Substituting equation~\ref{eqn:time-dependent solution} yields 
+\[ \begin{aligned}
+    i \hb \pd t \left[\sum c_n(t) \exp\left(-\df i \hb E_n t\right) |n\ra \right] &= 
+        \left[H^0 + H'(t)\right]\left[\sum c_n(t) \exp\left(-\df i \hb E_n t\right) |n\ra \right] \\ 
+\end{aligned}\] 
+Expanding the left hand side (we suppress summation to avoid clutter) 
+\[ 
+    i \hb \pd t \left[c_n(t) \exp\left(-\df i \hb E_n t\right) |n\ra \right] =
+    i\hb \dot c_n \exp\left(-\df i \hb E_nt\right)|n\ra 
+        + E_n c_n \exp\left(-\df i \hb E_nt\right)|n\ra
+\] 
+On the right hand side, the first term cancels with the last term on the left hand side above 
+\[ 
+    H^0\left[c_n(t) \exp\left(-\df i \hb E_n t\right) |n\ra \right] 
+        = E_n c_n \exp\left(-\df i \hb E_nt\right)|n\ra
+\] 
+The equation we're left with cannot be directly isolated component-wise for $n$ 
+because $H'(t)$ is not generally diagonal. 
+\begin{equation}
+    \sum_n H'(t)c_n(t)\exp\left(-\df i \hb E_nt\right)|n\ra = \sum_n i \hb \dot c_n \exp\left(-\df i \hb E_nt\right)|n\ra
+\end{equation}
+To isolate $\dot c_m$, apply $\la m|$ and denote the matrix element $H'_{mn}(t)=\ang{m|H'(t)|n}$. 
+\[
+    \sum_n H'_{mn} \exp\left(-\df i \hb E_nt\right) c_n = i\hb \dot c_m \exp\left(-\df i \hb E_mt\right)
+\] 
+Let $\omega_{nm} = (E_n - E_m)/\hb$, the Schrodinger equation~\ref{eqn:time-dependent Schrodinger} 
+may be rewritten exactly as a system of $n$ coupled first-order differential equations
+\begin{equation}\label{eqn:time-dependent systems}
+    \dot c_n(t) = -\df i \hb \sum_m H'_{nm}(t) \exp\left(i \omega_{nm} t\right) c_m(t)
+\end{equation}
+
+
+
+\subsection{Interaction Picture}
+The following section is adapted from these 
+\href{https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2018/89ef6d5958ee59bae9a91345c3d8c8e4_MIT8_06S18ch4.pdf}
+{lecture notes} from MIT. 
+We may rephrase the derivation in the previous section more concisely 
+in terms of the interaction picture. 
+We adopt a frame in which the energy eigenstates of $H^0$, as they would normally evolve, 
+remains constant. Formally, consider the transform 
+\[\begin{aligned}
+    |\tilde \psi(t)\ra &= U(t)^\dag|\psi(t)\ra , \quad U(t) &= \exp\left(-\df i \hb H^0 t\right)
+\end{aligned}\] 
+Note that $[H^0, U(t)] = 0$, the Schrodinger equation transforms accordingly. 
+We use the subscript to denote time variable to reduce clutter: 
+\leqalign{eqn:transformed se'}{
+    \pd t |\tilde \psi_t\ra &= \pd t \left(U^\dag_t |\psi_t\ra \right)  
+    = \df i \hb H^0 |\tilde \psi_t\ra + U^\dag_t \left(\pd t |\psi_t\ra \right) \\ 
+    &= \df i \hb H^0 |\tilde \psi_t\ra - U^\dag_t \left[\df i \hb (H^0+H'_t)|\psi_t\ra \right] \\ 
+    &= \df i \hb H^0|\tilde \psi_t\ra - \df i \hb \left(U_t^\dag H^0 U_t\right)\left(U_t^\dag |\psi_t\ra\right) 
+        - \df i \hb \left(U_t^\dag H_t'U_t\right)\left(U_t^\dag |\psi_t\ra\right) \\ 
+    &= -\df i \hb \left(U_t^\dag H_t'U_t \right) U_t^\dag |\psi_t\ra = -\df i \hb \tilde H_t' |\tilde \psi_t\ra
+}
+This frame change eliminates $H^0$ and leaves only $\tilde H'_t=U_t^\dag H_t'U_t$. 
+Let $\{c_j(t)\}$ the expansion of the ket 
+in our new frame with respect to the eigenbasis $|\psi_{n}\ra$ of $H^0$
+\malign{
+    |\tilde \psi_t\ra = \sum c_n(t) |\psi_{n}\ra 
+}
+These are exactly the de-wiggled coefficients we have introduced in the previous section. 
+We can recover the evolution of the ket in our original frame by 
+$|\psi_t\ra = U_t|\tilde \psi_t\ra$ by $U_t$, which 
+is diagonal in this eigenbasis 
+\[ 
+    |\psi_t\ra = U_t \sum c_n(t)|\psi_n\ra  = \sum e^{-iE_nt/\hb} c_n(t)|\psi_n\ra 
+\] 
+In terms of this concrete basis, the Schrodinger equation~\ref{eqn:transformed se'} reads 
+\[ 
+    \dot {\tilde c}_n(t) = \la \psi_n| \left(\pd t |\tilde \psi_t\ra \right)
+    = -\df i \hb \sum_m \tilde c_m(t) \la \psi_n|\tilde H'_t|\psi_m\ra 
+\] 
+We can simplify the matrix element by noting that 
+\[ 
+    \la \psi_n|\tilde H'_t|\psi_m\ra = \la \psi_n|e^{iH^0t/\hb}H'_te^{-iH^0t/\hb}|\psi_m\ra 
+    = e^{i(E_n - E_m)t/\hb} H'_{nm}(t)
+\] 
+This leaves us equation~\ref{eqn:time-dependent systems}. 
+\subsection{Time-Dependent Perturbation Theory}
+So far everything is exact. To obtain a perturbative solution, introduce 
+$\lambda$ and assume that $|\tilde \psi_t\ra$ can be expanded in $\lambda$:
+\[\begin{aligned}
+    H_t &= H^0 + \lambda H'_t \\ 
+    |\tilde \psi_t\ra &= |\tilde \psi^0_t\ra + \lambda |\tilde \psi^1_t\ra + 
+        \lambda^2|\tilde \psi^2_t\ra + \cdots \\ 
+    \pd t |\tilde \psi_t\ra &= -\df i \hb \lambda \tilde H'_t|\tilde \psi_t\ra 
+\end{aligned}\] 
+Equating by powers of $\lambda$, the time-derivative of $n$-th component is coupled to 
+$H'_t$ acting on $(n-1)$-th component. 
+\begin{equation}\begin{aligned}\label{eqn:time-dependent perturbation}
+    \pd t |\tilde \psi^0_t\ra &= 0 \\ 
+    \pd t |\tilde \psi^1_t\ra &= -\df i \hb \tilde H'_t|\psi^0_t\ra \\ 
+    \vdots \quad &= \quad \vdots \\ 
+    \pd t |\tilde \psi^{n+1}_t\ra &= -\df i \hb \tilde H'_t|\psi^n_t\ra 
+\end{aligned}\end{equation}
+Our interacting picture transform degenerates to the identity at $t=0$. 
+Equating the power series approximation, which holds for all $\lambda$, 
+yields the initial conditions 
+\begin{equation}\begin{aligned}
+    |\psi_0\ra &= |\tilde \psi^0_0\ra + \lambda |\tilde \psi^1_0\ra + \cdots \\ 
+    |\tilde \psi^0_0\ra &= |\tilde \psi_t^0\ra = |\psi_0\ra \\ 
+    |\tilde \psi^n_\sim\ra &= 0, \quad n>0
+\end{aligned}\end{equation}
+An initial state $|\psi_0\ra$ gives us the constant $(n=0)$-th order solutions $|\tilde \psi^0_t\ra$. 
+in the transformed frame, $|\tilde \psi_0\ra$ is constant, i.e. the zeroth order 
+solution evolves only according to $H^0$. 
+Using the zero initial condition, 
+The following terms in equation~\ref{eqn:time-dependent perturbation} is solved by 
+succesive integration. 
+\begin{equation}\begin{aligned}
+    |\tilde \psi_t^1\ra &= -\df i \hb \int_0^t H'_{t'} |\psi_{t'}^0\ra \, dt' \\ 
+    |\tilde \psi_t^2\ra &= -\df i \hb \int_0^t H'_{t'} |\psi_{t'}^1\ra \, dt'
+    = -\df i \hb \int_0^t H'_{t'} \left(-\df i \hb \int_0^{t'} H'_{t''} |\psi_{t''}^0\ra \, dt''\right) \, dt' \\ 
+    &= -\df 1 {\hb^2}\int_0^t H'_{t'}\int_0^{t'} H'_{t''} |\psi_{t''}^0\ra \, dt''\, dt' \\ 
+    |\tilde \psi_t^3\ra &= -\df i \hb \int_0^t H'_{t'}|\psi_{t'}^2\ra\, dt' = \cdots 
+\end{aligned}\end{equation}
+In concrete terms, consider an initial state $|\psi_0\ra$. 
+We first consider the Fourier expansion of a ket $|\tilde \psi_t\ra$ in the 
+transformed frame in terms of the eigenstates of $H^0$. 
+\[ 
+    |\tilde \psi_t\ra = \sum_k |\tilde \psi_t^k\ra = \sum_{k, j} \tilde c_j^k(t) |j\ra 
+\] 
+They are related to the Fourier expansion of $|\psi_t\ra$ in the original frame via 
+\[ 
+    \tilde c_j^k(t) = \exp\left(-\df i \hb E_j t\right)c_j^k(t)
+\] 
+In concrete components, the zeroth order correction is the constant initial condition. 
+\[\begin{aligned}
+    |\tilde \psi^0_t\ra &= \sum \tilde c_j^0(t) |j\ra = \sum \exp\left(-\df i \hb E_j t\right) c_j^0 |j\ra \\ 
+    |\psi_t^0\ra &= \exp\left(\df i \hb H^0 t\right)|\tilde \psi_0\ra = |\psi_0\ra 
+\end{aligned}\] 
+Introduce $\omega_{kj} = \exp(i(E_k-E_j)/\hb)$, the first-order components read 
+\[\begin{aligned}
+    \tilde c_k^1(t)
+    &= \la k|\tilde \psi_t^1\ra 
+        = -\df i \hb \la k |\int_0^t H'_{t'}  \sum \exp\left(-\df i \hb E_j t\right) c_j^0 |j\ra \, dt' \\ 
+        &= -\df i \hb \sum_j \int_0^t \la k|H'_{t'}|j\ra \exp\left(-\df i \hb E_j t\right) c_j^0\, dt' \\ 
+    c_k^1 &= -\exp\left(\df i \hb E_k t \right) \tilde c_k^1(t) \\
+    &= -\exp\left(\df i \hb E_k t \right)\df i \hb \sum_j \int_0^t \la k|H'_{t'}|j\ra \exp\left(-\df i \hb E_j t\right) c_j^0\, dt' \\ 
+    &= -\df i \hb \sum_j c_j(0) \int_0^t \la k|H'_{t'}|j\ra \exp(i\omega_{kj})\, dt'
+\end{aligned}\] 
+The second-order components read 
+\[\begin{aligned}
+    \tilde c_k^2(t)
+    &= \la k|\tilde \psi_t^2\ra = -\df 1 {\hb^2}\int_0^t \la k| H'_{t'}\int_0^{t'} H'_{t''} |\psi_{t''}^0\ra \, dt''\, dt'\\ 
+    &= -\df 1 {\hb^2}\sum_j \int_0^t \la k| H'_{t'}|j\ra \int_0^{t'} \la j|H'_{t''} |\psi_{t''}^0\ra \, dt''\, dt'\\ 
+    &= -\df 1 {\hb^2}\sum_{j, l} \int_0^t \la k| H'_{t'}|j\ra \int_0^{t'} \la j|H'_{t''} \exp\left(-\df i \hb E_l t\right) c_l^0|l\ra  \, dt''\, dt'\\ 
+    c_k^2(t) &= -\exp\left(\df i \hb E_k t \right) \tilde c_k^2(t) \\
+    &= -\df 1 {\hb^2}\sum_{j, l} \int_0^t \exp\left(\df i \hb (E_k-E_j+E_j) t \right) \la k| H'_{t'}|j\ra \int_0^{t'} 
+        \exp\la j|H'_{t''} \exp\left(-\df i \hb E_l t\right) c_l^0|l\ra  \, dt''\, dt'\\ 
+    &= -\df 1 {\hb^2}\sum_{j, l} c_l(0) \int_0^t \exp(i\omega_{kj}t)\la k| H'_{t'}|j\ra \int_0^{t'} \exp(i\omega_{jl}t)\la j|H'_{t''} |l\ra  \, dt''\, dt'\\ 
+\end{aligned}\] 
+Taken together and let $H'_{ab}(t) = \la a|H'(t)|b\ra$, the second-order approximation is 
+\leqalign{eqn:sec_order_time_perturbation}{
+    c_k(0) &-\df i \hb \sum_j c_j(0) \int_0^t H'_{kj}(t') \exp(i\omega_{kj}t)\, dt' \\ 
+    &-\df 1 {\hb^2}\sum_{j, l} c_l(0) \int_0^t \exp(i\omega_{kj}t) H'_{kj}(t') \int_0^{t'} \exp(i\omega_{jl}t)H'_{jl}(t'')\, dt''\, dt'
+}
+Griffiths forgoes the polynomial picture altogether. 
+Substitute $c_m(t)=c_m(0)$ into 
+the right hand side of equation~\ref{eqn:time-dependent systems} to obtain 
+the first order coefficients (not corrections)
+\begin{equation}\label{eqn:first-order coefficient}
+    c_n^{(1)}(t) = c_n(0) - \df i \hb \sum_m c_m(0)\int_0^t H'_{nm}(t')\exp(i\omega_{nm}t')\, dt'
+\end{equation}
+For the second-order, 
+substitute $c_m(t)$ in equation~\ref{eqn:first-order coefficient} into~\ref{eqn:time-dependent systems}. 
+
+We wish to emphasize the theme of polynomial approximation in perturbation theory, 
+even in time-dependent systems. 
+We start by introducing a tilde frame which eliminates $H^0$ and 
+assuming that time-evolution in this frame is expandable in succesive powers of $\lambda$. 
+In this frame, the zeroth order solution is constant, and higher-order corrections are coupled 
+to the perturbative action of $H'$ on the immediately lower order. We switch back to the original 
+frame after performing the polynomial approximation. 
+
+
+\subsection{Sinusoidal Perturbations}
+Consider a two-level system with sinusoidal perturbation 
+\leqalign{eqn:sinusoidal_perturb}{
+    H'(r, t) &= V(r)\cos \omega t \\ 
+    H'_{ab}(t) &= \la \psi_a | V |\psi_b\ra \cos\omega t = V_{ab}\cos \omega t
+}
+Assuming initial level $a$ and that diagonal matrix elements vanish, to 
+the first order in \ref{eqn:sec_order_time_perturbation}
+\[\begin{aligned}
+    c_b(t) 
+    &= -\df i \hb V_{ba}\int_0^t \cos\omega t \exp(i\omega_{ba}t)\, dt'\\ 
+    &= -\df {i V_{ba}}{2\hb} \int_0^t \left[\exp(i(\omega_0 + \omega) t') + \exp(i(\omega_0 - \omega)t')\right]\, dt' \\ 
+    &= -\df {V_{ba}}{2\hb}\left[\df{\exp(i(\omega_0 + \omega)t) - 1}{\omega_0 + \omega} + \df{\exp(i(\omega_0 - \omega)t) - 1}{\omega_0 - \omega}\right]
+\end{aligned}\] 
+Far-detuned frequency have negligible transition rates. Assuming $\omega_0 + \omega \gg |\omega_0 - \omega|$. 
+Drop the first term. Let $\Delta_\omega = \omega_0 - \omega$ 
+\malign{
+    c_b(t) 
+    &\approx -\df {V_{ba}}{2\hb} \df{\exp(i\Delta_\omega t/2)}{\Delta_\omega }
+        \left[\exp(i\Delta_\omega t/2) - \exp(-i\Delta_\omega t/2)\right] \\ 
+    &= -i\df {V_{ba}}{\hb} \df{\sin\left(\Delta_\omega t/2\right)}{\Delta_\omega } e^{i\Delta_\omega t/2}
+}
+The following transition probability should be trusted for $\omega_0 + \omega \gg |\omega_0 - \omega|$ and 
+relatively small probability. The most significant feature is flopping. 
+\leqalign{eqn:flopping}{
+    P_{a\to b}(t)\approx \df{|V_{ab}|^2}{\hb^2} 
+        \df{\sin^2\left(\Delta_\omega t/2\right)}{\Delta_\omega^2}
+}
+\subsection{Rabi Flopping}
+Sinusoidal perturbation may be solved exactly if we begin by approximating 
+\[ 
+    H'(r, t) = V(r)\cos(\omega t) \to \df V 2 e^{-i\omega t}
+\] 
+Here, we ignore the $e^{i\omega t}$ earlier: in the Hamiltonian instead of as a perturbed term. 
+The perturbation under this approximation is not Hermitian, but it allows us to solve 
+equation~\ref{eqn:time-dependent systems}. 
+Again, consider a two-level system with 
+$\omega_0 = (E_b - E_a)/\hb>0$ starting out in state $a$, then 
+\[
+    \dot c_a(t) = -\df i \hb H'_{ab}(t)e^{-i\omega_0 t} c_b(t)
+    ,\quad \dot c_b(t) = -\df i \hb H'_{ba}(t)e^{i\omega_0 t}c_a(t)
+\] 
+We assume again that diagonal matrix elements vanish. 
+Take another derivative of the equations above to uncouple $c_a, c_b$. 
+
+\subsection{Interaction with EM waves}
+% Consider an EM wave incident on a hydrogenic atom: 
+% \[\begin{aligned}
+%     H &= \df 1 {2m}\left(-i\hb \nabla - qA\right)^2 + \Phi q + V_{\mrm{Coulomb}}(r)  \\ 
+%         &= \df 1 {2m}\left(p - qA\right)^2 + \Phi q + V_{\mrm{Coulomb}}(r) 
+% \end{aligned}\] 
+% Choose the Coulomb gauge 
+% \[\begin{aligned}
+%     \nabla\cdot A &= 0 \\ 
+%     \Phi(r, t) &= 0
+% \end{aligned}\] 
+% Recall the electric component of constant-polarization monochromatic light propagating in 
+% direction $k$ with polarization along $E_0$: 
+% \[ 
+%     E(r, t) = E_0 e^{i(k\cdot r - \omega t)}
+% \] 
+% For a (constant-polarization) plane wave with polarization along $A_0$ propagating along $r$
+% \[ 
+%     A = \mrm{Re}\left[A_0 \, e^{i(k\cdot r - \omega t)}\right]
+% \] 
+% Now $k\cdot E_0 = 0$. Also recall that 
+% \[ 
+%     E = -\nabla \Phi - \pd t A
+% \] 
+% Under the Coulomb gauge, $E_0\|A_0$. In particular, $E_0 = \df \omega 2 A_0 i$. 
+
+% For the Coulomb gauge, $[A, p] = 2 A p$, expand out the Hamiltonian to obtain 
+
+% The Hamiltonian expands to (recall that we're focused on the reals!)
+% \[ 
+%  H = \left(\df {p^2}{2m} + V(r)\right) +
+%      \df e {2m} \left[e^{i(k\cdot r - \omega t)}A_0
+%         + e^{-i(k\cdot r - \omega t)}\bar A_0\right] p 
+% \] 
+% Let $a$ denote the full set of quantum numbers $n, l, m, m_s$. 
+
+% We wish to consider how a plane wave interacts with an electron in 
+% a special state $a$. Consider $c_b(t), b\neq a$. According to the perturbation equation 
+% and our initial conditions,
+% \[ 
+%     c_b(t) = - \df i \hb c_a(i)\int_0^t dt' H'_{ba}(t') \exp(i\omega_{ba}t')
+% \] 
+% We first compute the matrix element. Recall the expanded Hamiltonian 
+% \[\begin{aligned}
+%     H'_{ba}(t) 
+%     &= \ang{b|H'(t)|a} \\ 
+%     &= \int d^3r\, \psi^*_b(r)H'_t(r)\psi_a(r) \\ 
+%     &= \df e {2m}\int d^3r\, \psi^*_b(r) \left[e^{i(k\cdot r - \omega t)}A_0
+%         + e^{-i(k\cdot r - \omega t)}\bar A_0\right] p\, \psi_a(r)
+% \end{aligned}\] 
+% In the limit $\lambda \gg a_B$, the electromagnetic wave is locally constant. Recall 
+% that $k = 2\pi / \lambda$. We can expand $e^{i(k\cdot r - \omega t)}$ in terms of $r$ and 
+% only take the first order. 
+% \[ 
+%     e^{ik\cdot r} = 1
+% \] 
+% The integral simplifies to 
+% \[\begin{aligned}
+%     H'_{ba}(t) 
+%     &= \df e {2m}\int d^3r\, \psi^*_b(r) \left[e^{- i\omega t}A_0
+%         + e^{i \omega t}\bar A_0\right] p\, \psi_a(r)
+% \end{aligned}\] 
+% Now, to help us compute the integral \textbf{(prove this!!)}
+% \[ 
+%     \left[r, \df{p^2}{2m}\right] = \df 1 {2m} \sum\left([r_i, p_i]p_i + p_i[r_i, p_i]\right) = \df{i\hb}{m}p
+% \] 
+% Replace $p=\df m {i\hb} [r, H_0]$ into the equation above 
+% \[ \begin{aligned}
+%     H'_{ba}(t) 
+%     &= \df{e}{2i\hb}\int d^3 r \psi_b^*(r)
+%         \left[\exp^{-i\omega_{ba}t}A_0 r (E_a - E_b) + c.c\right]\psi_a(r)  \\ 
+%     &= \df{i\omega_{ba}}{2}A_0 \la b |e\, r|a\ra \left[\exp(-i\omega_{ba}t) + \exp(i\omega_{ba}t)\right] \\ 
+%     &= i\omega_{ba}A_0 \ang{b|e\, r|a}\mrm{Re}\left(e^{i\omega_{ba}t} + e^{-i\omega_{ba}t}\right)
+% \end{aligned}\] 
+Consider a monochromatic electromagnetic wave incident upon a hydrogenic atom. 
+When its wavelength is long compared to the Bohr radius, to the first order of this ratio, 
+the atom effectively acts as a dipole within a sinusoidally oscillating electric field: 
+\[ 
+    H' = -q E_0 z\cos \omega t
+\] 
+Then the matrix element for the perturbation reads 
+\[ 
+    H'_{ba}(t) = -q\la \psi_b|z|\psi_a\ra E_0\cos \omega t
+\] 
+
+
+\subsubsection{Absorption, Stimulated Emission}
+The selection rule for spatial 
+components dictate $\Delta l = \pm 1$, so diagonal matrix elements for $H'$ always vanish.
+Equivalently, note that 
+$z|\psi|^2$ is odd in $z$. Then the problem is as in~\ref{eqn:sinusoidal_perturb} with 
+$V_{ba}=-q\la \psi_b|z|\psi_a\ra E_0$. Substitution into equation~\ref{eqn:flopping} yields 
+\leqalign{eqn:monochromatic transition}{
+    P_{a\to b}(t) = P_{b\to a}(t) = 
+    \left(\df{q\la \psi_a|z|\psi_b\ra E_0}{\hb}\right)^2
+        \df{\sin^2\left(\Delta_\omega t/2\right)}{\Delta_\omega^2}
+}
+Equal absorption and stimulation probability is by 
+the first-order formula~\ref{eqn:first-order coefficient}: 
+\[ 
+    H'_{nm} = \overline{H'_{mn}}, \quad \omega_{nm} = -\omega_{mn}
+\] 
+The transition probability $P_{a\to b}(t) = |c_b(t)|^2$, computed with 
+initial conditions $c_n(0) = \delta_{na}$. 
+
+
+\subsubsection{Spontaneous Emission}
+We first generalize the perturbation result from a monochromatic, polarized, 
+single-frequency electromagnetic wave to the general case. 
+Recall the energy density of electromagnetic wave
+\[
+    u = \df {\epsilon_0}{2}E_0^2
+\]
+Substitute $E_0$ with this equation into equation~\ref{eqn:monochromatic transition} 
+yields, for $V_{ab} = q\la \psi_a|z|\psi_b\ra$ 
+\[ 
+    P_{b\to a}(t) = \df{2u|V_{ab}|^2}{\epsilon_0 \hb^2} \cdot 
+        \df{\sin^2\left(\Delta_\omega t/2\right)}{\Delta_\omega^2}
+\] 
+Let $du=\rho(\omega)\, d\omega$ denote some distribution of energy-frequency density. 
+When the different components are phase-decorrelated (incoherent), we 
+can conveniently perform the integral over the probability instead of the amplitude, yielding 
+\[ 
+    P_{b\to a}(t) = \df{2|V_{ab}|^2}{\epsilon_0 \hb^2} 
+        \int_0^\infty d\omega\, \rho(\omega)\left[\df{\sin^2\left(\Delta_\omega t/2\right)}{\Delta_\omega^2}\right]
+\] 
+The bracket term is sharply peaked about $\omega = \omega_0$. 
+We pull $\rho(\omega)$ outside the integral 
+\[ 
+    P_{b\to a}(t) \approx \df{2|V_{ab}|^2}{\epsilon_0 \hb^2} \rho(\omega_0)
+    \int_0^\infty d\omega\, \left[\df{\sin^2\left(\Delta_\omega t/2\right)}{\Delta_\omega^2}\right]
+    =\df{\pi |V_{ab}|^2}{\epsilon_0 \hb^2}\rho(\omega_0)t
+\] 
+Note that integrating over an incoherent frequency spectrum gets rid of the flopping. 
+\begin{definition}[transition rate]
+    The transition rate between two levels is defined as 
+    \[ 
+        R_{b\to a} = \pd t P_{b\to a}
+    \] 
+\end{definition}
+The transition rate between two levels in an incoherent spectrum $\rho(\omega)$ with 
+uniform polarization and direction is 
+\[ 
+    R_{b\to a} = \df{\pi}{\epsilon_0\hb^2}|V_{ab}|^2 \rho(\omega_0)
+\] 
+Averaging over all propagation and polarization directions introduces a 
+factor of $1/3$ and $z\mapsto \mbf r$ since we are not restricted to the $z$ direction. 
+\begin{mdframed}
+\[ 
+    R_{b\to a} = \df{\pi}{3\epsilon_0\hb^2}q^2|\la \psi_a|\mbf r|\psi_b\ra|^2 \rho(\omega_0) 
+    = B\rho(\omega_0),\quad\quad B = \df{\pi q^2|\la \psi_b|\mbf r|\psi_a\ra|^2}{3\epsilon_0\hb^2}
+\] 
+\end{mdframed}
+Denote by $A$ the rate of particles leaving the higher energy level $B$ by spontaneous emission. 
+\malign{
+    d_t N_b 
+        &= -N_bA - N_b R_{b\to a} + N_a R_{a\to b} \\ 
+        &= -N_bA - N_b B \rho(\omega_0) + N_a B \rho(\omega_0) \\ 
+}
+In thermal equilibrium $d_tN_b=0$, $N_a/N_b = \exp(\hb \omega_0 / k_B T)$. 
+Planck radiation formula gives 
+\[ 
+    \rho(\omega_0) = \df A {(N_a/N_b - 1)B} = \df A {(e^{\hb \omega_0 / \tau} - 1)B} 
+        = \df{\hb \omega_0^3}{\pi^2c^3(e^{\hb\omega / \tau} - 1)}
+\] 
+This gives us the spontaneous emission coefficient 
+\begin{mdframed}
+\[ 
+    A = \df{\omega_0^3q^2|\la \psi_b|\mbf r|\psi_a\ra|^2}{3\pi \epsilon_0 \hb c^3}
+\] 
+\end{mdframed}
+Assuming only spontaneous emission along decay modes with rate coefficients
+$A_1, A_2, \cdots$ and no replenishing mechanism, the population obeys 
+\[ 
+    dN = -\left(\sum A_n\right) N\, dt \implies N(t) = N(0)\exp\left(-\df t \tau\right),
+    \quad \tau = \left(\sum A_n\right)^{-1}
+\] 
+Here $\tau$ is the state's lifetime.
+Recall the selection rules: matrix elements for a vector $\mbf r$ obeys 
+\begin{mdframed}
+\[\begin{aligned}
+    \Delta l = \pm 1,&\quad\quad \Delta m = 0, \pm 1, \quad \text{for any component} \\ 
+    \Delta m = 0 \implies \la n'l'm|x|nlm\ra &= \la n'l'm|y|nlm\ra = 0 \\ 
+    m' = m\pm 1 \implies \la n'l'm'|x|nlm\ra &= \pm i \la n'l'm|y|nlm\ra = 0, 
+    \la n'l'm'|z|nlm\ra = 0
+\end{aligned}\]
+\end{mdframed}
+These rules (Griffiths 11.76) are very handy when evaluating transitions rates. 
+
+\subsection{Bound to Continuum Transitions}
+We can discretize a continuous energy spectrum by confining the system in a box of size 
+$L$, use periodic (or impenetratable, the former is usually more convenient) boundary conditions 
+to obtain a discrete spectrum, then take the limit as $L\to \infty$. This gives us the 
+state density $\rho(E)$ with respect to energy. 
+We consider a system, under sinusoidal perturbation, 
+transitioning from a bound state to a continuum state 
+with an energy in finite range $\Delta E$ about $E_f$. 
+Integrating equation~\ref{eqn:flopping} yields 
+\[ 
+    P_{a\to (E_b, \Delta E)}(t) = 
+    \int_{E_b - \Delta E / 2}^{E_b + \Delta E/2} \df{|V_{ab}|^2}{\hb^2} 
+    \left[\df{\sin^2((\omega_0 - \omega) t/2)}{(\omega_0 - \omega)^2}\right]\rho(E)\, dE 
+\] 
+Here $\omega_0(E) = (E - E_a)/\hb$, and $\rho(E)\, dE$ is the number of states of between $E, E+dE$. 
+The bracket quantity is sharply peaked about $E=E_f$ with width $4\pi \hb/t$. For $t\gg 1$, 
+approximate by pulling $\rho(E)$ out of the integral, which we also extend to infinity 
+\[ 
+    P_{a\to E_b}(t\to \infty) = \df \pi {2\hb} |V_{ab}|^2 \rho(E_b)t 
+\] 
+The transition rate in this limit is known as Fermi's Golden Rule (sinusoidal perturbations)
+\begin{mdframed}\leqalign{eqn:fermi's golden rule}{
+    R_{a\to b} = \df \pi {2\hb} |V_{ab}|^2 \rho(E_b)
+}\end{mdframed}
+Recall that $H'(r, t)=V(r)\cos(\omega t)$ and $V_{ab}=\la \psi_a|V(r)|\psi_b\ra$. 
+
+\subsection{Adiabatic theorem}
+The reference for this section is Weinberg, \textit{Lectures on Quantum Mechanics, VI.6}. 
+
+We consider a parameterized family of Hamiltonians $H_s$, where $s$ is a slowly varying 
+function $s(t)$ of time. By Hermiticity, $H_s$ is diagonalizable for every $s$. 
+Given a smooth path $s$ with subscript $0$ denote the initial condition $t=0$, 
+we can track how the eigenbasis $\{|n_s\}$ of $H_s$ smoothly varies with $s(t)$ 
+via a parameterized unitary $U(s)$ such that 
+\[ 
+    |n_s\ra = U(s)|n_0\ra \implies U_s = \sum_n |n_s\ra\la n_0|,\quad U(s_0) = \mrm{Id}
+\] 
+Consider a frame change parameterized by $U(t)$ 
+\[ 
+    \tilde H_s = U_s^\dag H_s U_s 
+\] 
+In this frame, the eigenvectors of $\tilde H_s$ are constant. Only eigenvalue 
+dependence on $s$ remains 
+\[ 
+    \tilde H_s |n_0\ra = U_s^\dag H_s |n_s\ra = E_n(s) U_s^\dag|n_s\ra = E_n(s)|n_0\ra 
+\] 
+Consider the corresponding state transformation (we now suppress $|n_0\ra = |n\ra$)
+\[ 
+    |\tilde \psi(t)\ra = U_s^\dag |\psi(t)\ra 
+\] 
+The Schrödinger equation transforms as 
+\malign{
+    \pd t |\tilde \psi(t)\ra 
+    &= \left(\pd t U_{s(t)}^\dag\right)|\psi(t)\ra + 
+        U^\dag_s \left(\pd t |\psi(t)\ra \right) \\ 
+    &= \left(\pd t U_{s(t)}^\dag\right)|\psi(t)\ra + 
+        U^\dag_s \left(-\df i \hb H_s |\psi(t)\right) \\
+    &= \left(\pd t U_{s(t)}^\dag\right)U_s |\tilde \psi(t)\ra 
+        -\df i \hb \tilde H_s |\tilde \psi(t)\ra \\ 
+    &= -\df i \hb \left[\tilde H_{s(t)} + \Delta(t)\right]|\tilde \psi(t)\ra 
+}
+This looks like the ``normal'' time-evolution of the frame-shifted state 
+under the frame-shifted Hamiltonian, with an additional term 
+\[ 
+    \Delta(t) = i\hb \left(\pd t U_{s(t)}\right)^\dag U_s
+\] 
+We introduce another coordinate transform parameterized by the 
+unitary operator $V(t)$ well-defined by the following differential equation, for $-i\tilde H_{s(t)}$ 
+correctly skew-Hermitian: 
+\[ 
+    \pd t V(t) = -\df i \hb \tilde H_{s(t)}V(t)
+\] 
+In the eigenbasis $\{|n_0\ra\}$ for $\tilde H_{s(t)}$ (and also for $H_{s(0)}$) 
+the solution is explicit.  
+\[ 
+    \la n|V(t)|m\ra = \delta_{nm}\exp \left(-\df i \hb\int_0^t E_n(s(t'))\, dt' \right)
+    = \delta_{nm} \exp\left(i\phi_n(t)\right)
+\] 
+Here $\phi_n(t)$ is called the dynamical phse 
+\[ 
+    \phi_n(t) = -\df 1 \hb \int_0^t E_n(s(t'))\, dt'
+\] 
+This frame further eliminates dependence on $\tilde H_{s(t)}$. Define the transforms 
+\malign{
+    |\bar \psi_t\ra = V(t)^\dag |\tilde \psi(t)\ra &=  V(t)^\dag U_s^\dag |\psi(t)\ra  \\ 
+    \bar \Delta(t) &= V(t)^\dag \Delta(t) V(t)
+}
+$\tilde H_{s(t)}$ and $V(t)$ shares an eigenbasis.  
+Only $\bar \Delta(t)$ remains in the Schrödinger equation: 
+\malign{
+    \pd t |\bar \psi(t)\ra 
+    &= \left(\pd t V(t)^\dag \right)|\tilde \psi(t)\ra + V(t)^\dag \pd t |\tilde \psi(t)\ra \\ 
+    &= \df i \hb \tilde H_{s(t)}V(t)^\dag |\tilde \psi(t)\ra 
+        -\df i \hb V(t)^\dag  \left[\tilde H_{s(t)} + \Delta(t)\right]|\tilde \psi(t)\ra  \\ 
+    &= -\df i \hb V(t)^\dag \Delta(t)|\tilde \psi(t)\ra = -\df i \hb \bar \Delta(t)|\bar \psi(t)\ra 
+}
+Consider the matrix elements of $\overline \Delta_{nm}(t)$ under its eigenbasis $\{|n\ra\}$
+\malign{
+    \la n|\bar \Delta(t)|m\ra &= \la n|V(t)^\dag \Delta(t)V(t)|m\ra = 
+    \exp\left(i[\phi_m(t)-\phi_n(t)]\right) \la n|\Delta(t)|m\ra  \\ 
+    &= \la n|\Delta(t)|m\ra \exp \left[\df i \hb \int_0^t dt'\, E_n(s(t')) - E_m(s(t'))\right]
+} 
+In the absence of degeneracy, when the rate of change of $s(t)$ is very small compared 
+to $|E_n(s) - E_m(s)|/\hb$, any duration that is significant with respect to $\Delta s(t)$ 
+will cause the phase factor to oscillate many times. The only components of $\bar \Delta(t)$ 
+which consistently contribute are the diagonal elements, by which 
+\malign{
+    \bar \Delta(t) 
+    &= \sum_n \la n|\bar \Delta(t)|n\ra \, |n\ra \la n| 
+    = \sum_n \la n| \Delta(t)|n\ra \, |n\ra \la n| \\ 
+    &= \sum_n \la n | \left[i\hb \left(\pd t U_{s(t)}\right)^\dag U_s\right] |n\ra \, |n\ra \la n| \\ 
+    &= i\hb \sum_n \left(\pd t \la n_s|\right)|n_s\ra \, |n\ra \la n| \\ 
+    &= \sum \rho_n(t)|n\ra \la n|, \quad \rho_n(t) = i\hb \left(\pd t \la n_s|\right)|n_s\ra 
+}
+The Schrodinger equation in the bar frame solves to 
+\malign{
+    |\bar \psi(t)\ra 
+    &= \sum_n \exp(i\gamma_n(t)) \la n|\bar \psi_0\ra |n\ra 
+    = \sum_n \exp(i\gamma_n(t)) \la n|\psi_0\ra |n\ra 
+}
+In particular, note that $|\bar \psi(0)\ra = |\psi(0)\ra$ since both transforms 
+are trivial at $t=0$. Here $\gamma_n(t)$ denotes the Berry phase 
+\[ 
+    \gamma_n(t) = -\df 1 \hb \int_0^t \rho_n(t')\, dt'
+\] 
+Change back to the original frame, here $V(t)$ introduces $\phi_n(t)$ and 
+$U_s$ effects $|n\ra \mapsto |n_s\ra$. 
+\malign{
+    |\psi(t)\ra 
+    &= U_{s(t)}V(t)|\bar \psi(t)\ra \\ 
+    &= \sum_n \exp(i\gamma_n(t))\exp(i\phi_n(t)) \la n|\bar \psi_0\ra |n_s\ra 
+}
+Apart from the dynamic and Berry phases $\phi_n(t), \gamma_n(t)$, the adiabatic 
+approximation says that eigenstates vary smoothly with time. 

@@ -1,0 +1,276 @@
+\section{Time Independent Perturbation Theory}
+Suppose we successfully solved for the eigensystem $\{E_n^0, \psi_n^0\}$ 
+for a time-independent Hamiltonian $H^0$. Perturbation theory
+approximates the eigensystem for the perturbed Hamiltonian 
+\[ 
+    H = H^0 + \lambda H'
+\] 
+The key assumption of perturbation theory 
+is that \textit{the eigensystem has a power series expansion 
+in terms of $\lambda$}. We use this assumption and 
+the known solutions for $\lambda=0$ to solve 
+for the perturbed eigensystem at $\lambda=1$. Concretely, 
+\malign{
+    \psi_n &= \psi_n^0 + \lambda \psi_n^1 + \lambda^2 \psi_n^2 + \cdots \\ 
+    E_n &= E_n^0 + \lambda E_n^1 + \lambda^2 E_n^2 + \cdots \\ 
+}
+The subscript denotes the eigensystem index and superscript 
+correction order. Substitute into the eigenvalue equation for $H$ to yield 
+\[
+    (H^0 + \lambda H')(\psi_n^0 + \lambda \psi_n^1 + \cdots)
+    = (E_n^0 + \lambda E_n^1 + \cdots)(\psi_n^0 + \lambda \psi_n^1 + \cdots)
+\]
+By assumption this equation holds independently for every power of $\lambda$. 
+In the zeroth order 
+\[ 
+    H^0\psi_n^0 = E_n^0 \psi_n^0
+\] 
+To the first and second orders 
+\leqalign{eqn:independent first-second perturbation}{
+    H^0\psi_n^1 + H'\psi_n^0 &= E_n^0\psi_n^1 + E_n^1\psi_n^0 \\ 
+    H^0\psi_n^2 + H'\psi_n^1 &= E_n^0 \psi_n^2 + E_n^1\psi_n^1 + E_n^2 \psi_n^0
+}
+\begin{remark}
+    The power series expansion assumption of perturbation theory is not generally true. 
+    The solutions to a physical system is not generally smooth around $\lambda=0$, as 
+    positive and negative coupling may lead to qualitatively different behaviors 
+    (consider a two-body system with attractive compared to repulsive interaction). 
+    This manifests mathematically in the divergence of higher-order terms. It is a 
+    miracle that we can use the first few terms in the perturbation series with a good 
+    conscience in the first place. 
+\end{remark}
+
+
+
+\subsection{Nondegenerate theory}
+Take the inner product of the first equation in~\ref{eqn:independent first-second perturbation}
+with $\psi_n^0$ to isolate a component 
+\[ 
+    \la \psi_n^0|H^0|\psi_n^1\ra + \la \psi_n^0|H'|\psi_n^0\ra 
+    = E_n^0\la \psi_n^0|\psi_n^1\ra + E_n^1\la \psi_n^0|\psi_n^0\ra
+\] 
+Hamiltonian $H^0$ is Hermitian, so the first terms on both sides of the equation cancel, 
+The first-order energy correction is an matrix 
+element of $H'$ in the orthonormal basis $\{|\psi_n^0\ra\}$. 
+\[ 
+    E_n^1 = \la \psi_n^0|H'|\psi_n^0\ra 
+\] 
+For the first order eigenstate correction, rewrite 
+equation~\ref{eqn:independent first-second perturbation} as 
+an equation in $\psi_n^1$. 
+\[ 
+    (H^0 - E_n^0)\psi_n^1 = -(H' - E_n^1)\psi_n^0
+\] 
+Any solution has freedom under $\psi_n^1\mapsto \psi_n^1 + \alpha \psi_n^0$. 
+Expand $\psi_n^1$ in the orthonormal basis 
+\leqalign{eqn:perturbation expansion}{
+    \psi_n^1 = \sum_{m\neq n} c_m^{(n)} \psi_m^0
+}
+Substitute into the equation 
+\[ 
+    \sum_{m\neq n}\left(E_m^0 - E_n^0\right)c_m^{(n)}\psi_m^0 = -(H' - E_n^1)\psi_n^0
+\] 
+Again, to isolate components take the inner product with $\psi_l^0$ for $l\neq n$ 
+\[
+    \left(E_l^0 - E_n^0\right)c_l^{(n)} = -\la \psi_l^0|H'|\psi_n^0\ra 
+\]
+Solve for $c_l^{(n)}$ and substitute into~\ref{eqn:perturbation expansion} yields 
+the first-order eigenfunction corrections 
+\[
+    |\psi_n^1\ra = \sum_{m\neq n} \df{\ang{\psi_m^0|H'|\psi_n^0}}{E_n^0 - E_m^0}|\psi_m^0\ra
+\] 
+For $E_n^2$, consider the second equation in~\ref{eqn:independent first-second perturbation}. 
+Inner product with $\psi_n^0$ to isolate components 
+\[ 
+    \la \psi_n^0|H^0|\psi_n^2\ra + \la \psi_n^0|H'|\psi_n^1\ra 
+    = E_n^0 \la \psi_n^0|\psi_n^2\ra + E_n^1\la \psi_n^0|\psi_n^1\ra + 
+    E_n^2\la \psi_n^0|\psi_n^0\ra 
+\] 
+Again, the first term on both sides cancel, so 
+\[ 
+    E_n^2 = \la \psi_n^0|H'|\psi_n^1\ra - E_n^1\la \psi_n^0|\psi_n^1\ra 
+\] 
+Recall that we excluded $\psi_n^0$ in the expansion for $\psi_n^1\ra$ in
+~\ref{eqn:perturbation expansion} so $\la \psi_n^0|\psi_n^1\ra = 0$, then 
+putting our results in one place:
+\begin{mdframed}
+\leqalign{eqn:perturbation results}{
+    E_n^1 &= \la \psi_n^0|H'|\psi_n^0\ra \\ 
+    |\psi_n^1\ra &= \sum_{m\neq n} 
+    \df{\ang{\psi_m^0|H'|\psi_n^0}}{E_n^0 - E_m^0}|\psi_m^0\ra \\
+    E_n^2 &= 
+    \sum_{m\neq n} \df{|\la \psi_m^0|H'|\psi_n^0\ra|^2}{E_n^0 - E_m^0}
+}
+\end{mdframed}
+
+
+% \begin{theorem}[inverse of $2\times 2$ matrix]
+%     \begin{equation}
+%         \begin{bmatrix}a & b \\ c & d\end{bmatrix}^{-1} = 
+%         \df 1 {ad - bc} \begin{bmatrix}
+%             d & -b \\ -c & a
+%         \end{bmatrix}
+%     \end{equation}
+% \end{theorem}
+
+\subsection{Degenerate theory}
+
+In the case of degeneracy, we need to think more rigorously about our solutions:
+
+The first order equation \(H^0 \psi_n^0 = E_n^0 \psi_n^0\) 
+is under-determined: when the eigenspace $E_n^0$ is of dimension greater than $1$, 
+there are many eigenstates which satisfy the first-order equation. 
+The problem when we consider the first-order eigenstate correction 
+\[ 
+    |\psi_n^{1}\rangle = \sum_{m \neq n} 
+    \frac{\langle \psi_m^0 | H' | \psi_n^0 \rangle}
+    {E_n^0 - E_m^0} | \psi_m^0 \rangle
+\] 
+It is not defined in case of degeneracy, when \(E_n^0 = E_m^0\) 
+for some \(n \neq m\). The same holds for the second order energy correction. 
+
+One way to make sense of the first-order eigenfunction correction equation 
+is choose a ``good'' basis for the degenerate eigenspace such that 
+\[ 
+    \forall n\neq m, E_n^0 = E_m^0 \implies \langle \psi_m^0 | H' | \psi_n^0 \rangle = 0
+\] 
+This allows us to cancel the zero denominators in~\ref{eqn:perturbation results} 
+with a zero enumerator and hope that no higher-order degeneracy exists 
+so the indeterminate form is $0$. We need the following definition to 
+make precise what we mean by finding a ``good'' eigenbasis for $H^0$ with respect 
+to a perturbation $H'$. 
+\begin{definition}[subspace projection of an operator]
+    the projection of an operator \(H : V \to V\) onto a subspace 
+    \(W \subset V\) \(H_{|W} : W \to W\) is 
+    \[ 
+        H_{|W} : W \xrightarrow \iota V \xrightarrow{H} V \xrightarrow{P_{V \to W}} W
+    \] 
+    Given an orthonormal basis $\{|i\ra\}$ for $W$, 
+    the matrix representation of \(H_{|W}\) 
+    is \(W_{ij} = \langle i | H | j \rangle\). 
+\end{definition}
+\begin{example}[operator in $\mathbb C^3$]
+    The subspace projection of the operator 
+    \[
+        A = \begin{pmatrix}
+            a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33}
+        \end{pmatrix}
+    \] 
+    onto the subspace spanned by the first and third basis elements is 
+    \[ 
+        A_{|\mrm{span}(e_1, e_3)} = 
+        \begin{pmatrix}
+            a_{11} & a_{13} \\ a_{31} & a_{33}
+        \end{pmatrix}
+    \] 
+    Formally, this is done by removing the second row and column. 
+\end{example}
+\begin{definition}[good basis for perturbation]
+    \(\mathcal{B} = \{|i\rangle\}\) is ``good'' basis for perturbing 
+    $H^0$ with respect to $H'$ if, for every eigenspace $W\subset V$ of $H$ 
+    with basis $\mathcal A\subseteq \mathcal B$, the representation of $H'_{|W}$ 
+    under $\mathcal A$ is diagonal. In other words 
+    \[ 
+        \forall |m\ra, |n\ra \in \mathcal A, m\neq n: H'_{mn} = 0
+    \] 
+\end{definition}
+\begin{remark}
+    Finding a good basis is weaker than finding a simultaneous eigenbasis for \(H^0, H'\), 
+    which does not exist when \([H^0, H'] \neq 0\). 
+    A good basis \textit{always} exists by applying the spectral theorem to 
+    the projection of $H'$  on each eigenspace of $H^0$. 
+\end{remark}
+The following results helps us find a good basis easily under certain conditions. 
+\begin{theorem}[characterization of commutativity]
+    Two normal operators $A, B$ commute if and only if they leave the eigenspaces of 
+    each other invariant. 
+
+    \prf Assume commutativity, and let $x$ be an eigenvector of $A$ with eigenvalue $\lambda$, 
+    then $BAx = \lambda Bx = A(Bx)$, so $Bx$ is also an eigenvector of $A$ with eigenvalue 
+    $\lambda$. 
+    Conversely, let $x_i$ be an eigenbasis for $A$ such that $Ax_i = \lambda_i x_i, ABx_i = \lambda_i Bx_i$.
+    Given an arbitrary vector $v=c_ix_i$, we have 
+    \[ 
+        BAv = c_i BAx_i = c_i\lambda_i Bx_i = c_i ABx_i = ABv 
+    \] 
+\end{theorem}
+This applies in particular two Hermitian operators. 
+In a subspace spanned by eigenvectors of $A$ with distinct eigenvalues, 
+commutativity forces $H$ to be diagonal. 
+\begin{lemma}
+    Given commuting Hermitian operators \( H \), \( A \), 
+    $H_{|W}$ is diagonal for every subspace $W$ spanned by an orthonormal set 
+    of eigenvectors of $A$ with distinct eigenvalues. 
+
+    \prf By $AH=HA$, $\la i|H|j\ra= \lambda_j^{-1}\la i|AH|j\ra= \lambda_i^{-1}\la i|HA|j\ra$. 
+    Since $\lambda_i\neq \lambda_j$, $\la i|H|j\ra= 0$.
+\end{lemma} 
+Note commutativity is not transitive: $[A, H^0] = [A, H']=0$ does not imply $[H^0, H']=0$.
+The following theorem is the main result of this section. 
+\begin{theorem}[convenient good basis condition]
+    Given Hermitian \( H^0, H'\). An eigenbasis $\{|i\ra\}$ for $H^0$ 
+    is a good basis if there exists an operator $A$ such that 
+    $[A, H^0] = [A, H']=0$ and each subset of $\{|i\ra\}$ corresponding 
+    to a degenerate subspace of $H^0$ are eigenvectors of $A$ with distinct eigenvalues. 
+
+    \prf Given such an $A$ and mutual eigenbasis $\{|i\ra\}$ between $A, H^0$, 
+    consider each degenerate eigenspace $W$ of $H^0$. By the lemma above, $H'_{|W}$ must 
+    be diagonal in this basis. 
+\end{theorem}
+\begin{remark}
+    The converse to the theorem is not true. Given a good basis and $[A, H^0]=0$, the fact 
+    that $H'_{|W}$ is diagonal for each degenerate eigenspace does not mean that it has to 
+    leave it invariant. Consider a good basis $b_i$ which is a shared eigenbasis for $H^0, A$ 
+    with eigenvalues $\lambda_i, \rho_i$ for the two operators respectively. 
+    Assume $\lambda_1 = \lambda_2$, then $\rho_1\neq \rho_2$.
+    It suffices to find a $H'$ whose projection onto the span of $b_1, b_2$ 
+    is diagonal but changes some eigenspace of $A$. The span of $b_1, b_2$ belongs 
+    to distinct eigenspaces of $A$ by $\rho_1\neq \rho_2$, the following $H'$ suffices 
+    for nonzero $H'_{13}, H'_{23}$. All representations are in the good basis. 
+    \[ 
+        H = \begin{pmatrix}
+            \lambda_1 \\ & \lambda_2=\lambda_1 \\ &&\lambda_3 
+        \end{pmatrix}, \quad 
+        A = \begin{pmatrix}
+            \rho_1 \\ & \rho_2\neq \rho_1 \\ &&\rho_3
+        \end{pmatrix}, \quad 
+        H' = \begin{pmatrix}
+            H'_{11} && H'_{13} \\ & H'_{22} & H'_{23} \\ &&H'_{33} 
+        \end{pmatrix}
+    \] 
+\end{remark}
+\begin{remark}
+    The operator $A$ is usually of two forms: 
+    \begin{itemize}
+        \item a unitary symmetry exhibited by both $H^0, H'$. 
+        The condition in the theorem above boils down to degenerate eigenstates of $H^0$ 
+        having different behaviors under the application of the symmetry. See the example below. 
+        \item a Hermitian observable whose eigenstates coincide with energy eigenstates 
+        of $H^0, H'$. The theorem condition translates to degenerate eigenstates of $H^0$ 
+        having different observable values. For example, $H, L_z, L^2$ 
+    \end{itemize}
+\end{remark}
+\begin{example}[oscillator]
+    Consider a particle in two-dimensional oscillator potential 
+    \[ 
+        H = \frac{p^2}{2m} + \frac{1}{2} m\omega^2 (x^2 + y^2), \quad 
+        H' = \epsilon m \omega^2 x y
+    \]
+    The first excited state is two-fold degenerate with one basis
+    \begin{align*}
+        \psi_0^{a} &= \psi_0 \phi_1 = \alpha y \exp\left(-\frac{\beta^2 (x^2 + y^2)}{2}\right) \\
+        \psi_0^{b} &= \psi_1 \phi_0 = \alpha x \exp\left(-\frac{\beta^2 (x^2 + y^2)}{2}\right)
+    \end{align*}
+    One can show that $H'_{ab}\neq 0$, so this is not a good basis. 
+    \( H \) has continuous rotational symmetry and reflections, while 
+    \( H' \) is invariant under 
+    \( A: (x, y) \mapsto (-x, -y) \) and \( A': (x, y) \mapsto (y, x) \). 
+    Both \( A, A' \) both commute with \( H, H' \). 
+    \begin{itemize}
+        \item \( \psi_0^{a}, \psi_0^{b} \) are degenerate eigenvectors of 
+        \( A \), so $A$ does not give us a good basis. 
+        \item \( \psi_0^{a}, \psi_0^{b} \) are not eigenvectors of \( A' \), 
+        but \( \frac{1}{\sqrt{2}} (\psi_0^{a} \pm \psi_0^{b}) \) are with eigenvalues \(\pm 1\).
+        They constitute the desired basis in which $H'$ is diagonal.  
+    \end{itemize}
+\end{example}
