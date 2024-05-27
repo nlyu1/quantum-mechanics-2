@@ -11,6 +11,7 @@ link-citations: true
 ---
 
 \usepackage{cancel}
+\usepackage{tikzcd}
 \newcommand{\pd}[1]{\partial_{#1}}
 
 \newcommand{\mbb}{\mathbb}
@@ -39,7 +40,7 @@ link-citations: true
 
 
 # Preface {-}
-These notes document fall 2023 iteration of Harvard's second-semester 
+These notes document the fall 2023 iteration of Harvard's second-semester 
 undergraduate quantum mechanics, Physics 143b, taught by Sonia Paban. 
 The course includes a brief introduction to path integrals, 
 followed by perturbation theory applied 
