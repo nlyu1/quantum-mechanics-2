@@ -1,0 +1,78 @@
+# Structure of Hydrogen
+The hydrogen atom provides an ideal playground to apply time-independent 
+perturbation theory. 
+
+
+## Fine structure
+
+### Relativistic correction to kinetic energy
+
+The lowest-order correction Hamiltonian due to relativistic correction to kinetic energy is 
+
+\begin{equation}\label{eqn:relativistic_hamiltonian}
+    H'_r = -\df{p^4}{8m^3c^2}
+\end{equation}
+
+Exploiting the Hermiticity of \(p\), the first-order correction is
+
+\begin{equation}
+    E_r^1=-\df{1}{8m^3c^2}\ang{p^2\psi|p^2\psi}
+\end{equation}
+
+For our unperturbed \(|\psi\ra\), which are solved for non-relativistically, \(p^2=2m(E-V)\), so 
+
+\begin{equation}\begin{aligned}\label{eqn:rel_corr}
+    E^1_r &= -\df1{2mc^2}\ang{(E-V)^2} \\ 
+        &= -\df1{2mc^2}\left(E_n^2 - 2E_n \ang{V} + \ang{V^2}\right) \\ 
+        &=-\df{(E_n)^2}{2mc^2}\left[\df{4n}{l+1/2}-3\right]
+\end{aligned}\end{equation}
+
+Several quantities which are handy in such evaluations when we use the basis \(n, l, m_l\)
+
+\begin{equation}
+    \ang{\df 1 r} = \df 1 {n^2 a} \quad \ang{\df 1 {r^2}} = \df 1 {(l+1/2)n^3a^2}\quad 
+    \ang{\df 1 {r^3}} = \df 1 {l(l+1/2)(l+1)n^3a^3}
+\end{equation}
+
+The perturbation is spherically symmetric, so \(L^2, L_z\) 
+commute with both \(H, H'_r\) and \(|n, l, m\ra\) are distinct eigenstates of \((L^2, L_z)\), 
+taken together, allowing us to use nondegenerate perturbation theory. 
+Relativistic correction to the kinetic energy lifts the \(l\)-degeneracy. 
+Our complete set of commuting observables (recall \@ref(def:csco)) are \(H, L^2, L_z, S^2, S_z\). 
+
+### Spin-orbit coupling
+
+From the electron's frame, the proton's motion generates a magnetic field which 
+couples to the electron spin. 
+
+\begin{equation}\label{eqn:spin_orbit_coupling}
+    H'_{\mathrm{so}} = \left(\df{e^2}{8\pi \epsilon_0}\right)\df 1 {m^2c^2r^3}\bf{S\cdot L}
+\end{equation}
+
+The energy spectrum is degenerate in \(m, m_s\) yet 
+\([\mbf S\cdot \mbf L, L_z], [\mbf{S\cdot L}, S_z]\neq 0\). 
+Therefore we cannot use \(m, s\) as 
+our quantum numbers. Consider instead the total angular momentum 
+
+\begin{equation}\label{def:J}
+    \bf{J\equiv L + S}
+\end{equation}
+
+We propose an addition of angular momentum transformation, which 
+replaces the complete set of commuting observables for a Hamiltonian 
+from \(L^2, L_z, S^2, S_z\) with \(J^2, L^2, S^2, J_z\) corresponding to 
+quantum numbers \(j, l, s, m_j\). We first need to 
+verify commutativity with \(H'_{\mrm{so}}\). 
+
+\begin{proposition}
+    \([\mbf J, \mbf{S\cdot L}] = 0\)
+
+    \textit{Proof:} Without loss of generality consider \(J_z\), 
+
+    \[\begin{aligned} 
+        [J_z, \mbf{S\cdot L}] 
+            &= [S_z+L_z, S_xL_x+S_yL_y+S_zL_z] \\ 
+            &= [S_z, S_x]L_x + [S_z, S_y]L_y + [L_z, L_x]S_x + [L_z, L_y]S_y \\ 
+            &= S_yL_x - S_xL_y + L_yS_x - L_xS_y = 0
+    \end{aligned}\]
+\end{proposition}

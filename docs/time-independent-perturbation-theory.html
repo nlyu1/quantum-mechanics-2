@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Time Independent Perturbation Theory | Quantum Mechanics II</title>
+  <meta name="description" content="3 Time Independent Perturbation Theory | Quantum Mechanics II" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Time Independent Perturbation Theory | Quantum Mechanics II" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Time Independent Perturbation Theory | Quantum Mechanics II" />
+  
+  
+  
+
+<meta name="author" content="Nicholas Lyu" />
+
+
+<meta name="date" content="2024-08-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="symmetry-conservation-laws-and-selection-rules.html"/>
+<link rel="next" href="structure-of-hydrogen.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="path-integrals.html"><a href="path-integrals.html"><i class="fa fa-check"></i><b>1</b> Path Integrals</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="path-integrals.html"><a href="path-integrals.html#gaussian-integrals"><i class="fa fa-check"></i><b>1.1</b> Gaussian Integrals</a></li>
+<li class="chapter" data-level="1.2" data-path="path-integrals.html"><a href="path-integrals.html#propagator"><i class="fa fa-check"></i><b>1.2</b> Propagator</a></li>
+<li class="chapter" data-level="1.3" data-path="path-integrals.html"><a href="path-integrals.html#integration-over-paths"><i class="fa fa-check"></i><b>1.3</b> Integration over paths</a></li>
+<li class="chapter" data-level="1.4" data-path="path-integrals.html"><a href="path-integrals.html#separable-lagrangian"><i class="fa fa-check"></i><b>1.4</b> Separable Lagrangian</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html"><i class="fa fa-check"></i><b>2</b> Symmetry, Conservation Laws, and Selection Rules</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#operators-in-quantum-theory"><i class="fa fa-check"></i><b>2.1</b> Operators in quantum theory</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#fundamental-operators"><i class="fa fa-check"></i><b>2.1.1</b> Fundamental operators</a></li>
+<li class="chapter" data-level="2.1.2" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#ladder-operators"><i class="fa fa-check"></i><b>2.1.2</b> Ladder operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#vector-operators"><i class="fa fa-check"></i><b>2.2</b> Vector operators</a></li>
+<li class="chapter" data-level="2.3" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#transformation"><i class="fa fa-check"></i><b>2.3</b> Transformation</a></li>
+<li class="chapter" data-level="2.4" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#observables-and-transformations"><i class="fa fa-check"></i><b>2.4</b> Observables and transformations</a></li>
+<li class="chapter" data-level="2.5" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#summary"><i class="fa fa-check"></i><b>2.5</b> Summary</a></li>
+<li class="chapter" data-level="2.6" data-path="symmetry-conservation-laws-and-selection-rules.html"><a href="symmetry-conservation-laws-and-selection-rules.html#selection-rules"><i class="fa fa-check"></i><b>2.6</b> Selection rules</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="time-independent-perturbation-theory.html"><a href="time-independent-perturbation-theory.html"><i class="fa fa-check"></i><b>3</b> Time Independent Perturbation Theory</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="time-independent-perturbation-theory.html"><a href="time-independent-perturbation-theory.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="time-independent-perturbation-theory.html"><a href="time-independent-perturbation-theory.html#nondegenerate-theory"><i class="fa fa-check"></i><b>3.2</b> Nondegenerate Theory</a></li>
+<li class="chapter" data-level="3.3" data-path="time-independent-perturbation-theory.html"><a href="time-independent-perturbation-theory.html#degenerate-theory"><i class="fa fa-check"></i><b>3.3</b> Degenerate Theory</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="structure-of-hydrogen.html"><a href="structure-of-hydrogen.html"><i class="fa fa-check"></i><b>4</b> Structure of Hydrogen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="structure-of-hydrogen.html"><a href="structure-of-hydrogen.html#fine-structure"><i class="fa fa-check"></i><b>4.1</b> Fine structure</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="structure-of-hydrogen.html"><a href="structure-of-hydrogen.html#relativistic-correction-to-kinetic-energy"><i class="fa fa-check"></i><b>4.1.1</b> Relativistic correction to kinetic energy</a></li>
+<li class="chapter" data-level="4.1.2" data-path="structure-of-hydrogen.html"><a href="structure-of-hydrogen.html#spin-orbit-coupling"><i class="fa fa-check"></i><b>4.1.2</b> Spin-orbit coupling</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quantum Mechanics II</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="time-independent-perturbation-theory" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Time Independent Perturbation Theory<a href="time-independent-perturbation-theory.html#time-independent-perturbation-theory" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Introduction<a href="time-independent-perturbation-theory.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Suppose we successfully solved for the eigensystem
+<span class="math inline">\(\{E_n^0, \psi_n^0\}\)</span> for a time-independent Hamiltonian <span class="math inline">\(H^0\)</span>.
+Perturbation theory approximates the eigensystem for the perturbed Hamiltonian
+<span class="math display">\[
+H = H^0 + \lambda H&#39;
+\]</span></p>
+<p>The key assumption of perturbation theory is that
+<em>the eigensystem has a power series expansion in terms of <span class="math inline">\(\lambda\)</span></em>.
+We use this assumption and the known solutions for <span class="math inline">\(\lambda=0\)</span>
+to solve for the perturbed eigensystem at <span class="math inline">\(\lambda=1\)</span>. Concretely,
+<span class="math display">\[
+\begin{align}
+    \psi_n &amp;= \psi_n^0 + \lambda \psi_n^1 + \lambda^2 \psi_n^2 + \cdots \\
+    E_n &amp;= E_n^0 + \lambda E_n^1 + \lambda^2 E_n^2 + \cdots
+\end{align}
+\]</span>
+The subscript denotes the eigensystem index and superscript correction order.
+Substitute into the eigenvalue equation for <span class="math inline">\(H\)</span> to yield
+<span class="math display">\[
+(H^0 + \lambda H&#39;)(\psi_n^0 + \lambda \psi_n^1 + \cdots) = (E_n^0 + \lambda E_n^1 + \cdots)(\psi_n^0 + \lambda \psi_n^1 + \cdots)
+\]</span>
+By assumption, this equation holds independently for every power of <span class="math inline">\(\lambda\)</span>.
+In the zeroth order
+<span class="math display">\[
+H^0\psi_n^0 = E_n^0 \psi_n^0
+\]</span>
+To the first and second orders</p>
+<p><span class="math display" id="eq:independentFirstSecondPerturbation">\[\begin{equation}
+\begin{aligned}
+    H^0\psi_n^1 + H&#39;\psi_n^0 &amp;= E_n^0\psi_n^1 + E_n^1\psi_n^0 \\
+    H^0\psi_n^2 + H&#39;\psi_n^1 &amp;= E_n^0 \psi_n^2 + E_n^1\psi_n^1 + E_n^2 \psi_n^0
+\end{aligned}
+\tag{3.1}
+\end{equation}\]</span></p>
+<div class="remark">
+<p><span id="unlabeled-div-28" class="remark"><em>Remark</em>. </span>The power series expansion assumption of perturbation theory is not generally true.
+The solutions to a physical system are usually not smooth around <span class="math inline">\(\lambda=0\)</span>,
+as positive and negative coupling may lead to qualitatively different behaviors
+(consider a two-body system with attractive compared to repulsive interaction).
+This manifests mathematically in the divergence of higher-order terms.
+It is quite a miracle that we can use the first few terms in the perturbation
+series with a good conscience in the first place.</p>
+</div>
+</div>
+<div id="nondegenerate-theory" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Nondegenerate Theory<a href="time-independent-perturbation-theory.html#nondegenerate-theory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Take the inner product of the first equation in
+<a href="time-independent-perturbation-theory.html#eq:independentFirstSecondPerturbation">(3.1)</a>
+with <span class="math inline">\(\psi_n^0\)</span> to isolate a component
+<span class="math display">\[
+\langle\psi_n^0|H^0|\psi_n^1\rangle+ \langle\psi_n^0|H&#39;|\psi_n^0\rangle
+= E_n^0\langle\psi_n^0|\psi_n^1\rangle+ E_n^1\langle\psi_n^0|\psi_n^0\rangle
+\]</span>
+The Hamiltonian <span class="math inline">\(H^0\)</span> is Hermitian,
+so the first terms on both sides of the equation cancel.
+The first-order energy correction is a matrix element of
+<span class="math inline">\(H&#39;\)</span> in the orthonormal basis <span class="math inline">\(\{|\psi_n^0\rangle\}\)</span>.
+<span class="math display">\[
+E_n^1 = \langle\psi_n^0|H&#39;|\psi_n^0\rangle
+\]</span>
+For the first order eigenstate correction,
+rewrite equation <a href="time-independent-perturbation-theory.html#eq:independentFirstSecondPerturbation">(3.1)</a>
+as an equation in <span class="math inline">\(\psi_n^1\)</span>.
+<span class="math display">\[
+(H^0 - E_n^0)\psi_n^1 = -(H&#39; - E_n^1)\psi_n^0
+\]</span>
+Any solution has freedom under
+<span class="math inline">\(\psi_n^1\mapsto \psi_n^1 + \alpha \psi_n^0\)</span>, since this is in the
+kernel of the left-hand-side operator <span class="math inline">\((H^0 - E_n^0)\)</span>.
+Expand <span class="math inline">\(\psi_n^1\)</span> in the orthonormal basis
+<span class="math display" id="eq:perturbationExpansion">\[
+\psi_n^1 = \sum_{m\neq n} c_m^{(n)} \psi_m^0
+\tag{3.2}
+\]</span>
+Without loss of generality we may assume the <span class="math inline">\(\psi_n^0\)</span> component to be
+zero. Substitute into the equation
+<span class="math display">\[
+\sum_{m\neq n}\left(E_m^0 - E_n^0\right)c_m^{(n)}\psi_m^0 = -(H&#39; - E_n^1)\psi_n^0
+\]</span>
+Again, to isolate components, take the inner product with <span class="math inline">\(\psi_l^0\)</span> for <span class="math inline">\(l\neq n\)</span>
+<span class="math display">\[
+\left(E_l^0 - E_n^0\right)c_l^{(n)} = -\langle\psi_l^0|H&#39;|\psi_n^0\rangle
+\]</span>
+Solve for <span class="math inline">\(c_l^{(n)}\)</span> and substitute into <a href="time-independent-perturbation-theory.html#eq:perturbationExpansion">(3.2)</a>,
+yielding the first-order eigenfunction corrections
+<span class="math display">\[
+|\psi_n^1\rangle= \sum_{m\neq n} \dfrac{\left\langle\psi_m^0|H&#39;|\psi_n^0 \right\rangle}{E_n^0 - E_m^0}|\psi_m^0\rangle
+\]</span>
+For <span class="math inline">\(E_n^2\)</span>, consider the second equation in
+<a href="time-independent-perturbation-theory.html#eq:independentFirstSecondPerturbation">(3.1)</a>.
+Inner product with <span class="math inline">\(\psi_n^0\)</span> to isolate components
+<span class="math display">\[
+\langle\psi_n^0|H^0|\psi_n^2\rangle+ \langle\psi_n^0|H&#39;|\psi_n^1\rangle= E_n^0 \langle\psi_n^0|\psi_n^2\rangle+ E_n^1\langle\psi_n^0|\psi_n^1\rangle+ E_n^2\langle\psi_n^0|\psi_n^0\rangle
+\]</span>
+Again, the first term on both sides cancel, so
+<span class="math display">\[
+E_n^2 = \langle\psi_n^0|H&#39;|\psi_n^1\rangle- E_n^1\langle\psi_n^0|\psi_n^1\rangle
+\]</span>
+Recall that we excluded <span class="math inline">\(\psi_n^0\)</span> in the expansion for <span class="math inline">\(|\psi_n^1\rangle\)</span>
+in <a href="time-independent-perturbation-theory.html#eq:perturbationExpansion">(3.2)</a> so <span class="math inline">\(\langle\psi_n^0|\psi_n^1\rangle= 0\)</span>,
+then putting our results in one place:
+Recall that we excluded <span class="math inline">\(\psi_n^0\)</span> in the expansion for <span class="math inline">\(|\psi_n^1\rangle\)</span>
+in <a href="time-independent-perturbation-theory.html#eq:perturbationExpansion">(3.2)</a> so <span class="math inline">\(\langle\psi_n^0|\psi_n^1\rangle= 0\)</span>,
+then putting our results in one place:
+<span class="math display" id="eq:perturbationResults">\[
+\begin{aligned}
+    E_n^1 &amp;= \langle\psi_n^0|H&#39;|\psi_n^0\rangle\\
+    |\psi_n^1\rangle&amp;= \sum_{m\neq n} \dfrac{\left\langle\psi_m^0|H&#39;|\psi_n^0 \right\rangle}{E_n^0 - E_m^0}|\psi_m^0\rangle\\
+    E_n^2 &amp;= \sum_{m\neq n} \dfrac{|\langle\psi_m^0|H&#39;|\psi_n^0\rangle|^2}{E_n^0 - E_m^0}
+\end{aligned}
+\tag{3.3}
+\]</span></p>
+</div>
+<div id="degenerate-theory" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Degenerate Theory<a href="time-independent-perturbation-theory.html#degenerate-theory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the case of degeneracy, we need to think more rigorously about our solutions:</p>
+<p>The zeroth order equation <span class="math inline">\(H^0 \psi_n^0 = E_n^0 \psi_n^0\)</span>
+becomes under-determined: when the eigenspace <span class="math inline">\(E_n^0\)</span> is of
+dimension greater than 1, there are many eigenstates which
+satisfy the zeroth-order.
+This problem asserts itself when we consider the
+first-order eigenstate correction</p>
+<p><span class="math display">\[
+|\psi_n^{1}\rangle = \sum_{m \neq n}
+\frac{\langle \psi_m^0 | H&#39; | \psi_n^0 \rangle}
+{E_n^0 - E_m^0} | \psi_m^0 \rangle
+\]</span></p>
+<p>This is not defined in case of degeneracy,
+when <span class="math inline">\(E_n^0 = E_m^0\)</span> for some <span class="math inline">\(n \neq m\)</span>.
+The same holds for the second order energy correction.</p>
+<p>One way to make sense of the first-order eigenfunction
+correction equation is to choose a “good” basis for the degenerate eigenspace such that
+<span class="math display">\[
+\forall n\neq m, E_n^0 = E_m^0 \implies \langle \psi_m^0 | H&#39; | \psi_n^0 \rangle = 0
+\]</span>
+This allows us to cancel the zero denominators in <a href="time-independent-perturbation-theory.html#eq:perturbationResults">(3.3)</a> with a zero enumerator and hope that no higher-order degeneracy exists so the indeterminate form is <span class="math inline">\(0\)</span>. We need the following definition to make precise what we mean by finding a “good” eigenbasis for <span class="math inline">\(H^0\)</span> with respect to a perturbation <span class="math inline">\(H&#39;\)</span>.</p>
+<div class="definition">
+<p><span id="def:defSubspaceProjection" class="definition"><strong>Definition 3.1  (subspace projection of an operator) </strong></span>The projection of an operator <span class="math inline">\(H : V \to V\)</span> onto a subspace <span class="math inline">\(W \subset V\)</span> <span class="math inline">\(H_{|W} : W \to W\)</span> is
+<span class="math display">\[
+H_{|W} : W \xrightarrow{\iota} V \xrightarrow{H} V \xrightarrow{P_{V \to W}} W
+\]</span>
+Given an orthonormal basis <span class="math inline">\(\{|i\rangle\}\)</span> for <span class="math inline">\(W\)</span>,
+the matrix representation of <span class="math inline">\(H_{|W}\)</span> is just <span class="math inline">\(W_{ij} = \langle i | H | j \rangle\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-29" class="definition"><strong>Definition 3.2  (good basis for perturbation) </strong></span><span class="math inline">\(\mathcal{B} = \{|i\rangle\}\)</span> is a “good” basis for perturbing <span class="math inline">\(H^0\)</span> with respect to <span class="math inline">\(H&#39;\)</span> if,
+for every eigenspace <span class="math inline">\(W \subset V\)</span> of <span class="math inline">\(H^0\)</span> with basis
+<span class="math inline">\(\mathcal{A} \subseteq \mathcal{B}\)</span>,
+the representation of <span class="math inline">\(H&#39;_{|W}\)</span> under <span class="math inline">\(\mathcal{A}\)</span> is diagonal. In other words,</p>
+<p><span class="math display">\[
+\forall |m\rangle, |n\rangle\in \mathcal{A}, m \neq n: H&#39;_{mn} = 0
+\]</span></p>
+</div>
+<div class="remark">
+<p><span id="unlabeled-div-30" class="remark"><em>Remark</em>. </span>Finding a good basis is weaker than finding a simultaneous eigenbasis for <span class="math inline">\(H^0, H&#39;\)</span>, which does not exist when <span class="math inline">\([H^0, H&#39;] \neq 0\)</span>. A good basis exists by applying the spectral theorem to the projection of <span class="math inline">\(H&#39;\)</span> on each eigenspace of <span class="math inline">\(H^0\)</span>.</p>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-31" class="theorem"><strong>Theorem 3.1  (characterization of commutativity) </strong></span>Two normal operators <span class="math inline">\(A, B\)</span> commute if and only if
+they leave the eigenspaces of each other invariant.</p>
+<p><strong>Proof:</strong> Assume commutativity,
+and let <span class="math inline">\(x\)</span> be an eigenvector of <span class="math inline">\(A\)</span> with eigenvalue <span class="math inline">\(\lambda\)</span>,
+then <span class="math inline">\(BAx = \lambda Bx = A(Bx)\)</span>, so <span class="math inline">\(Bx\)</span> is also an eigenvector of <span class="math inline">\(A\)</span>
+with eigenvalue <span class="math inline">\(\lambda\)</span>.
+Conversely, let <span class="math inline">\(x_i\)</span> be an eigenbasis for <span class="math inline">\(A\)</span>
+such that <span class="math inline">\(Ax_i = \lambda_i x_i, ABx_i = \lambda_i Bx_i\)</span>.
+Given an arbitrary vector <span class="math inline">\(v = c_i x_i\)</span>, we have
+<span class="math display">\[
+BAv = c_i BAx_i = c_i \lambda_i Bx_i = c_i ABx_i = ABv
+\]</span></p>
+</div>
+<p>This applies in particular to two Hermitian operators.
+In a subspace spanned by eigenvectors of <span class="math inline">\(A\)</span> with <em>distinct eigenvalues</em>,
+commutativity forces <span class="math inline">\(H\)</span> to be diagonal.</p>
+<div class="lemma">
+<p><span id="lem:unlabeled-div-32" class="lemma"><strong>Lemma 3.1  </strong></span>Given commuting Hermitian operators <span class="math inline">\(H\)</span> and <span class="math inline">\(A\)</span>,
+<span class="math inline">\(H_{|W}\)</span> is diagonal for every subspace <span class="math inline">\(W\)</span> spanned by an orthonormal
+set of eigenvectors of <span class="math inline">\(A\)</span> with distinct eigenvalues.</p>
+<p><strong>Proof:</strong>
+By <span class="math inline">\(AH = HA\)</span>, <span class="math inline">\(\langle i|H|j\rangle= \lambda_j^{-1}\langle i|AH|j\rangle= \lambda_i^{-1}\langle i|HA|j\rangle\)</span>.
+Since <span class="math inline">\(\lambda_i \neq \lambda_j\)</span>, <span class="math inline">\(\langle i|H|j\rangle= 0\)</span>.</p>
+</div>
+<p>Note that commutativity is not transitive:
+<span class="math inline">\([A, H^0] = [A, H&#39;]=0\)</span> does not imply <span class="math inline">\([H^0, H&#39;]=0\)</span>.
+A trivial example: identity commutes with every normal operator, but they don’t
+commute with each other. Commutativity does become transitive when all operators
+in question are not degenerate.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-33" class="theorem"><strong>Theorem 3.2  (convenient good basis condition) </strong></span>Given Hermitian <span class="math inline">\(H^0, H&#39;\)</span>. An eigenbasis <span class="math inline">\(\{|i\rangle\}\)</span> for <span class="math inline">\(H^0\)</span>
+is a good basis if it diagonalizes an operator <span class="math inline">\(A\)</span> such that
+<span class="math inline">\([A, H^0] = [A, H&#39;]=0\)</span> and each subset of <span class="math inline">\(\{|i\rangle\}\)</span>
+corresponding to a degenerate subspace of <span class="math inline">\(H^0\)</span> are eigenvectors
+of <span class="math inline">\(A\)</span> with distinct eigenvalues.</p>
+<p><strong>Proof:</strong> Given such an <span class="math inline">\(A\)</span> and mutual eigenbasis <span class="math inline">\(\{|i\rangle\}\)</span> between <span class="math inline">\(A, H^0\)</span>, consider each degenerate eigenspace <span class="math inline">\(W\)</span> of <span class="math inline">\(H^0\)</span>. By the lemma above, <span class="math inline">\(H&#39;_{|W}\)</span> must be diagonal in this basis.</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="symmetry-conservation-laws-and-selection-rules.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="structure-of-hydrogen.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

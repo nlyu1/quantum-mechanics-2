@@ -32,6 +32,14 @@ thm:unlabeled-div-23
 thm:unlabeled-div-24
 def:unlabeled-div-26
 thm:unlabeled-div-27
+eq:independentFirstSecondPerturbation
+eq:perturbationExpansion
+eq:perturbationResults
+def:defSubspaceProjection
+def:unlabeled-div-29
+thm:unlabeled-div-31
+lem:unlabeled-div-32
+thm:unlabeled-div-33
 path-integrals
 gaussian-integrals
 propagator
@@ -46,3 +54,11 @@ transformation
 observables-and-transformations
 summary
 selection-rules
+time-independent-perturbation-theory
+introduction
+nondegenerate-theory
+degenerate-theory
+structure-of-hydrogen
+fine-structure
+relativistic-correction-to-kinetic-energy
+spin-orbit-coupling

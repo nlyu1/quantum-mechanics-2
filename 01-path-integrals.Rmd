@@ -171,7 +171,7 @@ Consider the following quantity for an endpoint-preserving perturbation $\eta$ a
     &= \sum_{n=1}^\infty \df 1 {n!} \left[\epsilon \left(\eta \pd q + \dot \eta \pd{\dot q}\right)\right]^n \mathcal L(q_{\mathrm{cl}}, \dot q_{\mathrm{cl}}, t) \\ 
     &= \left[1 + 
         \epsilon (\eta \pd q + \dot \eta \pd{\dot q}) + 
-        \epsilon^2\left(\eta^2 \pd{q}^2 + 2(\eta \pd q)(\dot \eta d_{\dot q}) + \dot \eta^2 \pd{\dot q}^2\right)
+        \epsilon^2\left(\eta^2 \pd{q}^2 + 2(\eta \pd q)(\dot \eta \pd{\dot q}) + \dot \eta^2 \pd{\dot q}^2\right)
         +O(\epsilon^3)\right]\mathcal L_{\mathrm{cl}}
 \end{aligned} 
 \end{equation}
